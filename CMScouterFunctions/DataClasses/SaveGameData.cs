@@ -1,0 +1,26 @@
+﻿using CMScouterFunctions.DataClasses;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace CMScouterFunctions.DataClasses
+{
+    public class SaveGameData
+    {
+        public Dictionary<int, string> FirstNames { get; set; }
+
+        public Dictionary<int, string> Surnames { get; set; }
+
+        public Dictionary<int, string> CommonNames { get; set; }
+
+        public Dictionary<int, Nation> Nations { get; set; }
+
+        public Dictionary<int, Club> Clubs { get; set; }
+
+        public List<Player> Players { get; set; }
+
+        public DateTime GameDate { get; set; }
+
+        public byte ValueMultiplier { get { return 2; } }
+    }
+}
