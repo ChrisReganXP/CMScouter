@@ -13,6 +13,7 @@ namespace CMScouterFunctions
     {
         public static SaveGameData LoadPlayers(SaveGameFile savegame)
         {
+            SaveGameData saveData = new SaveGameData();
             Stopwatch watch = new Stopwatch();
 
             Dictionary<int, Club_Comp> clubcomps = GetDataFileClubCompetitionDictionary(savegame);
@@ -60,7 +61,7 @@ namespace CMScouterFunctions
 
             watch.Start();
             List<Staff> duplicates = new List<Staff>();
-            Dictionary<int, Staff> staffDic = GetDataFileStaffDictionary(savegame, out duplicates);
+            Dictionary<int, Staff> staffDic = GetDataFileStaffDictionary(savegame, saveData, out duplicates);
             //Dictionary<int, Staff> staffDic = GetDataFileConvertedIdDictionary<Staff>(savegame, DataFileType.Staff, out duplicates);
             watch.Stop();
             timings = $"{staffDic.Count} records in {watch.ElapsedMilliseconds / 100}";
@@ -87,7 +88,6 @@ namespace CMScouterFunctions
 
             List<Player> searchablePlayers = ConstructSearchablePlayers(staffDic, players).ToList();
 
-            SaveGameData saveData = new SaveGameData();
             saveData.GameDate = savegame.GameDate;
             saveData.FirstNames = firstnames;
             saveData.Surnames = secondNames;
@@ -99,7 +99,7 @@ namespace CMScouterFunctions
             return saveData;
         }
 
-        private static Dictionary<int, Staff> GetDataFileStaffDictionary(SaveGameFile savegame, out List<Staff> duplicateStaff)
+        private static Dictionary<int, Staff> GetDataFileStaffDictionary(SaveGameFile savegame, SaveGameData gameData, out List<Staff> duplicateStaff)
         {
             Dictionary<int, Staff> dic = new Dictionary<int, Staff>();
             duplicateStaff = new List<Staff>();
@@ -111,6 +111,8 @@ namespace CMScouterFunctions
             foreach (var item in bytes)
             {
                 var staff = converter.Convert(item);
+                staff.Value = staff.Value * gameData.ValueMultiplier;
+                staff.Wage = staff.Wage * gameData.ValueMultiplier;
 
                 if (staff.StaffPlayerId != -1)
                 {

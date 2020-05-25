@@ -16,7 +16,7 @@ namespace ChampMan_Scouter
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new ScoutingForm());
         }
     }
 }

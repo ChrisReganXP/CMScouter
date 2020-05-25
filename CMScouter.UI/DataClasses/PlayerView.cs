@@ -37,12 +37,12 @@ namespace CMScouter.UI
 
         public string GetKnownName()
         {
-            return CommonName ?? FirstName + " " + SecondName;
+            return string.IsNullOrWhiteSpace(CommonName) ? FirstName + " " + SecondName : CommonName;
         }
 
         public string GetAlternateName()
         {
-            return CommonName == null ? CommonName : FirstName + " " + SecondName;
+            return string.IsNullOrWhiteSpace(CommonName) ? null : FirstName + " " + SecondName;
         }
 
         public PlayerPositionView Positions { get; set; }

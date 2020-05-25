@@ -44,6 +44,11 @@ namespace CMScouter.UI
             return ConstructPlayerByFilter(filter);
         }
 
+        public List<Club> GetClubs()
+        {
+            return _savegame.Clubs.Values.ToList();
+        }
+
         public List<PlayerView> GetPlayersAtClub(string clubName)
         {
             List<int> clubIDs = _savegame.Clubs.Where(x => x.Value.Name.StartsWith(clubName, StringComparison.InvariantCultureIgnoreCase)).Select(x => x.Key).ToList();

@@ -85,11 +85,11 @@ namespace CMScouterFunctions
             switch (regionName.ToUpper())
             {
                 case "UK":
-                case "UK & Ireland":
+                case "UK & IRELAND":
                     countryIds = GetUKCountries(nations);
                     break;
 
-                case "Scandinavia":
+                case "SCANDINAVIA":
                     countryIds = GetScandiCountries(nations);
                     break;
             }
