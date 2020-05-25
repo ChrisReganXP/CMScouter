@@ -147,7 +147,7 @@ namespace CMScouter.UI
 
             CreatePlayerBasedFilter(request, filters);
             filters.Add(x => (request.MinAge == 0 || GetAge(x._staff.DOB) >= request.MinAge) && (request.MaxAge == 0 || GetAge(x._staff.DOB) <= request.MaxAge));
-            filters.Add(x => !request.EUNationality || IsEUNationality(x._staff));
+            filters.Add(x => !request.EUNationalityOnly || IsEUNationality(x._staff));
             filters.Add(x => (request.MinValue == 0 || x._staff.IsOverValue(request.MinValue, _savegame.ValueMultiplier)) && (request.MaxValue == 0 || x._staff.IsUnderValue(request.MaxValue, _savegame.ValueMultiplier)));
             filters.Add(x => (request.PlayerType == null || _playerRater.PlaysPosition(request.PlayerType.Value, x._player)));
 

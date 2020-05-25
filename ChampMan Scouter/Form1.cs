@@ -65,7 +65,7 @@ namespace ChampMan_Scouter
             //scoutedPosition = PlayerType.CentreHalf;
 
             // Euro scouting
-            // ScoutingRequest request = new ScoutingRequest() { NumberOfResults = 1000, EUNationality = true, MaxValue = 1, MaxAge = 31/*, PlaysInRegion = "UK"*/ };
+            // ScoutingRequest request = new ScoutingRequest() { NumberOfResults = 1000, EUNationalityOnly = true, MaxValue = 1, MaxAge = 31/*, PlaysInRegion = "UK"*/ };
 
             //Club scouting
             ScoutingRequest request = new ScoutingRequest() 
