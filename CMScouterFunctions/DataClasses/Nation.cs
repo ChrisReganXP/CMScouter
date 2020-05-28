@@ -13,5 +13,10 @@ namespace CMScouterFunctions.DataClasses
         public string Name { get; set; }
 
         public bool EUNation { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Name} ({Id})";
+        }
     }
 }

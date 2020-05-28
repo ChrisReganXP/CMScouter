@@ -100,6 +100,21 @@ namespace ChampMan_Scouter
             tabSearchPanels.SelectedTab = tabSearch_Player;
             //pnlClubList.Hide();
             //pnlPlayerSearch.Show();
+
+            AddNationsToSelect();
+        }
+
+        private void AddNationsToSelect()
+        {
+            ddlNationality.DisplayMember = "Name";
+            ddlNationality.ValueMember = "Id";
+
+            var nationList = cmsUI.GetAllNations().Select(x => new { x.Id, x.Name}).OrderBy(x => x.Name).ToList();
+            var all = new { Id = -1, Name = "<All>" };
+            nationList.Insert(0, all);
+
+            ddlNationality.DataSource = nationList;
+            ddlNationality.SelectedIndex = 0;
         }
 
         #endregion
@@ -163,8 +178,18 @@ namespace ChampMan_Scouter
             }
             
 
-            PlayerType type;
-            Enum.TryParse(ddlPlayerType.Text, out type);
+            PlayerType castType;
+            PlayerType? type;
+            if (!Enum.TryParse(ddlPlayerType.Text, out castType))
+            {
+                type = null;
+            }
+            else
+            {
+                type = castType;
+            }
+
+            int? nationId = (int)ddlNationality.SelectedValue == -1 ? (int?)null : (int)ddlNationality.SelectedValue;
 
             ScoutingRequest request = new ScoutingRequest()
             {
@@ -174,6 +199,7 @@ namespace ChampMan_Scouter
                 MaxAge = maxAge,
                 NumberOfResults = 200,
                 PlaysInRegion = ddlPlaysInRegion.Text,
+                Nationality = nationId,
             };
 
             var playerList = cmsUI.GetScoutResults(request);
@@ -203,20 +229,21 @@ namespace ChampMan_Scouter
             buttonColumn.HeaderText = "View";
             buttonColumn.Name = "ViewButton";
             buttonColumn.Text = "View";
-            buttonColumn.Width = 30;
+            buttonColumn.Width = 40;
+            buttonColumn.UseColumnTextForButtonValue = true;
             dgvPlayers.Columns.Add(buttonColumn);
 
-            dgvPlayers.Columns.Add(CreateGridViewColumn(40, "PlayerId", "Id"));
+            dgvPlayers.Columns.Add(CreateGridViewColumn(50, "PlayerId", "Id"));
             dgvPlayers.Columns.Add(CreateGridViewColumn(120, "Name", "Name"));
 
             if (request.PlayerType != null)
             {
-                dgvPlayers.Columns.Add(CreateGridViewColumn(40, "ScoutedRating", "Pos Rat"));
-                dgvPlayers.Columns.Add(CreateGridViewColumn(40, "ScoutedRole", "Role Rat"));
+                dgvPlayers.Columns.Add(CreateGridViewColumn(30, "ScoutedRating", "Pos Rat"));
+                dgvPlayers.Columns.Add(CreateGridViewColumn(30, "ScoutedRole", "Role Rat"));
             }
 
-            dgvPlayers.Columns.Add(CreateGridViewColumn(40, "BestRating", "Rating"));
-            dgvPlayers.Columns.Add(CreateGridViewColumn(40, "BestRole", "Role"));
+            dgvPlayers.Columns.Add(CreateGridViewColumn(30, "BestRating", "Rat"));
+            dgvPlayers.Columns.Add(CreateGridViewColumn(30, "BestRole", "Role"));
             dgvPlayers.Columns.Add(CreateGridViewColumn(100, "ClubName", "Club"));
             dgvPlayers.Columns.Add(CreateGridViewColumn(70, "DescribedPosition", "Position"));
             dgvPlayers.Columns.Add(CreateGridViewColumn(70, "Value", "Value", format: "c0"));

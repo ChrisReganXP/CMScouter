@@ -49,6 +49,11 @@ namespace CMScouter.UI
             return _savegame.Clubs.Values.ToList();
         }
 
+        public List<Nation> GetAllNations()
+        {
+            return _savegame.Nations.Values.ToList();
+        }
+
         public List<PlayerView> GetPlayersAtClub(string clubName)
         {
             List<int> clubIDs = _savegame.Clubs.Where(x => x.Value.Name.StartsWith(clubName, StringComparison.InvariantCultureIgnoreCase)).Select(x => x.Key).ToList();
@@ -133,6 +138,17 @@ namespace CMScouter.UI
             }
         }
 
+        private void CreateNationalityFilter(ScoutingRequest request, List<Func<Player, bool>> filters)
+        {
+            if (request.Nationality == null)
+            {
+                return;
+            }
+
+            Func<Player, bool> filter = x => x._staff.NationId == request.Nationality;
+            filters.Add(filter);
+        }
+
         public List<PlayerView> GetScoutResults(ScoutingRequest request)
         {
             List<Func<Player, bool>> filters = new List<Func<Player, bool>>();
@@ -151,9 +167,10 @@ namespace CMScouter.UI
             filters.Add(x => (clubId == null || x._staff.ClubId == clubId));
 
             CreatePlayerBasedFilter(request, filters);
+            CreateNationalityFilter(request, filters);
             filters.Add(x => (request.MinAge == 0 || GetAge(x._staff.DOB) >= request.MinAge) && (request.MaxAge == 0 || GetAge(x._staff.DOB) <= request.MaxAge));
             filters.Add(x => !request.EUNationalityOnly || IsEUNationality(x._staff));
-            filters.Add(x => (request.MinValue == 0 || x._staff.IsOverValue(request.MinValue, _savegame.ValueMultiplier)) && (request.MaxValue == 0 || x._staff.IsUnderValue(request.MaxValue, _savegame.ValueMultiplier)));
+            filters.Add(x => (request.MinValue == null || x._staff.IsOverValue(request.MinValue.Value, _savegame.ValueMultiplier)) && (request.MaxValue == null || x._staff.IsUnderValue(request.MaxValue.Value, _savegame.ValueMultiplier)));
             filters.Add(x => (request.PlayerType == null || _playerRater.PlaysPosition(request.PlayerType.Value, x._player)));
 
             var players = _savegame.Players;

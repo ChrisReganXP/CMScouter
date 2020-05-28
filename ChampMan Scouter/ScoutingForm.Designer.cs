@@ -37,33 +37,35 @@ namespace ChampMan_Scouter
             this.mainMenu_Exit = new System.Windows.Forms.MenuItem();
             this.ofdOpenSaveFile = new System.Windows.Forms.OpenFileDialog();
             this.pnlSearch = new System.Windows.Forms.Panel();
-            this.btnSearch = new System.Windows.Forms.Button();
+            this.tabSearchPanels = new System.Windows.Forms.TabControl();
+            this.tabSearch_Club = new System.Windows.Forms.TabPage();
             this.pnlClubList = new System.Windows.Forms.Panel();
             this.lblClubNameSearch = new System.Windows.Forms.Label();
             this.cbxClubName = new System.Windows.Forms.ComboBox();
+            this.tabSearch_Player = new System.Windows.Forms.TabPage();
+            this.pnlPlayerSearch = new System.Windows.Forms.Panel();
+            this.ddlPlaysInRegion = new System.Windows.Forms.ComboBox();
+            this.lblBasedIn = new System.Windows.Forms.Label();
+            this.tbxMaxAge = new System.Windows.Forms.TextBox();
+            this.lblMaxAge = new System.Windows.Forms.Label();
+            this.cbxEUNational = new System.Windows.Forms.CheckBox();
+            this.lblMaxValue = new System.Windows.Forms.Label();
+            this.lblPlayerType = new System.Windows.Forms.Label();
+            this.tbxMaxValue = new System.Windows.Forms.TextBox();
+            this.ddlPlayerType = new System.Windows.Forms.ComboBox();
+            this.btnSearch = new System.Windows.Forms.Button();
             this.ddlSearchTypes = new System.Windows.Forms.ComboBox();
             this.lblSearchFor = new System.Windows.Forms.Label();
             this.dgvPlayers = new System.Windows.Forms.DataGridView();
-            this.pnlPlayerSearch = new System.Windows.Forms.Panel();
-            this.ddlPlayerType = new System.Windows.Forms.ComboBox();
-            this.tbxMaxValue = new System.Windows.Forms.TextBox();
-            this.lblPlayerType = new System.Windows.Forms.Label();
-            this.lblMaxValue = new System.Windows.Forms.Label();
-            this.tabSearchPanels = new System.Windows.Forms.TabControl();
-            this.tabSearch_Club = new System.Windows.Forms.TabPage();
-            this.tabSearch_Player = new System.Windows.Forms.TabPage();
-            this.cbxEUNational = new System.Windows.Forms.CheckBox();
-            this.lblMaxAge = new System.Windows.Forms.Label();
-            this.tbxMaxAge = new System.Windows.Forms.TextBox();
-            this.lblBasedIn = new System.Windows.Forms.Label();
-            this.ddlPlaysInRegion = new System.Windows.Forms.ComboBox();
+            this.ddlNationality = new System.Windows.Forms.ComboBox();
+            this.lblNationality = new System.Windows.Forms.Label();
             this.pnlSearch.SuspendLayout();
-            this.pnlClubList.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPlayers)).BeginInit();
-            this.pnlPlayerSearch.SuspendLayout();
             this.tabSearchPanels.SuspendLayout();
             this.tabSearch_Club.SuspendLayout();
+            this.pnlClubList.SuspendLayout();
             this.tabSearch_Player.SuspendLayout();
+            this.pnlPlayerSearch.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPlayers)).BeginInit();
             this.SuspendLayout();
             // 
             // mainMenu
@@ -108,15 +110,30 @@ namespace ChampMan_Scouter
             this.pnlSearch.Size = new System.Drawing.Size(775, 135);
             this.pnlSearch.TabIndex = 0;
             // 
-            // btnSearch
+            // tabSearchPanels
             // 
-            this.btnSearch.Location = new System.Drawing.Point(676, 45);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(75, 23);
-            this.btnSearch.TabIndex = 3;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            this.tabSearchPanels.Appearance = System.Windows.Forms.TabAppearance.Buttons;
+            this.tabSearchPanels.Controls.Add(this.tabSearch_Club);
+            this.tabSearchPanels.Controls.Add(this.tabSearch_Player);
+            this.tabSearchPanels.ItemSize = new System.Drawing.Size(0, 1);
+            this.tabSearchPanels.Location = new System.Drawing.Point(143, 4);
+            this.tabSearchPanels.Name = "tabSearchPanels";
+            this.tabSearchPanels.SelectedIndex = 0;
+            this.tabSearchPanels.Size = new System.Drawing.Size(511, 114);
+            this.tabSearchPanels.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.tabSearchPanels.TabIndex = 5;
+            this.tabSearchPanels.TabStop = false;
+            // 
+            // tabSearch_Club
+            // 
+            this.tabSearch_Club.Controls.Add(this.pnlClubList);
+            this.tabSearch_Club.Location = new System.Drawing.Point(4, 5);
+            this.tabSearch_Club.Name = "tabSearch_Club";
+            this.tabSearch_Club.Padding = new System.Windows.Forms.Padding(3);
+            this.tabSearch_Club.Size = new System.Drawing.Size(503, 105);
+            this.tabSearch_Club.TabIndex = 0;
+            this.tabSearch_Club.Text = "tabPage1";
+            this.tabSearch_Club.UseVisualStyleBackColor = true;
             // 
             // pnlClubList
             // 
@@ -143,6 +160,123 @@ namespace ChampMan_Scouter
             this.cbxClubName.Name = "cbxClubName";
             this.cbxClubName.Size = new System.Drawing.Size(121, 21);
             this.cbxClubName.TabIndex = 0;
+            // 
+            // tabSearch_Player
+            // 
+            this.tabSearch_Player.BackColor = System.Drawing.SystemColors.Control;
+            this.tabSearch_Player.Controls.Add(this.pnlPlayerSearch);
+            this.tabSearch_Player.Location = new System.Drawing.Point(4, 5);
+            this.tabSearch_Player.Name = "tabSearch_Player";
+            this.tabSearch_Player.Padding = new System.Windows.Forms.Padding(3);
+            this.tabSearch_Player.Size = new System.Drawing.Size(503, 105);
+            this.tabSearch_Player.TabIndex = 1;
+            this.tabSearch_Player.Text = "tabPage2";
+            // 
+            // pnlPlayerSearch
+            // 
+            this.pnlPlayerSearch.Controls.Add(this.lblNationality);
+            this.pnlPlayerSearch.Controls.Add(this.ddlNationality);
+            this.pnlPlayerSearch.Controls.Add(this.ddlPlaysInRegion);
+            this.pnlPlayerSearch.Controls.Add(this.lblBasedIn);
+            this.pnlPlayerSearch.Controls.Add(this.tbxMaxAge);
+            this.pnlPlayerSearch.Controls.Add(this.lblMaxAge);
+            this.pnlPlayerSearch.Controls.Add(this.cbxEUNational);
+            this.pnlPlayerSearch.Controls.Add(this.lblMaxValue);
+            this.pnlPlayerSearch.Controls.Add(this.lblPlayerType);
+            this.pnlPlayerSearch.Controls.Add(this.tbxMaxValue);
+            this.pnlPlayerSearch.Controls.Add(this.ddlPlayerType);
+            this.pnlPlayerSearch.Location = new System.Drawing.Point(6, -1);
+            this.pnlPlayerSearch.Name = "pnlPlayerSearch";
+            this.pnlPlayerSearch.Size = new System.Drawing.Size(494, 106);
+            this.pnlPlayerSearch.TabIndex = 4;
+            // 
+            // ddlPlaysInRegion
+            // 
+            this.ddlPlaysInRegion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlPlaysInRegion.FormattingEnabled = true;
+            this.ddlPlaysInRegion.Location = new System.Drawing.Point(275, 29);
+            this.ddlPlaysInRegion.Name = "ddlPlaysInRegion";
+            this.ddlPlaysInRegion.Size = new System.Drawing.Size(108, 21);
+            this.ddlPlaysInRegion.TabIndex = 9;
+            // 
+            // lblBasedIn
+            // 
+            this.lblBasedIn.AutoSize = true;
+            this.lblBasedIn.Location = new System.Drawing.Point(305, 7);
+            this.lblBasedIn.Name = "lblBasedIn";
+            this.lblBasedIn.Size = new System.Drawing.Size(49, 13);
+            this.lblBasedIn.TabIndex = 8;
+            this.lblBasedIn.Text = "Based In";
+            // 
+            // tbxMaxAge
+            // 
+            this.tbxMaxAge.Location = new System.Drawing.Point(164, 80);
+            this.tbxMaxAge.Name = "tbxMaxAge";
+            this.tbxMaxAge.Size = new System.Drawing.Size(73, 20);
+            this.tbxMaxAge.TabIndex = 7;
+            // 
+            // lblMaxAge
+            // 
+            this.lblMaxAge.AutoSize = true;
+            this.lblMaxAge.Location = new System.Drawing.Point(176, 61);
+            this.lblMaxAge.Name = "lblMaxAge";
+            this.lblMaxAge.Size = new System.Drawing.Size(49, 13);
+            this.lblMaxAge.TabIndex = 6;
+            this.lblMaxAge.Text = "Max Age";
+            // 
+            // cbxEUNational
+            // 
+            this.cbxEUNational.AutoSize = true;
+            this.cbxEUNational.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.cbxEUNational.Location = new System.Drawing.Point(31, 73);
+            this.cbxEUNational.Name = "cbxEUNational";
+            this.cbxEUNational.Size = new System.Drawing.Size(83, 17);
+            this.cbxEUNational.TabIndex = 5;
+            this.cbxEUNational.Text = "EU National";
+            this.cbxEUNational.UseVisualStyleBackColor = true;
+            // 
+            // lblMaxValue
+            // 
+            this.lblMaxValue.AutoSize = true;
+            this.lblMaxValue.Location = new System.Drawing.Point(173, 7);
+            this.lblMaxValue.Name = "lblMaxValue";
+            this.lblMaxValue.Size = new System.Drawing.Size(57, 13);
+            this.lblMaxValue.TabIndex = 3;
+            this.lblMaxValue.Text = "Max Value";
+            // 
+            // lblPlayerType
+            // 
+            this.lblPlayerType.AutoSize = true;
+            this.lblPlayerType.Location = new System.Drawing.Point(34, 7);
+            this.lblPlayerType.Name = "lblPlayerType";
+            this.lblPlayerType.Size = new System.Drawing.Size(63, 13);
+            this.lblPlayerType.TabIndex = 2;
+            this.lblPlayerType.Text = "Player Type";
+            // 
+            // tbxMaxValue
+            // 
+            this.tbxMaxValue.Location = new System.Drawing.Point(157, 29);
+            this.tbxMaxValue.Name = "tbxMaxValue";
+            this.tbxMaxValue.Size = new System.Drawing.Size(100, 20);
+            this.tbxMaxValue.TabIndex = 1;
+            // 
+            // ddlPlayerType
+            // 
+            this.ddlPlayerType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlPlayerType.Location = new System.Drawing.Point(15, 29);
+            this.ddlPlayerType.Name = "ddlPlayerType";
+            this.ddlPlayerType.Size = new System.Drawing.Size(121, 21);
+            this.ddlPlayerType.TabIndex = 0;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(676, 45);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnSearch.TabIndex = 3;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // ddlSearchTypes
             // 
@@ -177,135 +311,23 @@ namespace ChampMan_Scouter
             this.dgvPlayers.Visible = false;
             this.dgvPlayers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPlayers_CellContentClick);
             // 
-            // pnlPlayerSearch
+            // ddlNationality
             // 
-            this.pnlPlayerSearch.Controls.Add(this.ddlPlaysInRegion);
-            this.pnlPlayerSearch.Controls.Add(this.lblBasedIn);
-            this.pnlPlayerSearch.Controls.Add(this.tbxMaxAge);
-            this.pnlPlayerSearch.Controls.Add(this.lblMaxAge);
-            this.pnlPlayerSearch.Controls.Add(this.cbxEUNational);
-            this.pnlPlayerSearch.Controls.Add(this.lblMaxValue);
-            this.pnlPlayerSearch.Controls.Add(this.lblPlayerType);
-            this.pnlPlayerSearch.Controls.Add(this.tbxMaxValue);
-            this.pnlPlayerSearch.Controls.Add(this.ddlPlayerType);
-            this.pnlPlayerSearch.Location = new System.Drawing.Point(6, -1);
-            this.pnlPlayerSearch.Name = "pnlPlayerSearch";
-            this.pnlPlayerSearch.Size = new System.Drawing.Size(494, 106);
-            this.pnlPlayerSearch.TabIndex = 4;
+            this.ddlNationality.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlNationality.FormattingEnabled = true;
+            this.ddlNationality.Location = new System.Drawing.Point(389, 29);
+            this.ddlNationality.Name = "ddlNationality";
+            this.ddlNationality.Size = new System.Drawing.Size(102, 21);
+            this.ddlNationality.TabIndex = 10;
             // 
-            // ddlPlayerType
+            // lblNationality
             // 
-            this.ddlPlayerType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ddlPlayerType.Location = new System.Drawing.Point(15, 29);
-            this.ddlPlayerType.Name = "ddlPlayerType";
-            this.ddlPlayerType.Size = new System.Drawing.Size(121, 21);
-            this.ddlPlayerType.TabIndex = 0;
-            // 
-            // tbxMaxValue
-            // 
-            this.tbxMaxValue.Location = new System.Drawing.Point(157, 29);
-            this.tbxMaxValue.Name = "tbxMaxValue";
-            this.tbxMaxValue.Size = new System.Drawing.Size(100, 20);
-            this.tbxMaxValue.TabIndex = 1;
-            // 
-            // lblPlayerType
-            // 
-            this.lblPlayerType.AutoSize = true;
-            this.lblPlayerType.Location = new System.Drawing.Point(34, 7);
-            this.lblPlayerType.Name = "lblPlayerType";
-            this.lblPlayerType.Size = new System.Drawing.Size(63, 13);
-            this.lblPlayerType.TabIndex = 2;
-            this.lblPlayerType.Text = "Player Type";
-            // 
-            // lblMaxValue
-            // 
-            this.lblMaxValue.AutoSize = true;
-            this.lblMaxValue.Location = new System.Drawing.Point(173, 7);
-            this.lblMaxValue.Name = "lblMaxValue";
-            this.lblMaxValue.Size = new System.Drawing.Size(57, 13);
-            this.lblMaxValue.TabIndex = 3;
-            this.lblMaxValue.Text = "Max Value";
-            // 
-            // tabSearchPanels
-            // 
-            this.tabSearchPanels.Appearance = System.Windows.Forms.TabAppearance.Buttons;
-            this.tabSearchPanels.Controls.Add(this.tabSearch_Club);
-            this.tabSearchPanels.Controls.Add(this.tabSearch_Player);
-            this.tabSearchPanels.ItemSize = new System.Drawing.Size(0, 1);
-            this.tabSearchPanels.Location = new System.Drawing.Point(143, 4);
-            this.tabSearchPanels.Name = "tabSearchPanels";
-            this.tabSearchPanels.SelectedIndex = 0;
-            this.tabSearchPanels.Size = new System.Drawing.Size(511, 114);
-            this.tabSearchPanels.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            this.tabSearchPanels.TabIndex = 5;
-            this.tabSearchPanels.TabStop = false;
-            // 
-            // tabSearch_Club
-            // 
-            this.tabSearch_Club.Controls.Add(this.pnlClubList);
-            this.tabSearch_Club.Location = new System.Drawing.Point(4, 5);
-            this.tabSearch_Club.Name = "tabSearch_Club";
-            this.tabSearch_Club.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSearch_Club.Size = new System.Drawing.Size(503, 105);
-            this.tabSearch_Club.TabIndex = 0;
-            this.tabSearch_Club.Text = "tabPage1";
-            this.tabSearch_Club.UseVisualStyleBackColor = true;
-            // 
-            // tabSearch_Player
-            // 
-            this.tabSearch_Player.BackColor = System.Drawing.SystemColors.Control;
-            this.tabSearch_Player.Controls.Add(this.pnlPlayerSearch);
-            this.tabSearch_Player.Location = new System.Drawing.Point(4, 5);
-            this.tabSearch_Player.Name = "tabSearch_Player";
-            this.tabSearch_Player.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSearch_Player.Size = new System.Drawing.Size(503, 105);
-            this.tabSearch_Player.TabIndex = 1;
-            this.tabSearch_Player.Text = "tabPage2";
-            // 
-            // cbxEUNational
-            // 
-            this.cbxEUNational.AutoSize = true;
-            this.cbxEUNational.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.cbxEUNational.Location = new System.Drawing.Point(31, 73);
-            this.cbxEUNational.Name = "cbxEUNational";
-            this.cbxEUNational.Size = new System.Drawing.Size(83, 17);
-            this.cbxEUNational.TabIndex = 5;
-            this.cbxEUNational.Text = "EU National";
-            this.cbxEUNational.UseVisualStyleBackColor = true;
-            // 
-            // lblMaxAge
-            // 
-            this.lblMaxAge.AutoSize = true;
-            this.lblMaxAge.Location = new System.Drawing.Point(176, 61);
-            this.lblMaxAge.Name = "lblMaxAge";
-            this.lblMaxAge.Size = new System.Drawing.Size(49, 13);
-            this.lblMaxAge.TabIndex = 6;
-            this.lblMaxAge.Text = "Max Age";
-            // 
-            // tbxMaxAge
-            // 
-            this.tbxMaxAge.Location = new System.Drawing.Point(164, 80);
-            this.tbxMaxAge.Name = "tbxMaxAge";
-            this.tbxMaxAge.Size = new System.Drawing.Size(73, 20);
-            this.tbxMaxAge.TabIndex = 7;
-            // 
-            // lblBasedIn
-            // 
-            this.lblBasedIn.AutoSize = true;
-            this.lblBasedIn.Location = new System.Drawing.Point(305, 7);
-            this.lblBasedIn.Name = "lblBasedIn";
-            this.lblBasedIn.Size = new System.Drawing.Size(49, 13);
-            this.lblBasedIn.TabIndex = 8;
-            this.lblBasedIn.Text = "Based In";
-            // 
-            // ddlPlaysInRegion
-            // 
-            this.ddlPlaysInRegion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ddlPlaysInRegion.FormattingEnabled = true;
-            this.ddlPlaysInRegion.Location = new System.Drawing.Point(275, 29);
-            this.ddlPlaysInRegion.Name = "ddlPlaysInRegion";
-            this.ddlPlaysInRegion.Size = new System.Drawing.Size(121, 21);
-            this.ddlPlaysInRegion.TabIndex = 9;
+            this.lblNationality.AutoSize = true;
+            this.lblNationality.Location = new System.Drawing.Point(417, 7);
+            this.lblNationality.Name = "lblNationality";
+            this.lblNationality.Size = new System.Drawing.Size(56, 13);
+            this.lblNationality.TabIndex = 11;
+            this.lblNationality.Text = "Nationality";
             // 
             // ScoutingForm
             // 
@@ -319,14 +341,14 @@ namespace ChampMan_Scouter
             this.Text = "CM0102 Scouter";
             this.pnlSearch.ResumeLayout(false);
             this.pnlSearch.PerformLayout();
-            this.pnlClubList.ResumeLayout(false);
-            this.pnlClubList.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPlayers)).EndInit();
-            this.pnlPlayerSearch.ResumeLayout(false);
-            this.pnlPlayerSearch.PerformLayout();
             this.tabSearchPanels.ResumeLayout(false);
             this.tabSearch_Club.ResumeLayout(false);
+            this.pnlClubList.ResumeLayout(false);
+            this.pnlClubList.PerformLayout();
             this.tabSearch_Player.ResumeLayout(false);
+            this.pnlPlayerSearch.ResumeLayout(false);
+            this.pnlPlayerSearch.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPlayers)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -359,5 +381,7 @@ namespace ChampMan_Scouter
         private System.Windows.Forms.TextBox tbxMaxAge;
         private System.Windows.Forms.Label lblBasedIn;
         private System.Windows.Forms.ComboBox ddlPlaysInRegion;
+        private System.Windows.Forms.Label lblNationality;
+        private System.Windows.Forms.ComboBox ddlNationality;
     }
 }

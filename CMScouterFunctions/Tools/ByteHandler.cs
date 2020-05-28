@@ -24,6 +24,7 @@ namespace CMScouterFunctions
         public static string GetStringFromBytes(byte[] bytes, int start, int length = 0)
         {
             length = length > 0 ? length : bytes.Length;
+
             return GetStringFromBytesTerminated(bytes, start, length);
         }
 
@@ -85,17 +86,20 @@ namespace CMScouterFunctions
 
         private static byte[] TrimEnd(byte[] array)
         {
-            int lastIndex = Array.FindLastIndex(array, b => b != 0);
+            int lastIndex = Array.FindIndex(array, b => b == 0);
 
-            Array.Resize(ref array, lastIndex + 1);
+            if (lastIndex >= 0)
+            {
+                Array.Resize(ref array, lastIndex);
+            }
 
             return array;
         }
 
         private static string GetStringFromBytesTerminated(byte[] bytes, int start, int length)
         {
-            var result = textEncoding.GetString(TrimEnd(bytes.Skip(start).Take(length).ToArray()));
-            return result;
+            var lengthBytes = bytes.Skip(start).Take(length).ToArray();
+            return textEncoding.GetString(TrimEnd(lengthBytes));
         }
 
         private static byte ConvertIntrinsic(byte b)

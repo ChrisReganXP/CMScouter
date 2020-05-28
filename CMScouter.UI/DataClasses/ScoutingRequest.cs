@@ -13,11 +13,13 @@ namespace CMScouter.UI
 
         public byte MaxAge { get; set; }
 
+        public int? Nationality { get; set; }
+
         public bool EUNationalityOnly { get; set; }
 
-        public int MinValue { get; set; }
+        public int? MinValue { get; set; }
 
-        public int MaxValue { get; set; }
+        public int? MaxValue { get; set; }
 
         public PlayerType? PlayerType { get; set; }
 
