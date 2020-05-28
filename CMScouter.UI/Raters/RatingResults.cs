@@ -8,6 +8,8 @@ namespace CMScouter.UI.Raters
 {
     public class PositionRatings
     {
+        public PlayerType Position { get; set; }
+
         public List<PositionRating> Ratings { get; set; }
 
         public PositionRatings()

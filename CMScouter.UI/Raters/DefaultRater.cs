@@ -754,7 +754,7 @@ namespace CMScouter.UI
 
         private PositionRatings GetRatingsForPosition(Player player, PlayerType type, byte offFieldRating)
         {
-            PositionRatings ratings = new PositionRatings();
+            PositionRatings ratings = new PositionRatings() { Position = type } ;
 
             List<Roles> roles = type.GetAttributeValue<LinkedRoles, List<Roles>>(x => x.Roles);
             foreach (var role in roles)

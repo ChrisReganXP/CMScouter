@@ -244,6 +244,7 @@ namespace ChampMan_Scouter
             }
 
             dgvPlayers.Columns.Add(CreateGridViewColumn(30, "BestRating", "Rat"));
+            dgvPlayers.Columns.Add(CreateGridViewColumn(30, "BestPosition", "Pos"));
             dgvPlayers.Columns.Add(CreateGridViewColumn(30, "BestRole", "Role"));
             dgvPlayers.Columns.Add(CreateGridViewColumn(100, "ClubName", "Club"));
             dgvPlayers.Columns.Add(CreateGridViewColumn(70, "DescribedPosition", "Position"));
@@ -271,6 +272,7 @@ namespace ChampMan_Scouter
             }
 
             dt.Columns.Add(new DataColumn() { ColumnName = "BestRating", DataType = typeof(byte), DefaultValue = null });
+            dt.Columns.Add(new DataColumn() { ColumnName = "BestPosition", DataType = typeof(string), DefaultValue = null });
             dt.Columns.Add(new DataColumn() { ColumnName = "BestRole", DataType = typeof(string), DefaultValue = null });
 
             dt.Columns.Add(new DataColumn() { ColumnName = "ClubName", DataType = typeof(string), DefaultValue = null });
@@ -289,11 +291,12 @@ namespace ChampMan_Scouter
 
                 if (request.PlayerType != null)
                 {
-                    dr["ScoutedRating"] = GetScoutedPosition(request.PlayerType, player.ScoutRatings);
+                    dr["ScoutedRating"] = GetScoutedPositionRating(request.PlayerType, player.ScoutRatings);
                     dr["ScoutedRole"] = GetScoutedRole(request.PlayerType, player.ScoutRatings);
                 }
 
                 dr["BestRating"] = player.ScoutRatings.BestPosition.BestRole().Rating;
+                dr["BestPosition"] = GetScoutedPosition(player.ScoutRatings.BestPosition.Position);
                 dr["BestRole"] = player.ScoutRatings.BestPosition.BestRole().Role;
 
                 dr["ClubName"] = player.ClubName;
@@ -308,6 +311,57 @@ namespace ChampMan_Scouter
             }
 
             return dt;
+        }
+
+        private string GetScoutedPosition(PlayerType position)
+        {
+            switch (position)
+            {
+                case PlayerType.GoalKeeper:
+                    return "GK";
+
+                case PlayerType.RightBack:
+                    return "RB";
+
+                case PlayerType.CentreHalf:
+                    return "CD";
+
+                case PlayerType.LeftBack:
+                    return "LB";
+
+                case PlayerType.RightWingBack:
+                    return "RWB";
+
+                case PlayerType.DefensiveMidfielder:
+                    return "DM";
+
+                case PlayerType.LeftWingBack:
+                    return "LWB";
+
+                case PlayerType.RightMidfielder:
+                    return "RM";
+
+                case PlayerType.CentralMidfielder:
+                    return "CM";
+
+                case PlayerType.LeftMidfielder:
+                    return "LM";
+
+                case PlayerType.RightWinger:
+                    return "RW";
+
+                case PlayerType.AttackingMidfielder:
+                    return "AM";
+
+                case PlayerType.LeftWinger:
+                    return "LW";
+
+                case PlayerType.CentreForward:
+                    return "CF";
+
+                default:
+                    return "";
+            }
         }
 
         private DataGridViewTextBoxColumn CreateGridViewColumn(int width, string propertyName, string headerText, bool isDecimal = false, string format = null)
@@ -327,7 +381,7 @@ namespace ChampMan_Scouter
             return c;
         }
 
-        private string GetScoutedPosition(PlayerType? scoutedPosition, RatingResults ratings)
+        private string GetScoutedPositionRating(PlayerType? scoutedPosition, RatingResults ratings)
         {
             if (scoutedPosition == null)
             {
