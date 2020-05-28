@@ -35,11 +35,19 @@
             this.lblAge = new System.Windows.Forms.Label();
             this.lblAlternateName = new System.Windows.Forms.Label();
             this.lblFullName = new System.Windows.Forms.Label();
+            this.lblCA = new System.Windows.Forms.Label();
+            this.lblCAVal = new System.Windows.Forms.Label();
+            this.lblPA = new System.Windows.Forms.Label();
+            this.lblPAVal = new System.Windows.Forms.Label();
             this.gbxPersonal.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbxPersonal
             // 
+            this.gbxPersonal.Controls.Add(this.lblPAVal);
+            this.gbxPersonal.Controls.Add(this.lblPA);
+            this.gbxPersonal.Controls.Add(this.lblCAVal);
+            this.gbxPersonal.Controls.Add(this.lblCA);
             this.gbxPersonal.Controls.Add(this.lblDescribedPosition);
             this.gbxPersonal.Controls.Add(this.lblSecondNationality);
             this.gbxPersonal.Controls.Add(this.lblNationality);
@@ -107,6 +115,42 @@
             this.lblFullName.TabIndex = 0;
             this.lblFullName.Text = "Full Name or Known As";
             // 
+            // lblCA
+            // 
+            this.lblCA.AutoSize = true;
+            this.lblCA.Location = new System.Drawing.Point(7, 130);
+            this.lblCA.Name = "lblCA";
+            this.lblCA.Size = new System.Drawing.Size(21, 13);
+            this.lblCA.TabIndex = 6;
+            this.lblCA.Text = "CA";
+            // 
+            // lblCAVal
+            // 
+            this.lblCAVal.AutoSize = true;
+            this.lblCAVal.Location = new System.Drawing.Point(32, 130);
+            this.lblCAVal.Name = "lblCAVal";
+            this.lblCAVal.Size = new System.Drawing.Size(25, 13);
+            this.lblCAVal.TabIndex = 7;
+            this.lblCAVal.Text = "200";
+            // 
+            // lblPA
+            // 
+            this.lblPA.AutoSize = true;
+            this.lblPA.Location = new System.Drawing.Point(74, 130);
+            this.lblPA.Name = "lblPA";
+            this.lblPA.Size = new System.Drawing.Size(21, 13);
+            this.lblPA.TabIndex = 8;
+            this.lblPA.Text = "PA";
+            // 
+            // lblPAVal
+            // 
+            this.lblPAVal.AutoSize = true;
+            this.lblPAVal.Location = new System.Drawing.Point(99, 130);
+            this.lblPAVal.Name = "lblPAVal";
+            this.lblPAVal.Size = new System.Drawing.Size(25, 13);
+            this.lblPAVal.TabIndex = 9;
+            this.lblPAVal.Text = "200";
+            // 
             // UCPersonalDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -129,5 +173,9 @@
         private System.Windows.Forms.Label lblSecondNationality;
         private System.Windows.Forms.Label lblNationality;
         private System.Windows.Forms.Label lblDescribedPosition;
+        private System.Windows.Forms.Label lblPA;
+        private System.Windows.Forms.Label lblCAVal;
+        private System.Windows.Forms.Label lblCA;
+        private System.Windows.Forms.Label lblPAVal;
     }
 }

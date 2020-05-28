@@ -36,6 +36,9 @@ namespace ChampMan_Scouter.Controls
             lblDescribedPosition.Text = player.Positions.DescribedPosition;
             lblNationality.Text = player.Nationality;
             lblSecondNationality.Text = player.SecondaryNationality;
+
+            lblCAVal.Text = player.CurrentAbility.ToString();
+            lblPAVal.Text = player.PotentialAbility.ToString();
         }
     }
 }

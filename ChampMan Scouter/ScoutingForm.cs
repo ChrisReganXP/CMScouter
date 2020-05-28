@@ -95,6 +95,7 @@ namespace ChampMan_Scouter
 
         private void DisplayInitialSearchOptions()
         {
+            ddlSearchTypes.SelectedIndex = 0;
             pnlSearch.Show();
 
             tabSearchPanels.SelectedTab = tabSearch_Player;

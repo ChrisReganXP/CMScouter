@@ -11,6 +11,15 @@ namespace CMScouter.UI
 {
     internal class DefaultRater : IPlayerRater
     {
+        /*
+            GK: Anticipation, Decisions, Handling, Heading, Positioning, Reflexes, Tackling, One on Ones
+            Full backs: Anticipation, Crossing, Decisions, Dribbling, Marking, Positioning, Tackling, Team work
+            Centre Backs: Anticipation, Decisions, Heading, Marking, Positioning, Tackling, Strength
+            Wingers: Agility, Balance, Crossing, Dribbling, Flair(If you please), Set pieces(If you please), Passing, Teamwork
+            Centre Mids: Have pretty much everything, but can vary if you want a more defensive or more attacking player
+            Strikers: Decisions, Finishing, Heading (depending on the striker), Movement (Depending on the striker) Natural Fitness, Strength (depending on the striker).
+        */
+
         byte[][] weightings;
 
         private List<PropertyInfo> MentalAttributes = typeof(PlayerData).GetProperties().Where(x => CheckAttributeGroup(x, AttributeGroup.Mental)).ToList();
@@ -740,9 +749,9 @@ namespace CMScouter.UI
                 TargetMan = TM,
                 Debug = debug,
             };*/
-        }
+    }
 
-        private byte GetRatingsForPersonality(Player player, RatingDebug debug)
+    private byte GetRatingsForPersonality(Player player, RatingDebug debug)
         {
             string mentalDebugString;
             byte offField = GetGroupingScore_Reflection(player._staff, OffFieldAttributes, weightings[weightings.Length - 1], out mentalDebugString);
