@@ -3,10 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using static CMScouterFunctions.Converters.NationTupleConverter;
 
 namespace CMScouterFunctions.Converters
 {
-    /*
     internal static class ConverterIdFactory
     {
         public static ITupleConverter<T> CreateTupleConverter<T>() where T : class
@@ -20,15 +20,15 @@ namespace CMScouterFunctions.Converters
             {
                 return (ITupleConverter<T>)new ClubTupleConverter();
             }
-            /*
+            
             if (typeof(T) == typeof(Nation))
             {
                 return (ITupleConverter<T>)new NationTupleConverter();
-            }*/
-            /*
+            }
+            
             throw new NotImplementedException("No Class Converter");
         }
-    }*/
+    }
 
     internal static class ConverterFactory
     {

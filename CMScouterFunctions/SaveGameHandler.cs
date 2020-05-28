@@ -13,7 +13,6 @@ namespace CMScouterFunctions
     public static class SaveGameHandler
     {
         const int ByteBlockSize = 268;
-        const int BitSize = 4;
 
         public static SaveGameData OpenSaveGameIntoMemory(string fileName)
         {
@@ -28,6 +27,29 @@ namespace CMScouterFunctions
             LoadGameData(savegame);
 
             return PlayerLoader.LoadPlayers(savegame);
+        }
+
+        public static List<int> GetCountriesInRegion(Dictionary<int, Nation> nations, string regionName)
+        {
+            List<int> countryIds = new List<int>();
+            if (string.IsNullOrWhiteSpace(regionName))
+            {
+                return countryIds;
+            }
+
+            switch (regionName.ToUpper())
+            {
+                case "UK":
+                case "UK & IRELAND":
+                    countryIds = GetUKCountries(nations);
+                    break;
+
+                case "SCANDINAVIA":
+                    countryIds = GetScandiCountries(nations);
+                    break;
+            }
+
+            return countryIds;
         }
 
         private static void ReadFileHeaders(StreamReader sr, SaveGameFile savegame)
@@ -67,34 +89,7 @@ namespace CMScouterFunctions
             ByteHandler.GetAllDataFromFile(general, savegame.FileName, fileFacts.DataSize);
 
             var fileData = ByteHandler.GetAllDataFromFile(general, savegame.FileName, fileFacts.DataSize);
-
-            var days = (byte)ByteHandler.GetObjectFromBytes(fileData[0], fileFacts.DataSize - 8, typeof(byte));
-            var time = (byte)ByteHandler.GetObjectFromBytes(fileData[0], fileFacts.DataSize - 7, typeof(byte));
-            var year = (short)ByteHandler.GetObjectFromBytes(fileData[0], fileFacts.DataSize - 6, typeof(short));
-            savegame.GameDate = new DateTime(year, 1, 1).AddDays(days);
-        }
-
-        public static List<int> GetCountriesInRegion(Dictionary<int, Nation> nations, string regionName)
-        {
-            List<int> countryIds = new List<int>();
-            if (string.IsNullOrWhiteSpace(regionName))
-            {
-                return countryIds;
-            }
-
-            switch (regionName.ToUpper())
-            {
-                case "UK":
-                case "UK & IRELAND":
-                    countryIds = GetUKCountries(nations);
-                    break;
-
-                case "SCANDINAVIA":
-                    countryIds = GetScandiCountries(nations);
-                    break;
-            }
-
-            return countryIds;
+            savegame.GameDate = ByteHandler.GetDateFromBytes(fileData[0], fileFacts.DataSize - 8).Value;
         }
 
         private static List<int> GetUKCountries(Dictionary<int, Nation> nations)

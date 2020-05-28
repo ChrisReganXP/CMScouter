@@ -17,6 +17,8 @@ namespace CMScouterFunctions.DataClasses
 
         public Dictionary<int, Club> Clubs { get; set; }
 
+        public Dictionary<int, Club_Comp> ClubComps { get; set; }
+
         public List<Player> Players { get; set; }
 
         public DateTime GameDate { get; set; }

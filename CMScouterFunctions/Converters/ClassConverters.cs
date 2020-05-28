@@ -7,25 +7,7 @@ using System.Reflection;
 using System.Text;
 
 namespace CMScouterFunctions.Converters
-{/*
-    internal class NationTupleConverter : ITupleConverter<Nation>
-    {
-        private static readonly List<string> EUNations = new List<string>() {
-            "AUSTRIA", "BELGIUM", "BULGARIA", "CROATIA", "CYRPUS", "CZECH REPUBLIC", "DENMARK", "ENGLAND", "ESTONIA", "SPAIN", "FINLAND", "FRANCE",
-            "GERMANY", "GREECE", "HUNGARY", "REPUBLIC OF IRELAND", "ICELAND", "ITALY", "LATVIA", "LITHUANIA", "LUXEMBOURG", "MALTA", "NETHERLANDS", "NORTHERN IRELAND",
-            "NORWAY", "POLAND", "PORTUGAL", "ROMANIA", "SCOTLAND", "SLOVAKIA", "SWITZERLAND", "SLOVENIA", "SWEDEN", "WALES"
-        };
-
-        Tuple<int, object> ITupleConverter<Nation>.Convert(byte[] source)
-        {
-            var nation = new Nation();
-            ConverterReflection.SetConversionProperties(nation, source);
-
-            nation.EUNation = EUNations.Contains(nation.Name, StringComparer.InvariantCultureIgnoreCase);
-
-            return new Tuple<int, object>(nation.Id, nation);
-        }
-    }*/
+{
 
     internal class NationConverter
     {
@@ -114,68 +96,6 @@ namespace CMScouterFunctions.Converters
         }
     }
 
-    /*
-    internal class StaffTupleConverter : ITupleConverter<Staff>
-    {
-        Tuple<int, object> ITupleConverter<Staff>.Convert(byte[] source)
-        {
-            var staff = new Staff();
-            /*
-            PropertyInfo[] props = staff.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
-            DataFileInfoAttribute[] attribs = new DataFileInfoAttribute[props.Length];
-            
-            for (int i = 0; i < attribs.Length; i++)
-            {
-                attribs[i] = (DataFileInfoAttribute)props[i].GetCustomAttributes(typeof(DataFileInfoAttribute), true).FirstOrDefault();
-            }*/
-            /*
-            ConverterReflection.SetConversionProperties(staff, source);
-            //ConverterReflection.SetConversionProperties(staff, props, attribs, source);
-
-            return new Tuple<int, object>(staff.StaffPlayerId, staff);
-        }
-    }*/
-
-    internal class ClubTupleConverter : ITupleConverter<Club>
-    {
-        private static byte[] bytes;
-
-        Tuple<int, object> ITupleConverter<Club>.Convert(byte[] sourceOfData)
-        {
-            bytes = sourceOfData;
-            Club club = new Club();
-            /*
-
-            Stopwatch mainWatch = new Stopwatch();
-            mainWatch.Start();
-            
-            if (props == null)
-            {
-                props = typeof(Club).GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
-                attribs = new DataFileInfoAttribute[props.Length];
-
-                for (int i = 0; i < attribs.Length; i++)
-                {
-                    attribs[i] = (DataFileInfoAttribute)props[i].GetCustomAttributes(typeof(DataFileInfoAttribute), true).FirstOrDefault();
-                }
-            }
-
-
-            Stopwatch smallwatch = new Stopwatch();
-            smallwatch.Start();*/
-
-            ConverterReflection.SetConversionProperties(club, /*props, attribs,*/ bytes);
-
-            //smallwatch.Stop();
-
-            var result = new Tuple<int, object>(club.ClubId, club);
-            //mainWatch.Stop();
-
-            //var timings = $"Main Method was {mainWatch.ElapsedTicks} of which {smallwatch.ElapsedTicks} was setting values";
-            return result;
-        }
-    }
-
     internal class PlayerDataConverter
     {
         public PlayerData Convert(byte[] source)
@@ -237,24 +157,6 @@ namespace CMScouterFunctions.Converters
             player.ThrowIns = ByteHandler.GetByteFromBytes(source, 65, true);
             player.Versatility = ByteHandler.GetByteFromBytes(source, 66);
             player.WorkRate = ByteHandler.GetByteFromBytes(source, 68);
-            /*player = ByteHandler.GetByteFromBytes(source, );
-            player = ByteHandler.GetByteFromBytes(source, );
-            player = ByteHandler(source, );*/
-
-            /*
-
-        [DataFileInfo(64, IsIntrinsic = false)]
-        public byte Technique { get; set; }
-
-        [DataFileInfo(65, IsIntrinsic = true)]
-        public byte ThrowIns { get; set; }
-
-        [DataFileInfo(66, IsIntrinsic = false)]
-        public byte  { get; set; }
-
-        [DataFileInfo(68, IsIntrinsic = false)]
-        [AttributeGroup(AttributeGroup.Mental)]
-        public byte  { get; set; }*/
 
             return player;
         }

@@ -22,10 +22,10 @@ namespace CMScouter.UI
             _savegame = file;
 
             ConstructLookups();
-            SetFilter(string.Empty);
+            SetRater(string.Empty);
         }
 
-        public void SetFilter(string rater)
+        public void SetRater(string rater)
         {
             if (string.IsNullOrEmpty(rater))
             {
