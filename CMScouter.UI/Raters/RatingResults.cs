@@ -27,7 +27,7 @@ namespace CMScouter.UI.Raters
 
         public byte Rating { get; set; }
 
-        public RatingDebug Debug { get; set; }
+        public RatingRoleDebug Debug { get; set; }
     }
 
     public class RatingResults
@@ -80,33 +80,25 @@ namespace CMScouter.UI.Raters
         public PositionRatings LeftWinger { get; set; }
 
         public PositionRatings CentreForward { get; set; }
-
-        public RatingDebug Debug { get; set; }
-    }
-
-    public class RatingDebug
-    {
-        public List<RatingRoleDebug> RatingsDebug { get; set; }
-
-        public RatingDebug()
-        {
-            RatingsDebug = new List<RatingRoleDebug>();
-        }
     }
 
     public class RatingRoleDebug
     {
-        public Roles Role { get; set; }
-        public string Mental { get; set; }
-        public string MentalDetail { get; set; }
-        public string Physical { get; set; }
-        public string PhysicalDetail { get; set; }
-        public string Technical { get; set; }
-        public string TechnicalDetail { get; set; }
-
         public string Position { get; set; }
 
-        public string OffField { get; set; }
-        public decimal OffFieldBonus { get; set; }
+        public Roles Role { get; set; }
+
+        public string Mental { get; set; }
+
+        public string MentalDetail { get; set; }
+
+        public string Physical { get; set; }
+
+        public string PhysicalDetail { get; set; }
+
+        public string Technical { get; set; }
+
+        public string TechnicalDetail { get; set; }
+
     }
 }

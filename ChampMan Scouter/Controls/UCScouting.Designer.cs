@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.gbxScouting = new System.Windows.Forms.GroupBox();
-            this.lblBestPosition = new System.Windows.Forms.Label();
             this.lblScoutRoleDebug = new System.Windows.Forms.Label();
+            this.lblBestPosition = new System.Windows.Forms.Label();
             this.gbxScouting.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -40,19 +40,10 @@
             this.gbxScouting.Controls.Add(this.lblBestPosition);
             this.gbxScouting.Location = new System.Drawing.Point(3, 6);
             this.gbxScouting.Name = "gbxScouting";
-            this.gbxScouting.Size = new System.Drawing.Size(752, 319);
+            this.gbxScouting.Size = new System.Drawing.Size(752, 658);
             this.gbxScouting.TabIndex = 0;
             this.gbxScouting.TabStop = false;
             this.gbxScouting.Text = "Scouting";
-            // 
-            // lblBestPosition
-            // 
-            this.lblBestPosition.AutoSize = true;
-            this.lblBestPosition.Location = new System.Drawing.Point(17, 31);
-            this.lblBestPosition.Name = "lblBestPosition";
-            this.lblBestPosition.Size = new System.Drawing.Size(68, 13);
-            this.lblBestPosition.TabIndex = 0;
-            this.lblBestPosition.Text = "Best Position";
             // 
             // lblScoutRoleDebug
             // 
@@ -63,13 +54,22 @@
             this.lblScoutRoleDebug.TabIndex = 1;
             this.lblScoutRoleDebug.Text = "Role Debug";
             // 
+            // lblBestPosition
+            // 
+            this.lblBestPosition.AutoSize = true;
+            this.lblBestPosition.Location = new System.Drawing.Point(17, 31);
+            this.lblBestPosition.Name = "lblBestPosition";
+            this.lblBestPosition.Size = new System.Drawing.Size(68, 13);
+            this.lblBestPosition.TabIndex = 0;
+            this.lblBestPosition.Text = "Best Position";
+            // 
             // UCScouting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.gbxScouting);
             this.Name = "UCScouting";
-            this.Size = new System.Drawing.Size(758, 325);
+            this.Size = new System.Drawing.Size(758, 676);
             this.gbxScouting.ResumeLayout(false);
             this.gbxScouting.PerformLayout();
             this.ResumeLayout(false);

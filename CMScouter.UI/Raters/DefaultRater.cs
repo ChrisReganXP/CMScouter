@@ -31,17 +31,6 @@ namespace CMScouter.UI
         private byte[] PhysicalWeights = new byte[] { (byte)DP.Acceleration, (byte)DP.Agility, (byte)DP.Balance, (byte)DP.Jumping, (byte)DP.Pace, (byte)DP.Stamina, (byte)DP.Strength };
         private byte[] TechnicalWeights = new byte[] { (byte)DP.Anticipation, (byte)DP.Creativity, (byte)DP.Crossing, (byte)DP.Decisions, (byte)DP.Dribbling, (byte)DP.Handling, (byte)DP.LongShots, (byte)DP.Marking, (byte)DP.OffTheBall, (byte)DP.OneOnOnes, (byte)DP.Passing, (byte)DP.Positioning, (byte)DP.Reflexes, (byte)DP.Tackling };
 
-        private static bool CheckAttributeGroup(PropertyInfo prop, AttributeGroup group)
-        {
-            if (!Attribute.IsDefined(prop, typeof(AttributeGroupAttribute)))
-            {
-                return false;
-            }
-
-            var val = (AttributeGroupAttribute)prop.GetCustomAttributes(typeof(AttributeGroupAttribute), false).FirstOrDefault();
-            return val.Grouping == group;
-        }
-
         public DefaultRater()
         {
             // last one is the off field
@@ -59,6 +48,93 @@ namespace CMScouter.UI
             AddTM();
             AddST();
             AddOffField();
+        }
+
+
+        public bool PlaysPosition(PlayerType type, PlayerData player)
+        {
+            switch (type)
+            {
+                case PlayerType.GoalKeeper:
+                    return player.GK >= 19;
+
+                case PlayerType.RightBack:
+                    return player.DF >= 15 && player.Right >= 15;
+
+                case PlayerType.CentreHalf:
+                    return player.DF >= 15 && player.Centre >= 15;
+
+                case PlayerType.LeftBack:
+                    return player.DF >= 15 && player.Left >= 15;
+
+                case PlayerType.RightWingBack:
+                    return (player.WingBack >= 15 && player.Right >= 15) || (player.DF == 20 && player.Right == 20);
+
+                case PlayerType.DefensiveMidfielder:
+                    return (player.DM >= 15 && player.Centre >= 15) || (player.Centre == 20 && (player.DF == 20 || player.MF == 20));
+
+                case PlayerType.LeftWingBack:
+                    return (player.WingBack >= 15 && player.Left >= 15) || (player.DF == 20 && player.Left == 20);
+
+                case PlayerType.RightMidfielder:
+                    return (player.MF >= 15 && player.Right >= 15) || (player.Right == 20 && player.AM == 20);
+
+                case PlayerType.CentralMidfielder:
+                    return (player.MF >= 15 && player.Centre >= 15) ||
+                        (player.DM == 20 && player.Centre >= 15) || (player.AM == 20 && player.Centre == 20);
+
+                case PlayerType.LeftMidfielder:
+                    return (player.MF >= 15 && player.Left >= 15) || (player.Left == 20 && player.AM == 20);
+
+                case PlayerType.RightWinger:
+                    return (player.AM >= 15 && player.Right >= 15) || (player.Right == 20 && (player.MF == 20 || player.ST == 20));
+
+                case PlayerType.AttackingMidfielder:
+                    return (player.AM >= 15 && player.Centre >= 15) || (player.Centre == 20 && (player.MF == 20 || player.ST == 20));
+
+                case PlayerType.LeftWinger:
+                    return (player.AM >= 15 && player.Left >= 15) || (player.Left == 20 && (player.MF == 20 || player.ST == 20));
+
+                case PlayerType.CentreForward:
+                    return (player.ST >= 15 && player.Centre >= 15) || (player.ST == 20) || (player.AM == 20 && player.Centre == 20);
+
+                default:
+                    return false;
+            }
+        }
+
+        public RatingResults GetRatings(Player player)
+        {
+            byte offFieldRating = GetRatingsForPersonality(player);
+
+            RatingResults results = new RatingResults();
+            results.Goalkeeper = GetRatingsForPosition(player, PlayerType.GoalKeeper, offFieldRating);
+            results.RightBack = GetRatingsForPosition(player, PlayerType.RightBack, offFieldRating);
+            results.CentreHalf = GetRatingsForPosition(player, PlayerType.CentreHalf, offFieldRating);
+            results.LeftBack = GetRatingsForPosition(player, PlayerType.LeftBack, offFieldRating);
+            results.RightWingBack = GetRatingsForPosition(player, PlayerType.RightWingBack, offFieldRating);
+            results.DefensiveMidfielder = GetRatingsForPosition(player, PlayerType.DefensiveMidfielder, offFieldRating);
+            results.LeftWingBack = GetRatingsForPosition(player, PlayerType.LeftWingBack, offFieldRating);
+            results.RightMidfielder = GetRatingsForPosition(player, PlayerType.RightMidfielder, offFieldRating);
+            results.CentreMidfielder = GetRatingsForPosition(player, PlayerType.CentralMidfielder, offFieldRating);
+            results.LeftMidfielder = GetRatingsForPosition(player, PlayerType.LeftMidfielder, offFieldRating);
+            results.RightWinger = GetRatingsForPosition(player, PlayerType.RightWinger, offFieldRating);
+            results.AttackingMidfielder = GetRatingsForPosition(player, PlayerType.AttackingMidfielder, offFieldRating);
+            results.LeftWinger = GetRatingsForPosition(player, PlayerType.LeftWinger, offFieldRating);
+            results.CentreForward = GetRatingsForPosition(player, PlayerType.CentreForward, offFieldRating);
+
+            return results;
+        }
+
+        private static bool CheckAttributeGroup(PropertyInfo prop, AttributeGroup group)
+        {
+            if (!Attribute.IsDefined(prop, typeof(AttributeGroupAttribute)))
+            {
+                return false;
+            }
+
+            var val = (AttributeGroupAttribute)prop.GetCustomAttributes(typeof(AttributeGroupAttribute), false).FirstOrDefault();
+            return val.Grouping == group;
         }
 
         private void AddGK()
@@ -676,113 +752,43 @@ namespace CMScouter.UI
             return values;
         }
 
-        private PositionRatings GetRatingsForPosition(Player player, PlayerType type, byte offFieldRating, RatingDebug debug)
+        private PositionRatings GetRatingsForPosition(Player player, PlayerType type, byte offFieldRating)
         {
             PositionRatings ratings = new PositionRatings();
 
             List<Roles> roles = type.GetAttributeValue<LinkedRoles, List<Roles>>(x => x.Roles);
             foreach (var role in roles)
             {
-                ratings.Ratings.Add(GetRatingForTypeAndRole(player, type, role, offFieldRating, debug));
+                ratings.Ratings.Add(GetRatingForTypeAndRole(player, type, role, offFieldRating));
             }
 
             return ratings;
         }
 
-        private PositionRating GetRatingForTypeAndRole(Player player, PlayerType type, Roles role, byte offFieldRating, RatingDebug debug)
+        private PositionRating GetRatingForTypeAndRole(Player player, PlayerType type, Roles role, byte offFieldRating)
         {
-            var rating = AdjustScoreForOffField(AdjustScoreForPosition(player, type, CalculateRating(player, type, role, debug), debug), offFieldRating, debug);
-            return new PositionRating() { Rating = rating, Role = role, Debug = debug, };
+            RatingRoleDebug roleDebug = new RatingRoleDebug();
+            var rating = AdjustScoreForOffField(AdjustScoreForPosition(player, type, CalculateRating(player, type, role, ref roleDebug), roleDebug), offFieldRating, roleDebug);
+            return new PositionRating() { Rating = rating, Role = role, Debug = roleDebug, };
         }
 
-        public RatingResults GetRatings(Player player)
-        {
-            var debug = new RatingDebug();
-
-            byte offFieldRating = GetRatingsForPersonality(player, debug);
-
-
-            RatingResults results = new RatingResults();
-            results.Goalkeeper = GetRatingsForPosition(player, PlayerType.GoalKeeper, offFieldRating, debug);
-            results.RightBack = GetRatingsForPosition(player, PlayerType.RightBack, offFieldRating, debug);
-            results.CentreHalf = GetRatingsForPosition(player, PlayerType.CentreHalf, offFieldRating, debug);
-            results.LeftBack = GetRatingsForPosition(player, PlayerType.LeftBack, offFieldRating, debug);
-            results.RightWingBack = GetRatingsForPosition(player, PlayerType.RightWingBack, offFieldRating, debug);
-            results.DefensiveMidfielder = GetRatingsForPosition(player, PlayerType.DefensiveMidfielder, offFieldRating, debug);
-            results.LeftWingBack = GetRatingsForPosition(player, PlayerType.LeftWingBack, offFieldRating, debug);
-            results.RightMidfielder = GetRatingsForPosition(player, PlayerType.RightMidfielder, offFieldRating, debug);
-            results.CentreMidfielder = GetRatingsForPosition(player, PlayerType.CentralMidfielder, offFieldRating, debug);
-            results.LeftMidfielder = GetRatingsForPosition(player, PlayerType.LeftMidfielder, offFieldRating, debug);
-            results.RightWinger = GetRatingsForPosition(player, PlayerType.RightWinger, offFieldRating, debug);
-            results.AttackingMidfielder = GetRatingsForPosition(player, PlayerType.AttackingMidfielder, offFieldRating, debug);
-            results.LeftWinger = GetRatingsForPosition(player, PlayerType.LeftWinger, offFieldRating, debug);
-            results.CentreForward = GetRatingsForPosition(player, PlayerType.CentreForward, offFieldRating, debug);
-
-            results.Debug = debug;
-            return results;
-
-            /*
-            var GK = CalculateRating(item, PlayerType.GoalKeeper, debug);
-            var DFB = Math.Max(CalculateRating(item, PlayerType.DefensiveLeftBack, debug), CalculateRating(item, PlayerType.DefensiveRightBack, debug));
-            var AFB = Math.Max(CalculateRating(item, PlayerType.AttackingLeftBack, debug), CalculateRating(item, PlayerType.AttackingRightBack, debug));
-            var CB = CalculateRating(item, PlayerType.CentreHalf, debug);
-            var DM = CalculateRating(item, PlayerType.HoldingMidfielder, debug);
-            var CM = Math.Max(CalculateRating(item, PlayerType.HoldingMidfielder, debug), CalculateRating(item, PlayerType.AttackingMidfielder, debug));
-            var WM = Math.Max(CalculateRating(item, PlayerType.LeftMidfielder, debug), CalculateRating(item, PlayerType.RightMidfielder, debug));
-            var WG = Math.Max(CalculateRating(item, PlayerType.LeftWinger, debug), CalculateRating(item, PlayerType.RightWinger, debug));
-            var AM = CalculateRating(item, PlayerType.AttackingMidfielder, debug);
-            var PO = CalculateRating(item, PlayerType.Poacher, debug);
-            var TM = CalculateRating(item, PlayerType.TargetMan, debug);
-
-            return new RatingResults()
-            {
-                GK = GK,
-                DefensiveFullBack = DFB,
-                AttackingFullBack = AFB,
-                CentreHalf = CB,
-                HoldingMidfielder = DM,
-                CentreMidfielder = CM,
-                WideMidfielder = WM,
-                AttackingMidfielder = AM,
-                Winger = WG,
-                Poacher = PO,
-                TargetMan = TM,
-                Debug = debug,
-            };*/
-    }
-
-    private byte GetRatingsForPersonality(Player player, RatingDebug debug)
+        private byte GetRatingsForPersonality(Player player)
         {
             string mentalDebugString;
             byte offField = GetGroupingScore_Reflection(player._staff, OffFieldAttributes, weightings[weightings.Length - 1], out mentalDebugString);
 
-            debug.RatingsDebug = new List<RatingRoleDebug>();
-            debug.RatingsDebug.Add(new RatingRoleDebug() { OffField = offField.ToString() });
-
             return offField;
         }
 
-        /*
-        private byte CalculateRating(Player player, PlayerType type, RatingDebug debug)
-        {
-            RatingRoleDebug roleDebug;
-            Roles role = type.GetAttributeValue<LinkedRole, Roles>(x => x.Role);
-            var weights = GetWeights(role);
-            byte result = RatePlayer(player, type, role, weights, out roleDebug);
-
-            debug.RatingsDebug.Add(roleDebug);
-            return result;
-        }*/
-
-        private byte CalculateRating(Player player, PlayerType type, Roles role, RatingDebug debug)
+        private byte CalculateRating(Player player, PlayerType type, Roles role, ref RatingRoleDebug debug)
         {
             RatingRoleDebug roleDebug;
             var weights = GetWeights(role);
 
-            var values = GetValues(player);
+            //var values = GetValues(player);
             byte result = RatePlayerInRole(player, type, role, weights, out roleDebug);
 
-            debug.RatingsDebug.Add(roleDebug);
+            debug = roleDebug;
             return result;
         }
 
@@ -790,28 +796,6 @@ namespace CMScouter.UI
         {
             return weightings[(int)role];
         }
-
-        /*
-        private byte RatePlayer(Player player, PlayerType type, Roles role, byte[] weights, out RatingRoleDebug debug)
-        {
-            byte mentalWeight = weights.GW(DP.MentalityWeight);
-            byte physicalWeight = weights.GW(DP.PhysicalityWeight);
-            byte technicalWeight = weights.GW(DP.TechnicalWeight);
-
-            var mental = GetGroupingScore(player._player, MentalAttributes, weights);
-            var physical = GetGroupingScore(player._player, PhysicalAttributes, weights);
-            var technical = GetGroupingScore(player._player, TechnicalAttributes, weights);
-
-            decimal mentalScore = Weight(mental, mentalWeight);
-            decimal physicalScore = Weight(physical, physicalWeight);
-            decimal technicalScore = Weight(technical, technicalWeight);
-            decimal adjust = (decimal)(mentalWeight + physicalWeight + technicalWeight) / 100;
-
-            debug = new RatingRoleDebug() { Role = role, Mental = $"{mentalScore} / {mentalWeight}", Physical = $"{physicalScore} / {physicalWeight}", Technical = $"{technicalScore} / {technicalWeight}"};
-
-            decimal unadjustedScore = ((mentalScore + physicalScore + technicalScore) / adjust);
-            return AdjustScoreForPosition(player, type, unadjustedScore);
-        }*/
 
         private byte RatePlayerInRole_Reflection(Player player, PlayerType type, Roles role, byte[] weights, out RatingRoleDebug debug)
         {
@@ -879,19 +863,17 @@ namespace CMScouter.UI
             return (byte)((mentalScore + physicalScore + technicalScore) / adjust);
         }
 
-        private byte AdjustScoreForPosition(Player player, PlayerType type, decimal unadjustedScore, RatingDebug debug)
+        private byte AdjustScoreForPosition(Player player, PlayerType type, decimal unadjustedScore, RatingRoleDebug debug)
         {
             decimal positionModifier = (decimal)PositionalFamiliarity(type, player) / 100;
-            debug.RatingsDebug.Last().Position = positionModifier.ToString("0.00");
+            debug.Position = positionModifier.ToString("0.00");
 
             return (byte)(unadjustedScore * positionModifier);
         }
 
-        private byte AdjustScoreForOffField(byte unadjustedScore, byte offFieldRating, RatingDebug debug)
+        private byte AdjustScoreForOffField(byte unadjustedScore, byte offFieldRating, RatingRoleDebug debug)
         {
             decimal offFieldBonus = -5 + (((decimal)offFieldRating) / 10);
-
-            debug.RatingsDebug.Last().OffFieldBonus = offFieldBonus;
 
             return (byte)Math.Min(99, Math.Max(0, (unadjustedScore + offFieldBonus)));
         }
@@ -1094,7 +1076,7 @@ namespace CMScouter.UI
             switch (type)
             {
                 case PlayerType.GoalKeeper:
-                    modifierForPosition = GetFamiliarity(player._player.GK);
+                    modifierForPosition = GetFamiliarity(player._player.GK, player._player.GK); // double down on GK position, not side
                     break;
 
                 case PlayerType.RightBack:
@@ -1165,58 +1147,6 @@ namespace CMScouter.UI
         private byte GetVersitilityModifier(byte versatility)
         {
             return (byte)100;
-        }
-
-        public bool PlaysPosition(PlayerType type, PlayerData player)
-        {
-            switch (type)
-            {
-                case PlayerType.GoalKeeper:
-                    return player.GK >= 19;
-
-                case PlayerType.RightBack:
-                    return player.DF >= 15 && player.Right >= 15;
-
-                case PlayerType.CentreHalf:
-                    return player.DF >= 15 && player.Centre >= 15;
-
-                case PlayerType.LeftBack:
-                    return player.DF >= 15 && player.Left >= 15;
-
-                case PlayerType.RightWingBack:
-                    return (player.WingBack >= 15 && player.Right >= 15) || (player.DF == 20 && player.Right == 20);
-
-                case PlayerType.DefensiveMidfielder:
-                    return (player.DM >= 15 && player.Centre >= 15) || (player.Centre == 20 && (player.DF == 20 || player.MF == 20));
-
-                case PlayerType.LeftWingBack:
-                    return (player.WingBack >= 15 && player.Left >= 15) || (player.DF == 20 && player.Left == 20);
-
-                case PlayerType.RightMidfielder:
-                    return (player.MF >= 15 && player.Right >= 15) || (player.Right == 20 && player.AM == 20);
-
-                case PlayerType.CentralMidfielder:
-                    return (player.MF >= 15 && player.Centre >= 15) ||
-                        (player.DM == 20 && player.Centre >= 15) || (player.AM == 20 && player.Centre == 20);
-
-                case PlayerType.LeftMidfielder:
-                    return (player.MF >= 15 && player.Left >= 15) || (player.Left == 20 && player.AM == 20);
-
-                case PlayerType.RightWinger:
-                    return (player.AM >= 15 && player.Right >= 15) || (player.Right == 20 && (player.MF == 20 || player.ST == 20));
-
-                case PlayerType.AttackingMidfielder:
-                    return (player.AM >= 15 && player.Centre >= 15) || (player.Centre == 20 && (player.MF == 20 || player.ST == 20));
-
-                case PlayerType.LeftWinger:
-                    return (player.AM >= 15 && player.Left >= 15) || (player.Left == 20 && (player.MF == 20 || player.ST == 20));
-
-                case PlayerType.CentreForward:
-                    return (player.ST >= 15 && player.Centre >= 15) || (player.ST == 20) || (player.AM == 20 && player.Centre == 20);
-
-                default:
-                    return false;
-            }
         }
     }
 }

@@ -68,7 +68,7 @@
             // 
             this.ucScouting.Location = new System.Drawing.Point(12, 241);
             this.ucScouting.Name = "ucScouting";
-            this.ucScouting.Size = new System.Drawing.Size(776, 282);
+            this.ucScouting.Size = new System.Drawing.Size(776, 448);
             this.ucScouting.TabIndex = 1;
             // 
             // ucPersonalDetails
@@ -82,7 +82,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(897, 535);
+            this.ClientSize = new System.Drawing.Size(897, 701);
             this.Controls.Add(this.ucSetPieces);
             this.Controls.Add(this.ucPhysical);
             this.Controls.Add(this.ucMental);
