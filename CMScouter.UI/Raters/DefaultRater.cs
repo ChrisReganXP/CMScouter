@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 
 namespace CMScouter.UI
@@ -22,14 +21,10 @@ namespace CMScouter.UI
 
         byte[][] weightings;
 
-        private List<PropertyInfo> MentalAttributes = typeof(PlayerData).GetProperties().Where(x => CheckAttributeGroup(x, AttributeGroup.Mental)).ToList();
-        private List<PropertyInfo> PhysicalAttributes = typeof(PlayerData).GetProperties().Where(x => CheckAttributeGroup(x, AttributeGroup.Physical)).ToList();
-        private List<PropertyInfo> TechnicalAttributes = typeof(PlayerData).GetProperties().Where(x => CheckAttributeGroup(x, AttributeGroup.Technical)).ToList();
-        private List<PropertyInfo> OffFieldAttributes = typeof(Staff).GetProperties().Where(x => CheckAttributeGroup(x, AttributeGroup.OffField)).ToList();
-
-        private byte[] MentalWeights = new byte[] {  (byte)DP.Aggression, (byte)DP.Bravery, (byte)DP.Consistency, (byte)DP.ImportantMatches, (byte)DP.Influence, (byte)DP.Teamwork, (byte)DP.WorkRate};
-        private byte[] PhysicalWeights = new byte[] { (byte)DP.Acceleration, (byte)DP.Agility, (byte)DP.Balance, (byte)DP.Jumping, (byte)DP.Pace, (byte)DP.Stamina, (byte)DP.Strength };
-        private byte[] TechnicalWeights = new byte[] { (byte)DP.Anticipation, (byte)DP.Creativity, (byte)DP.Crossing, (byte)DP.Decisions, (byte)DP.Dribbling, (byte)DP.Handling, (byte)DP.LongShots, (byte)DP.Marking, (byte)DP.OffTheBall, (byte)DP.OneOnOnes, (byte)DP.Passing, (byte)DP.Positioning, (byte)DP.Reflexes, (byte)DP.Tackling };
+        private byte[] MentalAttributes = new byte[] {  (byte)DP.Aggression, (byte)DP.Bravery, (byte)DP.Consistency, (byte)DP.ImportantMatches, (byte)DP.Influence, (byte)DP.Teamwork, (byte)DP.WorkRate};
+        private byte[] PhysicalAttributes = new byte[] { (byte)DP.Acceleration, (byte)DP.Agility, (byte)DP.Balance, (byte)DP.Jumping, (byte)DP.Pace, (byte)DP.Stamina, (byte)DP.Strength };
+        private byte[] TechnicalAttributes = new byte[] { (byte)DP.Anticipation, (byte)DP.Creativity, (byte)DP.Crossing, (byte)DP.Decisions, (byte)DP.Dribbling, (byte)DP.Handling, (byte)DP.LongShots, (byte)DP.Marking, (byte)DP.OffTheBall, (byte)DP.OneOnOnes, (byte)DP.Passing, (byte)DP.Positioning, (byte)DP.Reflexes, (byte)DP.Tackling };
+        private byte[] OffFieldAttributes = new byte[] { (byte)DP.Adaptability, (byte)DP.Ambition, (byte)DP.Loyalty, (byte)DP.Pressure, (byte)DP.Professionalism, (byte)DP.Sportsmanship, (byte)DP.Temperament, (byte)DP.Versatility };
 
         public DefaultRater()
         {
@@ -49,7 +44,6 @@ namespace CMScouter.UI
             AddST();
             AddOffField();
         }
-
 
         public bool PlaysPosition(PlayerType type, PlayerData player)
         {
@@ -126,15 +120,346 @@ namespace CMScouter.UI
             return results;
         }
 
-        private static bool CheckAttributeGroup(PropertyInfo prop, AttributeGroup group)
+        private byte[] GetValues(Player player)
         {
-            if (!Attribute.IsDefined(prop, typeof(AttributeGroupAttribute)))
+            byte[] values = new byte[Enum.GetNames(typeof(DP)).Length];
+            values.AW(DP.Acceleration, player._player.Acceleration);
+            values.AW(DP.Aggression, player._player.Aggression);
+            values.AW(DP.Agility, player._player.Agility);
+            values.AW(DP.Anticipation, player._player.Anticipation);
+            values.AW(DP.Balance, player._player.Balance);
+            values.AW(DP.Bravery, player._player.Bravery);
+            values.AW(DP.Consistency, player._player.Consistency);
+            values.AW(DP.Corners, player._player.Corners);
+            values.AW(DP.Creativity, player._player.Creativity);
+            values.AW(DP.Crossing, player._player.Crossing);
+            values.AW(DP.Decisions, player._player.Decisions);
+            values.AW(DP.Dirtiness, player._player.Dirtiness);
+            values.AW(DP.Dribbling, player._player.Dribbling);
+            values.AW(DP.Finishing, player._player.Finishing);
+            values.AW(DP.FreeKicks, player._player.FreeKicks);
+            values.AW(DP.Flair, player._player.Flair);
+            values.AW(DP.Handling, player._player.Handling);
+            values.AW(DP.Heading, player._player.Heading);
+            values.AW(DP.ImportantMatches, player._player.ImportantMatches);
+            values.AW(DP.Influence, player._player.Influence);
+            values.AW(DP.InjuryProneness, player._player.InjuryProneness);
+            values.AW(DP.Jumping, player._player.Jumping);
+            values.AW(DP.LongShots, player._player.LongShots);
+            values.AW(DP.Marking, player._player.Marking);
+            values.AW(DP.OffTheBall, player._player.OffTheBall);
+            values.AW(DP.OneOnOnes, player._player.OneOnOnes);
+            values.AW(DP.Pace, player._player.Pace);
+            values.AW(DP.Passing, player._player.Passing);
+            values.AW(DP.Penalties, player._player.Penalties);
+            values.AW(DP.Positioning, player._player.Positioning);
+            values.AW(DP.Reflexes, player._player.Reflexes);
+            values.AW(DP.Stamina, player._player.Stamina);
+            values.AW(DP.Strength, player._player.Strength);
+            values.AW(DP.Tackling, player._player.Tackling);
+            values.AW(DP.Teamwork, player._player.Teamwork);
+            values.AW(DP.Technique, player._player.Technique);
+            values.AW(DP.ThrowIns, player._player.ThrowIns);
+            values.AW(DP.Versatility, player._player.Versatility);
+            values.AW(DP.WorkRate, player._player.WorkRate);
+            values.AW(DP.LeftFoot, player._player.Left);
+            values.AW(DP.RightFoot, player._player.Right);
+
+            values.AW(DP.Adaptability, player._staff.Adaptability);
+            values.AW(DP.Ambition, player._staff.Ambition);
+            values.AW(DP.Determination, player._staff.Determination);
+            values.AW(DP.Loyalty, player._staff.Loyalty);
+            values.AW(DP.Pressure, player._staff.Pressure);
+            values.AW(DP.Professionalism, player._staff.Professionalism);
+            values.AW(DP.Sportsmanship, player._staff.Sportsmanship);
+            values.AW(DP.Temperament, player._staff.Temperament);
+
+            return values;
+        }
+
+        private PositionRatings GetRatingsForPosition(Player player, PlayerType type, byte offFieldRating)
+        {
+            PositionRatings ratings = new PositionRatings() { Position = type } ;
+
+            List<Roles> roles = type.GetAttributeValue<LinkedRoles, List<Roles>>(x => x.Roles);
+            foreach (var role in roles)
             {
-                return false;
+                ratings.Ratings.Add(GetRatingForTypeAndRole(player, type, role, offFieldRating));
             }
 
-            var val = (AttributeGroupAttribute)prop.GetCustomAttributes(typeof(AttributeGroupAttribute), false).FirstOrDefault();
-            return val.Grouping == group;
+            return ratings;
+        }
+
+        private PositionRating GetRatingForTypeAndRole(Player player, PlayerType type, Roles role, byte offFieldRating)
+        {
+            RatingRoleDebug roleDebug = new RatingRoleDebug();
+            var rating = AdjustScoreForOffField(AdjustScoreForPosition(player, type, CalculateRating(player, type, role, ref roleDebug), roleDebug), offFieldRating);
+            return new PositionRating() { Rating = rating, Role = role, Debug = roleDebug, };
+        }
+
+        private byte GetRatingsForPersonality(Player player)
+        {
+            string mentalDebugString;
+            byte[] values = GetValues(player);
+
+            byte offField = GetGroupingScore(OffFieldAttributes, values, weightings[weightings.Length - 1], false, out mentalDebugString);
+
+            return offField;
+        }
+
+        private byte CalculateRating(Player player, PlayerType type, Roles role, ref RatingRoleDebug debug)
+        {
+            RatingRoleDebug roleDebug;
+            var weights = GetWeights(role);
+
+            //var values = GetValues(player);
+            byte result = RatePlayerInRole(player, type, role, weights, out roleDebug);
+
+            debug = roleDebug;
+            return result;
+        }
+
+        private byte RatePlayerInRole(Player player, PlayerType type, Roles role, byte[] weights, out RatingRoleDebug debug)
+        {
+            string mentalDebugString, physicalDebugString, technicalDebugString;
+
+            byte mentalWeight = weights.GW(DP.MentalityWeight);
+            byte physicalWeight = weights.GW(DP.PhysicalityWeight);
+            byte technicalWeight = weights.GW(DP.TechnicalWeight);
+
+            byte[] values = GetValues(player);
+
+            var mental = GetGroupingScore(MentalAttributes, values, weights, false, out mentalDebugString);
+            var physical = GetGroupingScore(PhysicalAttributes, values, weights, false, out physicalDebugString);
+            var technical = GetGroupingScore(TechnicalAttributes, values, weights, true, out technicalDebugString);
+
+            decimal mentalScore = Weight(mental, mentalWeight);
+            decimal physicalScore = Weight(physical, physicalWeight);
+            decimal technicalScore = Weight(technical, technicalWeight);
+            decimal adjust = (decimal)(mentalWeight + physicalWeight + technicalWeight) / 100;
+
+            debug = new RatingRoleDebug()
+            {
+                Position = type.ToString(),
+                Role = role,
+                Mental = $"{mentalScore} / {mentalWeight}",
+                MentalDetail = mentalDebugString,
+                Physical = $"{physicalScore} / {physicalWeight}",
+                PhysicalDetail = physicalDebugString,
+                Technical = $"{technicalScore} / {technicalWeight}",
+                TechnicalDetail = technicalDebugString,
+            };
+
+            return (byte)((mentalScore + physicalScore + technicalScore) / adjust);
+        }
+
+        private byte AdjustScoreForPosition(Player player, PlayerType type, decimal unadjustedScore, RatingRoleDebug debug)
+        {
+            decimal positionModifier = (decimal)PositionalFamiliarity(type, player) / 100;
+            debug.Position = positionModifier.ToString("0.00");
+
+            return (byte)(unadjustedScore * positionModifier);
+        }
+
+        private byte AdjustScoreForOffField(byte unadjustedScore, byte offFieldRating)
+        {
+            decimal offFieldBonus = -5 + (((decimal)offFieldRating) / 10);
+
+            return (byte)Math.Min(99, Math.Max(0, (unadjustedScore + offFieldBonus)));
+        }
+
+        private byte GetGroupingScore(byte[] attributes, byte[] values, byte[] weights, bool isIntrinsic, out string debugString)
+        {
+            decimal rating = 0;
+            int combinedWeights = 0;
+            byte realValue;
+            debugString = string.Empty;
+
+            if (values.Length != weights.Length || Enum.GetNames(typeof(DP)).Length != values.Length)
+            {
+                throw new ApplicationException("Unbalanced");
+            }
+
+            //for (int i = 0; i < weights.Length; i++)
+            foreach (var i in attributes)
+            {
+                byte weight = weights[i];
+
+                if (weight == 0)
+                {
+                    continue;
+                }
+
+                combinedWeights += weight;
+                realValue = values[i];
+                string attribute = Enum.GetNames(typeof(DP))[i];
+
+                decimal value = Adj(realValue, isIntrinsic);
+
+                decimal weightedValue = value * weight;
+                rating += weightedValue;
+
+                debugString += $"{attribute} : {value}-{weight}({realValue}) ";
+            }
+
+            int maxScore = 20 * combinedWeights;
+
+            var result = (byte)((rating / maxScore) * 100);
+            return result;
+        }
+
+        private byte PositionalFamiliarity(PlayerType type, Player player)
+        {
+            byte modifierForPosition = 100;
+            byte modifierForVersitility = GetVersitilityModifier(player._player.Versatility);
+
+            switch (type)
+            {
+                case PlayerType.GoalKeeper:
+                    modifierForPosition = GetFamiliarity(player._player.GK, player._player.GK); // double down on GK position, not side
+                    break;
+
+                case PlayerType.RightBack:
+                    modifierForPosition = GetFamiliarity(player._player.DF, player._player.Right);
+                    break;
+
+                case PlayerType.CentreHalf:
+                    modifierForPosition = GetFamiliarity(player._player.DF, player._player.Centre);
+                    break;
+
+                case PlayerType.LeftBack:
+                    modifierForPosition = GetFamiliarity(player._player.DF, player._player.Left);
+                    break;
+
+                case PlayerType.RightWingBack:
+                    modifierForPosition = GetFamiliarity(player._player.WingBack, player._player.Right);
+                    break;
+
+                case PlayerType.DefensiveMidfielder:
+                    modifierForPosition = GetFamiliarity(player._player.DM, player._player.Centre);
+                    break;
+
+                case PlayerType.LeftWingBack:
+                    modifierForPosition = GetFamiliarity(player._player.WingBack, player._player.Left);
+                    break;
+
+                case PlayerType.RightMidfielder:
+                    modifierForPosition = GetFamiliarity(player._player.MF, player._player.Right);
+                    break;
+
+                case PlayerType.CentralMidfielder:
+                    modifierForPosition = GetFamiliarity(player._player.MF, player._player.Centre);
+                    break;
+
+                case PlayerType.LeftMidfielder:
+                    modifierForPosition = GetFamiliarity(player._player.MF, player._player.Left);
+                    break;
+
+                case PlayerType.RightWinger:
+                    modifierForPosition = GetFamiliarity(player._player.AM, player._player.Right);
+                    break;
+
+                case PlayerType.AttackingMidfielder:
+                    modifierForPosition = GetFamiliarity(player._player.AM, player._player.Centre);
+                    break;
+
+                case PlayerType.LeftWinger:
+                    modifierForPosition = GetFamiliarity(player._player.AM, player._player.Left);
+                    break;
+
+                case PlayerType.CentreForward:
+                    modifierForPosition = GetFamiliarity(player._player.ST, player._player.Centre);
+                    break;
+
+                default:
+                    modifierForPosition = 1;
+                    break;
+            }
+
+            return (byte)(((decimal)modifierForPosition + modifierForVersitility) / 200 * 100);
+        }
+
+        private byte GetFamiliarity(byte position, byte channel = 20)
+        {
+            return (byte)((position + channel) * 2.5);
+        }
+
+        private byte GetVersitilityModifier(byte versatility)
+        {
+            return (byte)100;
+        }
+
+        private decimal Weight(byte score, short importance)
+        {
+            score = Math.Min(score, (byte)100);
+            return (decimal)score / 100 * importance;
+        }
+
+        private decimal Adj(byte val, bool isIntrinsic)
+        {
+            if (!isIntrinsic)
+            {
+                return val;
+            }
+
+            // based on GK attribs
+            /*
+            if (val < 32) return 1;
+            if (val < 50) return 2;
+            if (val < 65) return 3;
+            if (val < 81) return 4;
+            if (val < 88) return 5;
+            if (val < 94) return 6;
+
+            if (val < 99) return 7;
+            if (val < 104) return 8;
+            if (val < 107) return 9;
+
+            if (val < 108) return 10;
+            if (val < 109) return 11;
+            if (val < 110) return 12;
+
+            if (val < 111) return 13;
+
+            if (val < 114) return 14;
+            if (val < 118) return 15;
+            if (val < 122) return 16;
+
+            if (val < 128) return 17;
+            if (val < 135) return 18;
+            if (val < 150) return 19;*/
+
+            if (val < 64) return 1;
+            if (val < 72) return 2;
+            if (val < 80) return 3;
+            if (val < 87) return 4;
+            if (val < 92) return 5;
+            if (val < 96) return 6;
+
+            if (val < 99) return 7;
+            if (val < 102) return 8;
+            if (val < 107) return 9;
+
+            if (val < 111) return 10;
+            if (val < 114) return 11;
+            if (val < 119) return 12;
+
+            if (val < 123) return 13;
+
+            if (val < 128) return 14;
+            if (val < 134) return 15;
+            if (val < 142) return 16;
+
+            if (val < 150) return 17;
+            if (val < 160) return 18;
+            if (val < 180) return 19;
+
+            return 20;
+        }
+
+        private byte[] GetWeights(Roles role)
+        {
+            return weightings[(int)role];
         }
 
         private void AddGK()
@@ -207,7 +532,7 @@ namespace CMScouter.UI
 
         private void AddDFB()
         {
-            byte[] role = GetBaselineMentality(); 
+            byte[] role = GetBaselineMentality();
             role.AW(DP.Acceleration, 3);
             role.AW(DP.Aggression, 3);
             role.AW(DP.Agility, 1);
@@ -702,451 +1027,6 @@ namespace CMScouter.UI
             person.AW(DP.Sportsmanship, 0);
             person.AW(DP.Temperament, 3);
             weightings[weightings.Length - 1] = person;
-        }
-
-        private byte[] GetValues(Player player)
-        {
-            byte[] values = new byte[Enum.GetNames(typeof(DP)).Length];
-            values.AW(DP.Acceleration, player._player.Acceleration);
-            values.AW(DP.Aggression, player._player.Aggression);
-            values.AW(DP.Agility, player._player.Agility);
-            values.AW(DP.Anticipation, player._player.Anticipation);
-            values.AW(DP.Balance, player._player.Balance);
-            values.AW(DP.Bravery, player._player.Bravery);
-            values.AW(DP.Consistency, player._player.Consistency);
-            values.AW(DP.Corners, player._player.Corners);
-            values.AW(DP.Creativity, player._player.Creativity);
-            values.AW(DP.Crossing, player._player.Crossing);
-            values.AW(DP.Decisions, player._player.Decisions);
-            values.AW(DP.Dirtiness, player._player.Dirtiness);
-            values.AW(DP.Dribbling, player._player.Dribbling);
-            values.AW(DP.Finishing, player._player.Finishing);
-            values.AW(DP.FreeKicks, player._player.FreeKicks);
-            values.AW(DP.Flair, player._player.Flair);
-            values.AW(DP.Handling, player._player.Handling);
-            values.AW(DP.Heading, player._player.Heading);
-            values.AW(DP.ImportantMatches, player._player.ImportantMatches);
-            values.AW(DP.Influence, player._player.Influence);
-            values.AW(DP.InjuryProneness, player._player.InjuryProneness);
-            values.AW(DP.Jumping, player._player.Jumping);
-            values.AW(DP.LongShots, player._player.LongShots);
-            values.AW(DP.Marking, player._player.Marking);
-            values.AW(DP.OffTheBall, player._player.OffTheBall);
-            values.AW(DP.OneOnOnes, player._player.OneOnOnes);
-            values.AW(DP.Pace, player._player.Pace);
-            values.AW(DP.Passing, player._player.Passing);
-            values.AW(DP.Penalties, player._player.Penalties);
-            values.AW(DP.Positioning, player._player.Positioning);
-            values.AW(DP.Reflexes, player._player.Reflexes);
-            values.AW(DP.Stamina, player._player.Stamina);
-            values.AW(DP.Strength, player._player.Strength);
-            values.AW(DP.Tackling, player._player.Tackling);
-            values.AW(DP.Teamwork, player._player.Teamwork);
-            values.AW(DP.Technique, player._player.Technique);
-            values.AW(DP.ThrowIns, player._player.ThrowIns);
-            values.AW(DP.Versatility, player._player.Versatility);
-            values.AW(DP.WorkRate, player._player.WorkRate);
-            values.AW(DP.LeftFoot, player._player.Left);
-            values.AW(DP.RightFoot, player._player.Right);
-
-            return values;
-        }
-
-        private PositionRatings GetRatingsForPosition(Player player, PlayerType type, byte offFieldRating)
-        {
-            PositionRatings ratings = new PositionRatings() { Position = type } ;
-
-            List<Roles> roles = type.GetAttributeValue<LinkedRoles, List<Roles>>(x => x.Roles);
-            foreach (var role in roles)
-            {
-                ratings.Ratings.Add(GetRatingForTypeAndRole(player, type, role, offFieldRating));
-            }
-
-            return ratings;
-        }
-
-        private PositionRating GetRatingForTypeAndRole(Player player, PlayerType type, Roles role, byte offFieldRating)
-        {
-            RatingRoleDebug roleDebug = new RatingRoleDebug();
-            var rating = AdjustScoreForOffField(AdjustScoreForPosition(player, type, CalculateRating(player, type, role, ref roleDebug), roleDebug), offFieldRating, roleDebug);
-            return new PositionRating() { Rating = rating, Role = role, Debug = roleDebug, };
-        }
-
-        private byte GetRatingsForPersonality(Player player)
-        {
-            string mentalDebugString;
-            byte offField = GetGroupingScore_Reflection(player._staff, OffFieldAttributes, weightings[weightings.Length - 1], out mentalDebugString);
-
-            return offField;
-        }
-
-        private byte CalculateRating(Player player, PlayerType type, Roles role, ref RatingRoleDebug debug)
-        {
-            RatingRoleDebug roleDebug;
-            var weights = GetWeights(role);
-
-            //var values = GetValues(player);
-            byte result = RatePlayerInRole(player, type, role, weights, out roleDebug);
-
-            debug = roleDebug;
-            return result;
-        }
-
-        private byte[] GetWeights(Roles role)
-        {
-            return weightings[(int)role];
-        }
-
-        private byte RatePlayerInRole_Reflection(Player player, PlayerType type, Roles role, byte[] weights, out RatingRoleDebug debug)
-        {
-            string mentalDebugString, physicalDebugString, technicalDebugString;
-
-            byte mentalWeight = weights.GW(DP.MentalityWeight);
-            byte physicalWeight = weights.GW(DP.PhysicalityWeight);
-            byte technicalWeight = weights.GW(DP.TechnicalWeight);
-
-            var mental = GetGroupingScore(player._player, MentalAttributes, weights, out mentalDebugString);
-            var physical = GetGroupingScore(player._player, PhysicalAttributes, weights, out physicalDebugString);
-            var technical = GetGroupingScore(player._player, TechnicalAttributes, weights, out technicalDebugString);
-
-            decimal mentalScore = Weight(mental, mentalWeight);
-            decimal physicalScore = Weight(physical, physicalWeight);
-            decimal technicalScore = Weight(technical, technicalWeight);
-            decimal adjust = (decimal)(mentalWeight + physicalWeight + technicalWeight) / 100;
-
-            debug = new RatingRoleDebug()
-            {
-                Position = type.ToString(),
-                Role = role,
-                Mental = $"{mentalScore} / {mentalWeight}",
-                MentalDetail = mentalDebugString,
-                Physical = $"{physicalScore} / {physicalWeight}",
-                PhysicalDetail = physicalDebugString,
-                Technical = $"{technicalScore} / {technicalWeight}",
-                TechnicalDetail = technicalDebugString,
-            };
-
-            return (byte)((mentalScore + physicalScore + technicalScore) / adjust);
-        }
-
-        private byte RatePlayerInRole(Player player, PlayerType type, Roles role, byte[] weights, out RatingRoleDebug debug)
-        {
-            string mentalDebugString, physicalDebugString, technicalDebugString;
-
-            byte mentalWeight = weights.GW(DP.MentalityWeight);
-            byte physicalWeight = weights.GW(DP.PhysicalityWeight);
-            byte technicalWeight = weights.GW(DP.TechnicalWeight);
-
-            byte[] values = GetValues(player);
-
-            var mental = GetGroupingScore(player._player, MentalWeights, values, weights, false, out mentalDebugString);
-            var physical = GetGroupingScore(player._player, PhysicalWeights, values, weights, false, out physicalDebugString);
-            var technical = GetGroupingScore(player._player, TechnicalWeights, values, weights, true, out technicalDebugString);
-
-            decimal mentalScore = Weight(mental, mentalWeight);
-            decimal physicalScore = Weight(physical, physicalWeight);
-            decimal technicalScore = Weight(technical, technicalWeight);
-            decimal adjust = (decimal)(mentalWeight + physicalWeight + technicalWeight) / 100;
-
-            debug = new RatingRoleDebug()
-            {
-                Position = type.ToString(),
-                Role = role,
-                Mental = $"{mentalScore} / {mentalWeight}",
-                MentalDetail = mentalDebugString,
-                Physical = $"{physicalScore} / {physicalWeight}",
-                PhysicalDetail = physicalDebugString,
-                Technical = $"{technicalScore} / {technicalWeight}",
-                TechnicalDetail = technicalDebugString,
-            };
-
-            return (byte)((mentalScore + physicalScore + technicalScore) / adjust);
-        }
-
-        private byte AdjustScoreForPosition(Player player, PlayerType type, decimal unadjustedScore, RatingRoleDebug debug)
-        {
-            decimal positionModifier = (decimal)PositionalFamiliarity(type, player) / 100;
-            debug.Position = positionModifier.ToString("0.00");
-
-            return (byte)(unadjustedScore * positionModifier);
-        }
-
-        private byte AdjustScoreForOffField(byte unadjustedScore, byte offFieldRating, RatingRoleDebug debug)
-        {
-            decimal offFieldBonus = -5 + (((decimal)offFieldRating) / 10);
-
-            return (byte)Math.Min(99, Math.Max(0, (unadjustedScore + offFieldBonus)));
-        }
-
-        private byte GetGroupingScore_Reflection(Staff staff, List<PropertyInfo> attributes, byte[] weights, out string debugString)
-        {
-            decimal rating = 0;
-            int combinedWeights = 0;
-            byte realValue;
-            debugString = string.Empty;
-
-            foreach (var x in attributes)
-            {
-                byte weight = weights[(int)Enum.Parse(typeof(DP), x.Name)];
-                combinedWeights += weight;
-                decimal playerValue = GetPlayerValue(x, staff, out realValue);
-                decimal weightedValue = playerValue * weight;
-                rating += weightedValue;
-
-                if (weightedValue > 0)
-                {
-                    debugString += $"{x.Name} : {playerValue}-{weight}({realValue}) ";
-                }
-            }
-
-            int maxScore = 20 * combinedWeights;
-
-            var result = (byte)((rating / maxScore) * 100);
-            return result;
-        }
-
-        private byte GetGroupingScore(PlayerData player, byte[] attributes, byte[] values, byte[] weights, bool isIntrinsic, out string debugString)
-        {
-            decimal rating = 0;
-            int combinedWeights = 0;
-            byte realValue;
-            debugString = string.Empty;
-
-            if (values.Length != weights.Length || Enum.GetNames(typeof(DP)).Length != values.Length)
-            {
-                throw new ApplicationException("Unbalanced");
-            }
-
-            //for (int i = 0; i < weights.Length; i++)
-            foreach (var i in attributes)
-            {
-                byte weight = weights[i];
-
-                if (weight == 0)
-                {
-                    continue;
-                }
-
-                combinedWeights += weight;
-                realValue = values[i];
-                string attribute = Enum.GetNames(typeof(DP))[i];
-
-                decimal value = Adj(realValue, isIntrinsic);
-
-                decimal weightedValue = value * weight;
-                rating += weightedValue;
-
-                debugString += $"{attribute} : {value}-{weight}({realValue}) ";
-            }
-
-            int maxScore = 20 * combinedWeights;
-
-            var result = (byte)((rating / maxScore) * 100);
-            return result;
-        }
-
-        private byte GetGroupingScore(PlayerData player, List<PropertyInfo> attributes, byte[] weights, out string debugString)
-        {
-            decimal rating = 0;
-            int combinedWeights = 0;
-            byte realValue;
-            debugString = string.Empty;
-
-            foreach (var x in attributes)
-            {
-                realValue = 0;
-                byte weight = weights[(int)Enum.Parse(typeof(DP), x.Name)];
-                combinedWeights += weight;
-                decimal playerValue = weight == 0 ? 0 : GetPlayerValue(x, player, out realValue);
-                decimal weightedValue = playerValue * weight;
-                rating += weightedValue;
-
-                if (weightedValue > 0)
-                {
-                    debugString += $"{x.Name} : {playerValue}-{weight}({realValue}) ";
-                }
-            }
-
-            /*
-            MentalDPs.ForEach(x =>
-            {
-                string prop = x.GetAttributeValue<LinkedAttribute, string>(x => x.Attribute);
-                rating += (int)typeof(Player).GetProperty(prop).GetValue(player);
-            });*/
-
-            /*
-            int rating2 =
-                player.Aggression * weights.GW(DP.AGG) +
-                player.Bravery * weights.GW(DP.BRA) +
-                player.Consistency * weights.GW(DP.CON) +
-                player.ImportantMatches * weights.GW(DP.IMP) +
-                player.Influence * weights.GW(DP.INF) +
-                player.Teamwork * weights.GW(DP.TEA) +
-                player.WorkRate * weights.GW(DP.WOR);*/
-
-            int maxScore = 20 * combinedWeights;
-
-            var result = (byte)((rating / maxScore) * 100);
-            return result;
-        }
-
-        private decimal GetPlayerValue(PropertyInfo prop, object player, out byte realValue)
-        {
-            byte stat = (byte)prop.GetValue(player);
-            realValue = stat;
-
-            bool isIntrinsic = (player is PlayerData) && ((DataFileInfoAttribute)prop.GetCustomAttributes(typeof(DataFileInfoAttribute)).FirstOrDefault()).IsIntrinsic;
-
-            return Adj(stat, isIntrinsic);
-        }
-
-        private decimal Weight(byte score, short importance)
-        {
-            score = Math.Min(score, (byte)100);
-            return (decimal)score / 100 * importance;
-        }
-
-        private decimal Adj(byte val, bool isIntrinsic)
-        {
-            if (!isIntrinsic)
-            {
-                return val;
-            }
-
-            // based on GK attribs
-            /*
-            if (val < 32) return 1;
-            if (val < 50) return 2;
-            if (val < 65) return 3;
-            if (val < 81) return 4;
-            if (val < 88) return 5;
-            if (val < 94) return 6;
-
-            if (val < 99) return 7;
-            if (val < 104) return 8;
-            if (val < 107) return 9;
-
-            if (val < 108) return 10;
-            if (val < 109) return 11;
-            if (val < 110) return 12;
-
-            if (val < 111) return 13;
-
-            if (val < 114) return 14;
-            if (val < 118) return 15;
-            if (val < 122) return 16;
-
-            if (val < 128) return 17;
-            if (val < 135) return 18;
-            if (val < 150) return 19;*/
-
-            if (val < 64) return 1;
-            if (val < 72) return 2;
-            if (val < 80) return 3;
-            if (val < 87) return 4;
-            if (val < 92) return 5;
-            if (val < 96) return 6;
-
-            if (val < 99) return 7;
-            if (val < 102) return 8;
-            if (val < 107) return 9;
-
-            if (val < 111) return 10;
-            if (val < 114) return 11;
-            if (val < 119) return 12;
-
-            if (val < 123) return 13;
-
-            if (val < 128) return 14;
-            if (val < 134) return 15;
-            if (val < 142) return 16;
-
-            if (val < 150) return 17;
-            if (val < 160) return 18;
-            if (val < 180) return 19;
-
-            return 20;
-        }
-
-        private byte PositionalFamiliarity(PlayerType type, Player player)
-        {
-            byte modifierForPosition = 100;
-            byte modifierForVersitility = GetVersitilityModifier(player._player.Versatility);
-
-            switch (type)
-            {
-                case PlayerType.GoalKeeper:
-                    modifierForPosition = GetFamiliarity(player._player.GK, player._player.GK); // double down on GK position, not side
-                    break;
-
-                case PlayerType.RightBack:
-                    modifierForPosition = GetFamiliarity(player._player.DF, player._player.Right);
-                    break;
-
-                case PlayerType.CentreHalf:
-                    modifierForPosition = GetFamiliarity(player._player.DF, player._player.Centre);
-                    break;
-
-                case PlayerType.LeftBack:
-                    modifierForPosition = GetFamiliarity(player._player.DF, player._player.Left);
-                    break;
-
-                case PlayerType.RightWingBack:
-                    modifierForPosition = GetFamiliarity(player._player.WingBack, player._player.Right);
-                    break;
-
-                case PlayerType.DefensiveMidfielder:
-                    modifierForPosition = GetFamiliarity(player._player.DM, player._player.Centre);
-                    break;
-
-                case PlayerType.LeftWingBack:
-                    modifierForPosition = GetFamiliarity(player._player.WingBack, player._player.Left);
-                    break;
-
-                case PlayerType.RightMidfielder:
-                    modifierForPosition = GetFamiliarity(player._player.MF, player._player.Right);
-                    break;
-
-                case PlayerType.CentralMidfielder:
-                    modifierForPosition = GetFamiliarity(player._player.MF, player._player.Centre);
-                    break;
-
-                case PlayerType.LeftMidfielder:
-                    modifierForPosition = GetFamiliarity(player._player.MF, player._player.Left);
-                    break;
-
-                case PlayerType.RightWinger:
-                    modifierForPosition = GetFamiliarity(player._player.AM, player._player.Right);
-                    break;
-
-                case PlayerType.AttackingMidfielder:
-                    modifierForPosition = GetFamiliarity(player._player.AM, player._player.Centre);
-                    break;
-
-                case PlayerType.LeftWinger:
-                    modifierForPosition = GetFamiliarity(player._player.AM, player._player.Left);
-                    break;
-
-                case PlayerType.CentreForward:
-                    modifierForPosition = GetFamiliarity(player._player.ST, player._player.Centre);
-                    break;
-
-                default:
-                    modifierForPosition = 1;
-                    break;
-            }
-
-            return (byte)(((decimal)modifierForPosition + modifierForVersitility) / 200 * 100);
-        }
-
-        private byte GetFamiliarity(byte position, byte channel = 20)
-        {
-            return (byte)((position + channel) * 2.5);
-        }
-
-        private byte GetVersitilityModifier(byte versatility)
-        {
-            return (byte)100;
         }
     }
 }

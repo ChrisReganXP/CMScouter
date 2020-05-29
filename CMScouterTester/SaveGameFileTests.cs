@@ -17,7 +17,7 @@ namespace CMScouterTester
         [ClassInitialize]
         public static void TestSetup(TestContext context)
         {
-            cmsUI = new CMScouterUI(OldhamSave);
+            cmsUI = new CMScouterUI(LiverpoolSave);
         }
 
         [TestMethod]
@@ -53,7 +53,8 @@ namespace CMScouterTester
         [TestMethod]
         public void TestSearchByClubName(string clubName)
         {
-            List<PlayerView> players = cmsUI.GetPlayersAtClub(clubName);
+            ScoutingRequest request = new ScoutingRequest() { ClubName = clubName };
+            List<PlayerView> players = cmsUI.GetScoutResults(request);
 
             Assert.IsNotNull(players);
             Assert.IsTrue(players.Count > 0);
@@ -78,7 +79,11 @@ namespace CMScouterTester
         [DataRow("SCOTLAND")]
         public void TestSearchByNationality(string nationality)
         {
-            List<PlayerView> players = cmsUI.GetPlayersByNationality(nationality);
+            int? nationID = cmsUI.GetAllNations().FirstOrDefault(x => x.Name.Equals(nationality, StringComparison.InvariantCultureIgnoreCase))?.Id;
+            Assert.IsNotNull(nationID.Value);
+            
+            ScoutingRequest request = new ScoutingRequest() { Nationality = nationID.Value };
+            List<PlayerView> players = cmsUI.GetScoutResults(request);
 
             Assert.IsNotNull(players);
             Assert.IsTrue(players.Count > 0);
@@ -89,19 +94,21 @@ namespace CMScouterTester
         [DataRow()]
         public void TestSearchForHighestGKs()
         {
-            List<PlayerView> players = cmsUI.GetHighestAbilityGKs(20);
+            ScoutingRequest request = new ScoutingRequest() { PlayerType = PlayerType.GoalKeeper, NumberOfResults = 20 };
+            List<PlayerView> players = cmsUI.GetScoutResults(request);
             
             Assert.IsNotNull(players);
             Assert.IsTrue(players.Count > 0);
             Assert.IsTrue(players.All(p => p.ScoutRatings.Goalkeeper.BestRole().Rating > 70));
-            Assert.IsTrue(players.All(p => p.CurrentAbility > 100));
+            Assert.IsTrue(players.All(p => p.CurrentAbility > 80));
         }
 
         [TestMethod]
         [DataRow()]
         public void TestSearchForBestFreeTransfers()
         {
-            List<PlayerView> players = cmsUI.GetBestFreeTransfers(100);
+            ScoutingRequest request = new ScoutingRequest() { MaxValue = 0, NumberOfResults = 100 };
+            List<PlayerView> players = cmsUI.GetScoutResults(request);
 
             Assert.IsNotNull(players);
             Assert.IsTrue(players.Count >= 20);
@@ -111,7 +118,8 @@ namespace CMScouterTester
         [DataRow()]
         public void TestSearchForCentreBacks()
         {
-            List<PlayerView> players = cmsUI.GetScoutResults(PlayerType.CentreHalf, 2000000, 50, true);
+            ScoutingRequest request = new ScoutingRequest() { PlayerType = PlayerType.CentreHalf, MaxValue = 2000000, NumberOfResults = 50, EUNationalityOnly = true };
+            List<PlayerView> players = cmsUI.GetScoutResults(request);
 
             Assert.IsNotNull(players);
             Assert.IsTrue(players.Count >= 20);
@@ -122,7 +130,8 @@ namespace CMScouterTester
         [DataRow()]
         public void TestSearchForAttackingMidfielders()
         {
-            List<PlayerView> players = cmsUI.GetScoutResults(PlayerType.AttackingMidfielder, 2000000, 50, true);
+            ScoutingRequest request = new ScoutingRequest() { PlayerType = PlayerType.AttackingMidfielder, MaxValue = 2000000, NumberOfResults = 50, EUNationalityOnly = true };
+            List<PlayerView> players = cmsUI.GetScoutResults(request);
 
             Assert.IsNotNull(players);
             Assert.IsTrue(players.Count >= 20);
@@ -148,7 +157,8 @@ namespace CMScouterTester
         [DataRow("LIVERPOOL", "VAN DIJK")]
         public void TestCentreHalfRatings(string clubName, string playerSurname)
         {
-            List<PlayerView> players = cmsUI.GetPlayersAtClub(clubName);
+            ScoutingRequest request = new ScoutingRequest() { ClubName = clubName };
+            List<PlayerView> players = cmsUI.GetScoutResults(request);
             Assert.IsNotNull(players);
             Assert.IsTrue(players.Count > 0);
 
@@ -162,7 +172,8 @@ namespace CMScouterTester
         [DataRow("LIVERPOOL", "FIRMINO")]
         public void TestAttackingMidfielderRatings(string clubName, string playerSurname)
         {
-            List<PlayerView> players = cmsUI.GetPlayersAtClub(clubName);
+            ScoutingRequest request = new ScoutingRequest() { ClubName = clubName };
+            List<PlayerView> players = cmsUI.GetScoutResults(request);
             Assert.IsNotNull(players);
             Assert.IsTrue(players.Count > 0);
 
@@ -176,7 +187,8 @@ namespace CMScouterTester
         [DataRow("LIVERPOOL", "SALAH")]
         public void TestStrikerRatings(string clubName, string playerSurname)
         {
-            List<PlayerView> players = cmsUI.GetPlayersAtClub(clubName);
+            ScoutingRequest request = new ScoutingRequest() { ClubName = clubName };
+            List<PlayerView> players = cmsUI.GetScoutResults(request);
             Assert.IsNotNull(players);
             Assert.IsTrue(players.Count > 0);
 
