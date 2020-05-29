@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\UCGoalkeeping.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\UCGoalkeeping.Designer.cs">
+      <DependentUpon>UCGoalkeeping.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\UCSetPieces.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -102,6 +108,9 @@
     <Compile Include="ScoutingForm.Designer.cs">
       <DependentUpon>ScoutingForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Controls\UCGoalkeeping.resx">
+      <DependentUpon>UCGoalkeeping.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\UCSetPieces.resx">
       <DependentUpon>UCSetPieces.cs</DependentUpon>
     </EmbeddedResource>

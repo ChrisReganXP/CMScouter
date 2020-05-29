@@ -122,6 +122,9 @@ namespace CMScouter.UI
                     FreeKicks = item._player.FreeKicks,
                     Penalties = item._player.Penalties,
                     ThrowIns = item._player.ThrowIns,
+
+                    LeftFoot = item._player.LeftFoot,
+                    RightFoot = item._player.RightFoot,
                 },
 
                 ScoutRatings = _rater.GetRatings(item),

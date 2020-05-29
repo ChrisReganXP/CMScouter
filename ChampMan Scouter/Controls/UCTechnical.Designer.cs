@@ -55,6 +55,8 @@
             this.lblOffVal = new System.Windows.Forms.Label();
             this.lblMarVal = new System.Windows.Forms.Label();
             this.gbxTechnical = new System.Windows.Forms.GroupBox();
+            this.lblTecVal = new System.Windows.Forms.Label();
+            this.lblTechnique = new System.Windows.Forms.Label();
             this.gbxTechnical.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -294,6 +296,8 @@
             // 
             // gbxTechnical
             // 
+            this.gbxTechnical.Controls.Add(this.lblTecVal);
+            this.gbxTechnical.Controls.Add(this.lblTechnique);
             this.gbxTechnical.Controls.Add(this.lblAnticipation);
             this.gbxTechnical.Controls.Add(this.lblTackVal);
             this.gbxTechnical.Controls.Add(this.lblCreativity);
@@ -322,10 +326,28 @@
             this.gbxTechnical.Controls.Add(this.lblFinVal);
             this.gbxTechnical.Location = new System.Drawing.Point(9, 3);
             this.gbxTechnical.Name = "gbxTechnical";
-            this.gbxTechnical.Size = new System.Drawing.Size(247, 195);
+            this.gbxTechnical.Size = new System.Drawing.Size(247, 261);
             this.gbxTechnical.TabIndex = 29;
             this.gbxTechnical.TabStop = false;
             this.gbxTechnical.Text = "Technical";
+            // 
+            // lblTecVal
+            // 
+            this.lblTecVal.AutoSize = true;
+            this.lblTecVal.Location = new System.Drawing.Point(201, 166);
+            this.lblTecVal.Name = "lblTecVal";
+            this.lblTecVal.Size = new System.Drawing.Size(41, 13);
+            this.lblTecVal.TabIndex = 30;
+            this.lblTecVal.Text = "label28";
+            // 
+            // lblTechnique
+            // 
+            this.lblTechnique.AutoSize = true;
+            this.lblTechnique.Location = new System.Drawing.Point(137, 166);
+            this.lblTechnique.Name = "lblTechnique";
+            this.lblTechnique.Size = new System.Drawing.Size(58, 13);
+            this.lblTechnique.TabIndex = 29;
+            this.lblTechnique.Text = "Technique";
             // 
             // UCTechnical
             // 
@@ -333,7 +355,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.gbxTechnical);
             this.Name = "UCTechnical";
-            this.Size = new System.Drawing.Size(259, 206);
+            this.Size = new System.Drawing.Size(259, 280);
             this.gbxTechnical.ResumeLayout(false);
             this.gbxTechnical.PerformLayout();
             this.ResumeLayout(false);
@@ -369,5 +391,7 @@
         private System.Windows.Forms.Label lblOffVal;
         private System.Windows.Forms.Label lblMarVal;
         private System.Windows.Forms.GroupBox gbxTechnical;
+        private System.Windows.Forms.Label lblTechnique;
+        private System.Windows.Forms.Label lblTecVal;
     }
 }

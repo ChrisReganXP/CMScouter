@@ -50,6 +50,31 @@ namespace CMScouter.UI
         public PlayerAttributeView Attributes { get; set; }
         public RatingResults ScoutRatings { get; set; }
 
+        public string GetFootedness()
+        {
+            if (Attributes.LeftFoot >= 15 && Attributes.RightFoot >= 15)
+            {
+                return "Either";
+            }
+
+            if (Attributes.LeftFoot >= 15 && Attributes.RightFoot >= 10)
+            {
+                return "Left";
+            }
+
+            if (Attributes.LeftFoot >= 10 && Attributes.RightFoot >= 15)
+            {
+                return "Right";
+            }
+
+            if (Attributes.LeftFoot >= 15)
+            {
+                return "Left Only";
+            }
+
+            return "Right Only";
+        }
+
         public byte BestRating
         {
             get { return ScoutRatings.BestPosition.BestRole().Rating; }

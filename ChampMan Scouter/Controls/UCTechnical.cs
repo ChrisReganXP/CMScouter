@@ -43,11 +43,17 @@ namespace ChampMan_Scouter.Controls
             SetAttributeLabelValue(lblPasVal, player.Attributes.Passing);
             SetAttributeLabelValue(lblPosVal, player.Attributes.Positioning);
             SetAttributeLabelValue(lblTackVal, player.Attributes.Tackling);
+            SetAttributeLabelValue(lblTecVal, $"({player.Attributes.Technique})");
         }
 
         private void SetAttributeLabelValue(Label label, byte val)
         {
             label.Text = val.ToString();
+        }
+
+        private void SetAttributeLabelValue(Label label, string val)
+        {
+            label.Text = val;
         }
     }
 }

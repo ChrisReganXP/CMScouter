@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.ucSetPieces = new ChampMan_Scouter.Controls.UCSetPieces();
+            this.ucGoalkeeping = new ChampMan_Scouter.Controls.UCGoalkeeping();
             this.ucPhysical = new ChampMan_Scouter.Controls.UCPhysical();
             this.ucMental = new ChampMan_Scouter.Controls.UCMental();
             this.ucTechnical = new ChampMan_Scouter.Controls.UCTechnical();
@@ -38,52 +39,60 @@
             // 
             // ucSetPieces
             // 
-            this.ucSetPieces.Location = new System.Drawing.Point(745, 13);
+            this.ucSetPieces.Location = new System.Drawing.Point(745, 11);
             this.ucSetPieces.Name = "ucSetPieces";
-            this.ucSetPieces.Size = new System.Drawing.Size(153, 210);
+            this.ucSetPieces.Size = new System.Drawing.Size(153, 118);
             this.ucSetPieces.TabIndex = 5;
+            // 
+            // ucGoalkeeping
+            // 
+            this.ucGoalkeeping.Location = new System.Drawing.Point(745, 165);
+            this.ucGoalkeeping.Name = "ucGoalkeeping";
+            this.ucGoalkeeping.Size = new System.Drawing.Size(153, 115);
+            this.ucGoalkeeping.TabIndex = 1;
             // 
             // ucPhysical
             // 
-            this.ucPhysical.Location = new System.Drawing.Point(593, 13);
+            this.ucPhysical.Location = new System.Drawing.Point(593, 11);
             this.ucPhysical.Name = "ucPhysical";
-            this.ucPhysical.Size = new System.Drawing.Size(153, 210);
+            this.ucPhysical.Size = new System.Drawing.Size(153, 267);
             this.ucPhysical.TabIndex = 4;
             // 
             // ucMental
             // 
             this.ucMental.Location = new System.Drawing.Point(443, 11);
             this.ucMental.Name = "ucMental";
-            this.ucMental.Size = new System.Drawing.Size(144, 210);
+            this.ucMental.Size = new System.Drawing.Size(144, 269);
             this.ucMental.TabIndex = 3;
             // 
             // ucTechnical
             // 
-            this.ucTechnical.Location = new System.Drawing.Point(177, 12);
+            this.ucTechnical.Location = new System.Drawing.Point(177, 11);
             this.ucTechnical.Name = "ucTechnical";
-            this.ucTechnical.Size = new System.Drawing.Size(260, 222);
+            this.ucTechnical.Size = new System.Drawing.Size(260, 269);
             this.ucTechnical.TabIndex = 2;
             // 
             // ucScouting
             // 
-            this.ucScouting.Location = new System.Drawing.Point(12, 241);
+            this.ucScouting.Location = new System.Drawing.Point(12, 279);
             this.ucScouting.Name = "ucScouting";
-            this.ucScouting.Size = new System.Drawing.Size(776, 448);
+            this.ucScouting.Size = new System.Drawing.Size(776, 555);
             this.ucScouting.TabIndex = 1;
             // 
             // ucPersonalDetails
             // 
-            this.ucPersonalDetails.Location = new System.Drawing.Point(13, 13);
+            this.ucPersonalDetails.Location = new System.Drawing.Point(13, 11);
             this.ucPersonalDetails.Name = "ucPersonalDetails";
-            this.ucPersonalDetails.Size = new System.Drawing.Size(158, 172);
+            this.ucPersonalDetails.Size = new System.Drawing.Size(158, 269);
             this.ucPersonalDetails.TabIndex = 0;
             // 
             // PlayerViewForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(897, 701);
+            this.ClientSize = new System.Drawing.Size(897, 830);
             this.Controls.Add(this.ucSetPieces);
+            this.Controls.Add(this.ucGoalkeeping);
             this.Controls.Add(this.ucPhysical);
             this.Controls.Add(this.ucMental);
             this.Controls.Add(this.ucTechnical);
@@ -103,5 +112,6 @@
         private Controls.UCMental ucMental;
         private Controls.UCPhysical ucPhysical;
         private Controls.UCSetPieces ucSetPieces;
+        private Controls.UCGoalkeeping ucGoalkeeping;
     }
 }

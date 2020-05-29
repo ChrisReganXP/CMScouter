@@ -30,7 +30,7 @@ namespace CMScouterFunctions
 
         public static DateTime? GetDateFromBytes(byte[] bytes, int start)
         {
-            return ConvertToDate(bytes.Skip(start).Take(4).ToArray());
+            return ConvertToDate(bytes.Skip(start).Take(5).ToArray());
         }
 
         public static byte GetByteFromBytes(byte[] bytes, int start, bool isIntrinsicValue = false)
@@ -116,13 +116,19 @@ namespace CMScouterFunctions
 
         private static DateTime? ConvertToDate(byte[] bytes)
         {
-            // are days starting from 0?
-            var day = BitConverter.ToInt16(bytes, 0) + 1;
+            var day = BitConverter.ToInt16(bytes, 0);
             var year = BitConverter.ToInt16(bytes, 2);
             if (year == 0 || day == 0)
             {
                 return null;
             }
+
+            /* Something is going on with Leap Years that I can't fathom..
+             * Maybe its because the exe is patched to adjust the year?
+            if (bytes[4] == 1 && day > 59)
+            {
+                day -= 1;
+            }*/
 
             var date = new DateTime(year, 1, 1).AddDays(day);
             return date;

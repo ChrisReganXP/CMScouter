@@ -30,6 +30,7 @@ namespace ChampMan_Scouter
             ucMental.SetPlayer(this.Player);
             ucPhysical.SetPlayer(this.Player);
             ucSetPieces.SetPlayer(this.Player);
+            ucGoalkeeping.SetPlayer(this.Player);
         }
     }
 }

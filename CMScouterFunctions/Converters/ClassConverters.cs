@@ -45,10 +45,17 @@ namespace CMScouterFunctions.Converters
             staff.SecondaryNationId = ByteHandler.GetIntFromBytes(source, 30);
             staff.InternationalCaps = ByteHandler.GetByteFromBytes(source, 24);
             staff.InternationalGoals = ByteHandler.GetByteFromBytes(source, 25);
-            staff.ContractExpiryDate = ByteHandler.GetDateFromBytes(source, 68);
+            staff.ContractExpiryDate = ByteHandler.GetDateFromBytes(source, 70);
             staff.Wage = ByteHandler.GetIntFromBytes(source, 78);
             staff.Value = ByteHandler.GetIntFromBytes(source, 82);
             staff.ClubId = ByteHandler.GetIntFromBytes(source, 57);
+
+            List<int> playerTests = new List<int>() { 11282, 35425, 70038, 21195, 120511, 16406 };
+            if (playerTests.Contains(staff.StaffPlayerId))
+            {
+                var dobBytes = string.Join(", ", source.Skip(16).Take(5));
+                var epiryBytes = string.Join(", ", source.Skip(70).Take(5));
+            }
             
             staff.Adaptability = ByteHandler.GetByteFromBytes(source, 86);
             staff.Ambition = ByteHandler.GetByteFromBytes(source, 87);
@@ -157,6 +164,9 @@ namespace CMScouterFunctions.Converters
             player.ThrowIns = ByteHandler.GetByteFromBytes(source, 65, true);
             player.Versatility = ByteHandler.GetByteFromBytes(source, 66);
             player.WorkRate = ByteHandler.GetByteFromBytes(source, 68);
+
+            player.LeftFoot = ByteHandler.GetByteFromBytes(source, 48);
+            player.RightFoot = ByteHandler.GetByteFromBytes(source, 59);
 
             return player;
         }

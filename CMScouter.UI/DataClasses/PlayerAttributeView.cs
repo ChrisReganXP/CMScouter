@@ -115,5 +115,8 @@ namespace CMScouter.UI
 
         #endregion
 
+        public byte LeftFoot { get; set; }
+
+        public byte RightFoot { get; set; }
     }
 }

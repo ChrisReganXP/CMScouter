@@ -33,7 +33,9 @@ namespace ChampMan_Scouter.Controls
             SetAttributeLabelValue(lblAccVal, player.Attributes.Acceleration);
             SetAttributeLabelValue(lblAgiVal, player.Attributes.Agility);
             SetAttributeLabelValue(lblBalVal, player.Attributes.Balance);
+            SetAttributeLabelValue(lblInjVal, player.Attributes.InjuryProneness);
             SetAttributeLabelValue(lblJumpVal, player.Attributes.Jumping);
+            SetAttributeLabelValue(lblNaFiVal, player.Attributes.NaturalFitness);
             SetAttributeLabelValue(lblPaceVal, player.Attributes.Pace);
             SetAttributeLabelValue(lblStaVal, player.Attributes.Stamina);
             SetAttributeLabelValue(lblStreVal, player.Attributes.Strength);

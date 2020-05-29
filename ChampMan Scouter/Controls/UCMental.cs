@@ -33,9 +33,12 @@ namespace ChampMan_Scouter.Controls
             SetAttributeLabelValue(lblAggVal, player.Attributes.Aggression);
             SetAttributeLabelValue(lblBraVal, player.Attributes.Bravery);
             SetAttributeLabelValue(lblConsVal, player.Attributes.Consistency);
+            SetAttributeLabelValue(lblDirtVal, player.Attributes.Dirtiness);
+            SetAttributeLabelValue(lblFlaVal, player.Attributes.Flair);
             SetAttributeLabelValue(lblImpVal, player.Attributes.ImportantMatches);
             SetAttributeLabelValue(lblInfVal, player.Attributes.Influence);
             SetAttributeLabelValue(lblTeamVal, player.Attributes.Teamwork);
+            SetAttributeLabelValue(lblVersVal, player.Attributes.Versitility);
             SetAttributeLabelValue(lblWorkVal, player.Attributes.WorkRate);
         }
 

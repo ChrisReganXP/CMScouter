@@ -86,6 +86,12 @@ namespace CMScouterFunctions.DataClasses
         [DataFileInfo(26)]
         public byte FreeRole { get; set; }
 
+        [DataFileInfo(48)]
+        public byte LeftFoot { get; set; }
+
+        [DataFileInfo(59)]
+        public byte RightFoot { get; set; }
+
         [DataFileInfo(27, IsIntrinsic = false)]
         [AttributeGroup(AttributeGroup.Physical)]
         public byte Acceleration { get; set; }

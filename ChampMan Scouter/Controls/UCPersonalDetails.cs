@@ -39,6 +39,12 @@ namespace ChampMan_Scouter.Controls
 
             lblCAVal.Text = player.CurrentAbility.ToString();
             lblPAVal.Text = player.PotentialAbility.ToString();
+
+            lblFooted.Text = player.GetFootedness();
+
+            lblValue.Text = player.Value.ToString("c0");
+            lblWage.Text = player.WagePerWeek.ToString("c0");
+            lblExpiry.Text = player.ContractExpiryDate == null ? "-" : player.ContractExpiryDate.Value.ToShortDateString();
         }
     }
 }

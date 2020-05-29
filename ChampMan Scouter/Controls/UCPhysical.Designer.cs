@@ -43,6 +43,10 @@
             this.lblStreVal = new System.Windows.Forms.Label();
             this.lblStaVal = new System.Windows.Forms.Label();
             this.gbxPhysical = new System.Windows.Forms.GroupBox();
+            this.lblInjuryProneness = new System.Windows.Forms.Label();
+            this.lblInjVal = new System.Windows.Forms.Label();
+            this.lblNaturalFitness = new System.Windows.Forms.Label();
+            this.lblNaFiVal = new System.Windows.Forms.Label();
             this.gbxPhysical.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,7 +80,7 @@
             // lblJumping
             // 
             this.lblJumping.AutoSize = true;
-            this.lblJumping.Location = new System.Drawing.Point(15, 96);
+            this.lblJumping.Location = new System.Drawing.Point(15, 115);
             this.lblJumping.Name = "lblJumping";
             this.lblJumping.Size = new System.Drawing.Size(46, 13);
             this.lblJumping.TabIndex = 3;
@@ -85,7 +89,7 @@
             // lblPace
             // 
             this.lblPace.AutoSize = true;
-            this.lblPace.Location = new System.Drawing.Point(15, 120);
+            this.lblPace.Location = new System.Drawing.Point(15, 156);
             this.lblPace.Name = "lblPace";
             this.lblPace.Size = new System.Drawing.Size(32, 13);
             this.lblPace.TabIndex = 7;
@@ -94,7 +98,7 @@
             // lblPaceVal
             // 
             this.lblPaceVal.AutoSize = true;
-            this.lblPaceVal.Location = new System.Drawing.Point(82, 120);
+            this.lblPaceVal.Location = new System.Drawing.Point(82, 156);
             this.lblPaceVal.Name = "lblPaceVal";
             this.lblPaceVal.Size = new System.Drawing.Size(17, 13);
             this.lblPaceVal.TabIndex = 15;
@@ -103,7 +107,7 @@
             // lblJumpVal
             // 
             this.lblJumpVal.AutoSize = true;
-            this.lblJumpVal.Location = new System.Drawing.Point(82, 96);
+            this.lblJumpVal.Location = new System.Drawing.Point(82, 115);
             this.lblJumpVal.Name = "lblJumpVal";
             this.lblJumpVal.Size = new System.Drawing.Size(41, 13);
             this.lblJumpVal.TabIndex = 11;
@@ -139,7 +143,7 @@
             // lblStrength
             // 
             this.lblStrength.AutoSize = true;
-            this.lblStrength.Location = new System.Drawing.Point(15, 166);
+            this.lblStrength.Location = new System.Drawing.Point(15, 202);
             this.lblStrength.Name = "lblStrength";
             this.lblStrength.Size = new System.Drawing.Size(47, 13);
             this.lblStrength.TabIndex = 17;
@@ -148,7 +152,7 @@
             // lblStamina
             // 
             this.lblStamina.AutoSize = true;
-            this.lblStamina.Location = new System.Drawing.Point(15, 143);
+            this.lblStamina.Location = new System.Drawing.Point(15, 179);
             this.lblStamina.Name = "lblStamina";
             this.lblStamina.Size = new System.Drawing.Size(45, 13);
             this.lblStamina.TabIndex = 16;
@@ -157,7 +161,7 @@
             // lblStreVal
             // 
             this.lblStreVal.AutoSize = true;
-            this.lblStreVal.Location = new System.Drawing.Point(80, 166);
+            this.lblStreVal.Location = new System.Drawing.Point(80, 202);
             this.lblStreVal.Name = "lblStreVal";
             this.lblStreVal.Size = new System.Drawing.Size(41, 13);
             this.lblStreVal.TabIndex = 25;
@@ -166,7 +170,7 @@
             // lblStaVal
             // 
             this.lblStaVal.AutoSize = true;
-            this.lblStaVal.Location = new System.Drawing.Point(80, 143);
+            this.lblStaVal.Location = new System.Drawing.Point(80, 179);
             this.lblStaVal.Name = "lblStaVal";
             this.lblStaVal.Size = new System.Drawing.Size(17, 13);
             this.lblStaVal.TabIndex = 24;
@@ -174,6 +178,10 @@
             // 
             // gbxPhysical
             // 
+            this.gbxPhysical.Controls.Add(this.lblNaturalFitness);
+            this.gbxPhysical.Controls.Add(this.lblNaFiVal);
+            this.gbxPhysical.Controls.Add(this.lblInjuryProneness);
+            this.gbxPhysical.Controls.Add(this.lblInjVal);
             this.gbxPhysical.Controls.Add(this.lblAgility);
             this.gbxPhysical.Controls.Add(this.lblStreVal);
             this.gbxPhysical.Controls.Add(this.lblAcceleration);
@@ -190,10 +198,46 @@
             this.gbxPhysical.Controls.Add(this.lblBalVal);
             this.gbxPhysical.Location = new System.Drawing.Point(3, 3);
             this.gbxPhysical.Name = "gbxPhysical";
-            this.gbxPhysical.Size = new System.Drawing.Size(140, 198);
+            this.gbxPhysical.Size = new System.Drawing.Size(140, 261);
             this.gbxPhysical.TabIndex = 26;
             this.gbxPhysical.TabStop = false;
             this.gbxPhysical.Text = "Physical";
+            // 
+            // lblInjuryProneness
+            // 
+            this.lblInjuryProneness.AutoSize = true;
+            this.lblInjuryProneness.Location = new System.Drawing.Point(15, 95);
+            this.lblInjuryProneness.Name = "lblInjuryProneness";
+            this.lblInjuryProneness.Size = new System.Drawing.Size(49, 13);
+            this.lblInjuryProneness.TabIndex = 26;
+            this.lblInjuryProneness.Text = "Inj Prone";
+            // 
+            // lblInjVal
+            // 
+            this.lblInjVal.AutoSize = true;
+            this.lblInjVal.Location = new System.Drawing.Point(82, 95);
+            this.lblInjVal.Name = "lblInjVal";
+            this.lblInjVal.Size = new System.Drawing.Size(41, 13);
+            this.lblInjVal.TabIndex = 27;
+            this.lblInjVal.Text = "label13";
+            // 
+            // lblNaturalFitness
+            // 
+            this.lblNaturalFitness.AutoSize = true;
+            this.lblNaturalFitness.Location = new System.Drawing.Point(15, 136);
+            this.lblNaturalFitness.Name = "lblNaturalFitness";
+            this.lblNaturalFitness.Size = new System.Drawing.Size(60, 13);
+            this.lblNaturalFitness.TabIndex = 28;
+            this.lblNaturalFitness.Text = "Nat Fitness";
+            // 
+            // lblNaFiVal
+            // 
+            this.lblNaFiVal.AutoSize = true;
+            this.lblNaFiVal.Location = new System.Drawing.Point(82, 136);
+            this.lblNaFiVal.Name = "lblNaFiVal";
+            this.lblNaFiVal.Size = new System.Drawing.Size(41, 13);
+            this.lblNaFiVal.TabIndex = 29;
+            this.lblNaFiVal.Text = "label13";
             // 
             // UCPhysical
             // 
@@ -201,7 +245,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.gbxPhysical);
             this.Name = "UCPhysical";
-            this.Size = new System.Drawing.Size(153, 210);
+            this.Size = new System.Drawing.Size(153, 280);
             this.gbxPhysical.ResumeLayout(false);
             this.gbxPhysical.PerformLayout();
             this.ResumeLayout(false);
@@ -225,5 +269,9 @@
         private System.Windows.Forms.Label lblStreVal;
         private System.Windows.Forms.Label lblStaVal;
         private System.Windows.Forms.GroupBox gbxPhysical;
+        private System.Windows.Forms.Label lblNaturalFitness;
+        private System.Windows.Forms.Label lblNaFiVal;
+        private System.Windows.Forms.Label lblInjuryProneness;
+        private System.Windows.Forms.Label lblInjVal;
     }
 }

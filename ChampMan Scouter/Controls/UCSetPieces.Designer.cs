@@ -124,7 +124,7 @@
             this.gbxSetPieces.Controls.Add(this.lblPenVal);
             this.gbxSetPieces.Location = new System.Drawing.Point(3, 3);
             this.gbxSetPieces.Name = "gbxSetPieces";
-            this.gbxSetPieces.Size = new System.Drawing.Size(140, 198);
+            this.gbxSetPieces.Size = new System.Drawing.Size(140, 113);
             this.gbxSetPieces.TabIndex = 26;
             this.gbxSetPieces.TabStop = false;
             this.gbxSetPieces.Text = "Set Pieces";
@@ -135,7 +135,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.gbxSetPieces);
             this.Name = "UCSetPieces";
-            this.Size = new System.Drawing.Size(153, 210);
+            this.Size = new System.Drawing.Size(153, 120);
             this.gbxSetPieces.ResumeLayout(false);
             this.gbxSetPieces.PerformLayout();
             this.ResumeLayout(false);
