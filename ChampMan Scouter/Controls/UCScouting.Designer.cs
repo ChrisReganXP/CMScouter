@@ -40,7 +40,7 @@
             this.gbxScouting.Controls.Add(this.lblBestPosition);
             this.gbxScouting.Location = new System.Drawing.Point(3, 6);
             this.gbxScouting.Name = "gbxScouting";
-            this.gbxScouting.Size = new System.Drawing.Size(752, 629);
+            this.gbxScouting.Size = new System.Drawing.Size(752, 550);
             this.gbxScouting.TabIndex = 0;
             this.gbxScouting.TabStop = false;
             this.gbxScouting.Text = "Scouting";
@@ -69,7 +69,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.gbxScouting);
             this.Name = "UCScouting";
-            this.Size = new System.Drawing.Size(758, 646);
+            this.Size = new System.Drawing.Size(758, 566);
             this.gbxScouting.ResumeLayout(false);
             this.gbxScouting.PerformLayout();
             this.ResumeLayout(false);

@@ -118,7 +118,7 @@ namespace CMScouterFunctions
         {
             var day = BitConverter.ToInt16(bytes, 0);
             var year = BitConverter.ToInt16(bytes, 2);
-            if (year == 0 || day == 0)
+            if (year == 0)
             {
                 return null;
             }

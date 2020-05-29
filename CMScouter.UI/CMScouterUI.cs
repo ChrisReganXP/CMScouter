@@ -61,12 +61,13 @@ namespace CMScouter.UI
             SearchFilterHelper filterHelper = new SearchFilterHelper(_savegame, _playerRater);
 
             filterHelper.CreateClubFilter(request, filters);
+            filterHelper.CreatePositionFilter(request, filters);
             filterHelper.CreatePlayerBasedFilter(request, filters);
             filterHelper.CreateNationalityFilter(request, filters);
-            filterHelper.CreateAgeFilter(request, filters);
             filterHelper.CreateEUNationalityFilter(request, filters);
             filterHelper.CreateValueFilter(request, filters);
-            filterHelper.CreatePositionFilter(request, filters);
+            filterHelper.CreateContractStatusFilter(request, filters);
+            filterHelper.CreateAgeFilter(request, filters);
 
             var players = _savegame.Players;
             foreach (var filter in filters)

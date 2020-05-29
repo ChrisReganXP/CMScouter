@@ -95,6 +95,17 @@ namespace CMScouter.UI
             filters.Add(x => (request.MinValue == null || x._staff.IsOverValue(request.MinValue.Value, _savegame.ValueMultiplier)) && (request.MaxValue == null || x._staff.IsUnderValue(request.MaxValue.Value, _savegame.ValueMultiplier)));
         }
 
+        public void CreateContractStatusFilter(ScoutingRequest request, List<Func<Player, bool>> filters)
+        {
+            if (request.ContractStatus < 0)
+            {
+                return;
+            }
+
+            Func<Player, bool> filter = x => x._staff.ContractExpiryDate <= _savegame.GameDate.AddDays(30 * request.ContractStatus);
+            filters.Add(filter);
+        }
+
         public void CreatePositionFilter(ScoutingRequest request, List<Func<Player, bool>> filters)
         {
             filters.Add(x => (request.PlayerType == null || _playerRater.PlaysPosition(request.PlayerType.Value, x._player)));

@@ -46,6 +46,12 @@ namespace ChampMan_Scouter
             ddlPlaysInRegion.SelectedIndex = 0;
             ddlPlaysInRegion.Items.Add("UK & Ireland");
             ddlPlaysInRegion.Items.Add("Scandinavia");
+
+            ddlContractStatus.ValueMember = "Value";
+            ddlContractStatus.DisplayMember = "Text";
+            var contractStatusList = new[] { new { Value = -1, Text = "<All>" }, new { Value = 6, Text = "Expires 6 Months" }, new { Value = 12, Text = "Expires 12 Months" } };
+            ddlContractStatus.DataSource = contractStatusList;
+            ddlContractStatus.SelectedIndex = 0;
         }
 
         private void CustomiseInitialItems()
@@ -201,6 +207,7 @@ namespace ChampMan_Scouter
                 NumberOfResults = 200,
                 PlaysInRegion = ddlPlaysInRegion.Text,
                 Nationality = nationId,
+                ContractStatus = (short)(int)ddlContractStatus.SelectedValue,
             };
 
             var playerList = cmsUI.GetScoutResults(request);

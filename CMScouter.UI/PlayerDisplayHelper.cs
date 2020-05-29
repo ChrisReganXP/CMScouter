@@ -57,6 +57,10 @@ namespace CMScouter.UI
                 CurrentAbility = item._player.CurrentAbility,
                 PotentialAbility = item._player.PotentialAbility,
 
+                Reputation = item._player.Reputation,
+                DomesticReputation = item._player.DomesticReputation,
+                WorldReputation = item._player.WorldReputation,
+
                 Positions = new PlayerPositionView()
                 {
                     GK = item._player.GK,

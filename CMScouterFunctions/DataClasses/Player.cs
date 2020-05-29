@@ -50,6 +50,15 @@ namespace CMScouterFunctions.DataClasses
         [DataFileInfo(7)]
         public short PotentialAbility { get; set; }
 
+        [DataFileInfo(9)]
+        public short Reputation { get; set; }
+
+        [DataFileInfo(11)]
+        public short DomesticReputation { get; set; }
+
+        [DataFileInfo(13)]
+        public short WorldReputation { get; set; }
+
         [DataFileInfo(15)]
         public byte GK { get; set; }
 

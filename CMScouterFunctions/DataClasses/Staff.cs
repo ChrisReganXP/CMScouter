@@ -49,12 +49,6 @@ namespace CMScouterFunctions.DataClasses
         [DataFileInfo(57)]
         public int ClubId { get; set; }
 
-        public int Reputation { get; set; }
-
-        public int DomesticReputation { get; set; }
-
-        public int ForeignReputation { get; set; }
-
         [AttributeGroup(AttributeGroup.OffField)]
         public byte Adaptability { get; set; }
 

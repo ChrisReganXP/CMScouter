@@ -112,6 +112,9 @@ namespace CMScouterFunctions.Converters
             player.PlayerId = ByteHandler.GetIntFromBytes(source, 0);
             player.CurrentAbility = ByteHandler.GetShortFromBytes(source, 5);
             player.PotentialAbility = ByteHandler.GetShortFromBytes(source, 7);
+            player.Reputation = ByteHandler.GetShortFromBytes(source, 9);
+            player.DomesticReputation = ByteHandler.GetShortFromBytes(source, 11);
+            player.WorldReputation = ByteHandler.GetShortFromBytes(source, 13);
             player.GK = ByteHandler.GetByteFromBytes(source, 15);
             player.SW = ByteHandler.GetByteFromBytes(source, 16);
             player.DF = ByteHandler.GetByteFromBytes(source, 17);
@@ -172,41 +175,4 @@ namespace CMScouterFunctions.Converters
         }
     }
 
-    internal class PlayerConverter : ICMConverter<PlayerData>
-    {
-        public PlayerData Convert(byte[] source)
-        {
-            var player = new PlayerData();
-            ConverterReflection.SetConversionProperties(player, source);
-            return player;
-        }
-    }
-    internal static class ConverterReflection
-    {
-        public static void SetConversionProperties(object target, byte[] source)
-        {
-            foreach (var prop in target.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
-            {
-                var positionAttribute = (DataFileInfoAttribute)prop.GetCustomAttributes(typeof(DataFileInfoAttribute), true).FirstOrDefault();
-
-                if (positionAttribute != null)
-                {
-                    prop.SetValue(target, ByteHandler.GetObjectFromBytes(source, positionAttribute.DataFilePosition, prop.PropertyType, positionAttribute.Length, positionAttribute.IsIntrinsic));
-                }
-            }
-        }
-        public static void SetConversionProperties(object target, PropertyInfo[] props, DataFileInfoAttribute[] attribs, byte[] source)
-        {
-            for (int i = 0; i < props.Length; i++)
-            {
-                var prop = props[i];
-                var positionAttribute = attribs[i];
-
-                if (prop != null && positionAttribute != null)
-                {
-                    prop.SetValue(target, ByteHandler.GetObjectFromBytes(source, positionAttribute.DataFilePosition, prop.PropertyType, positionAttribute.Length, positionAttribute.IsIntrinsic));
-                }
-            }
-        }
-    }
 }

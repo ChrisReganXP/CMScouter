@@ -44,6 +44,8 @@ namespace ChampMan_Scouter
             this.cbxClubName = new System.Windows.Forms.ComboBox();
             this.tabSearch_Player = new System.Windows.Forms.TabPage();
             this.pnlPlayerSearch = new System.Windows.Forms.Panel();
+            this.lblNationality = new System.Windows.Forms.Label();
+            this.ddlNationality = new System.Windows.Forms.ComboBox();
             this.ddlPlaysInRegion = new System.Windows.Forms.ComboBox();
             this.lblBasedIn = new System.Windows.Forms.Label();
             this.tbxMaxAge = new System.Windows.Forms.TextBox();
@@ -57,8 +59,8 @@ namespace ChampMan_Scouter
             this.ddlSearchTypes = new System.Windows.Forms.ComboBox();
             this.lblSearchFor = new System.Windows.Forms.Label();
             this.dgvPlayers = new System.Windows.Forms.DataGridView();
-            this.ddlNationality = new System.Windows.Forms.ComboBox();
-            this.lblNationality = new System.Windows.Forms.Label();
+            this.lblContractStatus = new System.Windows.Forms.Label();
+            this.ddlContractStatus = new System.Windows.Forms.ComboBox();
             this.pnlSearch.SuspendLayout();
             this.tabSearchPanels.SuspendLayout();
             this.tabSearch_Club.SuspendLayout();
@@ -174,6 +176,8 @@ namespace ChampMan_Scouter
             // 
             // pnlPlayerSearch
             // 
+            this.pnlPlayerSearch.Controls.Add(this.ddlContractStatus);
+            this.pnlPlayerSearch.Controls.Add(this.lblContractStatus);
             this.pnlPlayerSearch.Controls.Add(this.lblNationality);
             this.pnlPlayerSearch.Controls.Add(this.ddlNationality);
             this.pnlPlayerSearch.Controls.Add(this.ddlPlaysInRegion);
@@ -189,6 +193,24 @@ namespace ChampMan_Scouter
             this.pnlPlayerSearch.Name = "pnlPlayerSearch";
             this.pnlPlayerSearch.Size = new System.Drawing.Size(494, 106);
             this.pnlPlayerSearch.TabIndex = 4;
+            // 
+            // lblNationality
+            // 
+            this.lblNationality.AutoSize = true;
+            this.lblNationality.Location = new System.Drawing.Point(417, 7);
+            this.lblNationality.Name = "lblNationality";
+            this.lblNationality.Size = new System.Drawing.Size(56, 13);
+            this.lblNationality.TabIndex = 11;
+            this.lblNationality.Text = "Nationality";
+            // 
+            // ddlNationality
+            // 
+            this.ddlNationality.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlNationality.FormattingEnabled = true;
+            this.ddlNationality.Location = new System.Drawing.Point(389, 29);
+            this.ddlNationality.Name = "ddlNationality";
+            this.ddlNationality.Size = new System.Drawing.Size(102, 21);
+            this.ddlNationality.TabIndex = 10;
             // 
             // ddlPlaysInRegion
             // 
@@ -210,7 +232,7 @@ namespace ChampMan_Scouter
             // 
             // tbxMaxAge
             // 
-            this.tbxMaxAge.Location = new System.Drawing.Point(164, 80);
+            this.tbxMaxAge.Location = new System.Drawing.Point(32, 80);
             this.tbxMaxAge.Name = "tbxMaxAge";
             this.tbxMaxAge.Size = new System.Drawing.Size(73, 20);
             this.tbxMaxAge.TabIndex = 7;
@@ -218,7 +240,7 @@ namespace ChampMan_Scouter
             // lblMaxAge
             // 
             this.lblMaxAge.AutoSize = true;
-            this.lblMaxAge.Location = new System.Drawing.Point(176, 61);
+            this.lblMaxAge.Location = new System.Drawing.Point(44, 61);
             this.lblMaxAge.Name = "lblMaxAge";
             this.lblMaxAge.Size = new System.Drawing.Size(49, 13);
             this.lblMaxAge.TabIndex = 6;
@@ -228,7 +250,7 @@ namespace ChampMan_Scouter
             // 
             this.cbxEUNational.AutoSize = true;
             this.cbxEUNational.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.cbxEUNational.Location = new System.Drawing.Point(31, 73);
+            this.cbxEUNational.Location = new System.Drawing.Point(400, 76);
             this.cbxEUNational.Name = "cbxEUNational";
             this.cbxEUNational.Size = new System.Drawing.Size(83, 17);
             this.cbxEUNational.TabIndex = 5;
@@ -311,23 +333,22 @@ namespace ChampMan_Scouter
             this.dgvPlayers.Visible = false;
             this.dgvPlayers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPlayers_CellContentClick);
             // 
-            // ddlNationality
+            // lblContractStatus
             // 
-            this.ddlNationality.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ddlNationality.FormattingEnabled = true;
-            this.ddlNationality.Location = new System.Drawing.Point(389, 29);
-            this.ddlNationality.Name = "ddlNationality";
-            this.ddlNationality.Size = new System.Drawing.Size(102, 21);
-            this.ddlNationality.TabIndex = 10;
+            this.lblContractStatus.AutoSize = true;
+            this.lblContractStatus.Location = new System.Drawing.Point(164, 61);
+            this.lblContractStatus.Name = "lblContractStatus";
+            this.lblContractStatus.Size = new System.Drawing.Size(80, 13);
+            this.lblContractStatus.TabIndex = 12;
+            this.lblContractStatus.Text = "Contract Status";
             // 
-            // lblNationality
+            // ddlContractStatus
             // 
-            this.lblNationality.AutoSize = true;
-            this.lblNationality.Location = new System.Drawing.Point(417, 7);
-            this.lblNationality.Name = "lblNationality";
-            this.lblNationality.Size = new System.Drawing.Size(56, 13);
-            this.lblNationality.TabIndex = 11;
-            this.lblNationality.Text = "Nationality";
+            this.ddlContractStatus.FormattingEnabled = true;
+            this.ddlContractStatus.Location = new System.Drawing.Point(157, 80);
+            this.ddlContractStatus.Name = "ddlContractStatus";
+            this.ddlContractStatus.Size = new System.Drawing.Size(100, 21);
+            this.ddlContractStatus.TabIndex = 13;
             // 
             // ScoutingForm
             // 
@@ -383,5 +404,7 @@ namespace ChampMan_Scouter
         private System.Windows.Forms.ComboBox ddlPlaysInRegion;
         private System.Windows.Forms.Label lblNationality;
         private System.Windows.Forms.ComboBox ddlNationality;
+        private System.Windows.Forms.Label lblContractStatus;
+        private System.Windows.Forms.ComboBox ddlContractStatus;
     }
 }

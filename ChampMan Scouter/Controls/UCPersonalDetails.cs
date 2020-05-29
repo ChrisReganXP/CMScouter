@@ -45,6 +45,9 @@ namespace ChampMan_Scouter.Controls
             lblValue.Text = player.Value.ToString("c0");
             lblWage.Text = player.WagePerWeek.ToString("c0");
             lblExpiry.Text = player.ContractExpiryDate == null ? "-" : player.ContractExpiryDate.Value.ToShortDateString();
+
+            lblClub.Text = player.ClubName;
+            lblRepVal.Text = $"{player.Reputation}/{player.DomesticReputation}/{player.WorldReputation}";
         }
     }
 }

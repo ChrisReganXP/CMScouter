@@ -35,6 +35,12 @@ namespace CMScouter.UI
 
         public DateTime? ContractExpiryDate { get; set; }
 
+        public short Reputation { get; set; }
+
+        public short DomesticReputation { get; set; }
+
+        public short WorldReputation { get; set; }
+
         public string GetKnownName()
         {
             return string.IsNullOrWhiteSpace(CommonName) ? FirstName + " " + SecondName : CommonName;

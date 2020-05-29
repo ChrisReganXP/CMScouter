@@ -74,4 +74,42 @@ namespace CMScouterFunctions.Converters
             }
         }
     }
+
+    internal class PlayerConverter : ICMConverter<PlayerData>
+    {
+        public PlayerData Convert(byte[] source)
+        {
+            var player = new PlayerData();
+            ConverterReflection.SetConversionProperties(player, source);
+            return player;
+        }
+    }
+    internal static class ConverterReflection
+    {
+        public static void SetConversionProperties(object target, byte[] source)
+        {
+            foreach (var prop in target.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
+            {
+                var positionAttribute = (DataFileInfoAttribute)prop.GetCustomAttributes(typeof(DataFileInfoAttribute), true).FirstOrDefault();
+
+                if (positionAttribute != null)
+                {
+                    prop.SetValue(target, ByteHandler.GetObjectFromBytes(source, positionAttribute.DataFilePosition, prop.PropertyType, positionAttribute.Length, positionAttribute.IsIntrinsic));
+                }
+            }
+        }
+        public static void SetConversionProperties(object target, PropertyInfo[] props, DataFileInfoAttribute[] attribs, byte[] source)
+        {
+            for (int i = 0; i < props.Length; i++)
+            {
+                var prop = props[i];
+                var positionAttribute = attribs[i];
+
+                if (prop != null && positionAttribute != null)
+                {
+                    prop.SetValue(target, ByteHandler.GetObjectFromBytes(source, positionAttribute.DataFilePosition, prop.PropertyType, positionAttribute.Length, positionAttribute.IsIntrinsic));
+                }
+            }
+        }
+    }
 }

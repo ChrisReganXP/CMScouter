@@ -44,11 +44,17 @@
             this.lblWage = new System.Windows.Forms.Label();
             this.lblExpiry = new System.Windows.Forms.Label();
             this.lblPerWeek = new System.Windows.Forms.Label();
+            this.lblClub = new System.Windows.Forms.Label();
+            this.lblReputation = new System.Windows.Forms.Label();
+            this.lblRepVal = new System.Windows.Forms.Label();
             this.gbxPersonal.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbxPersonal
             // 
+            this.gbxPersonal.Controls.Add(this.lblRepVal);
+            this.gbxPersonal.Controls.Add(this.lblReputation);
+            this.gbxPersonal.Controls.Add(this.lblClub);
             this.gbxPersonal.Controls.Add(this.lblPerWeek);
             this.gbxPersonal.Controls.Add(this.lblExpiry);
             this.gbxPersonal.Controls.Add(this.lblWage);
@@ -184,7 +190,7 @@
             // lblWage
             // 
             this.lblWage.AutoSize = true;
-            this.lblWage.Location = new System.Drawing.Point(5, 197);
+            this.lblWage.Location = new System.Drawing.Point(5, 189);
             this.lblWage.Name = "lblWage";
             this.lblWage.Size = new System.Drawing.Size(46, 13);
             this.lblWage.TabIndex = 12;
@@ -194,7 +200,7 @@
             // lblExpiry
             // 
             this.lblExpiry.AutoSize = true;
-            this.lblExpiry.Location = new System.Drawing.Point(75, 197);
+            this.lblExpiry.Location = new System.Drawing.Point(75, 189);
             this.lblExpiry.Name = "lblExpiry";
             this.lblExpiry.Size = new System.Drawing.Size(65, 13);
             this.lblExpiry.TabIndex = 13;
@@ -203,11 +209,38 @@
             // lblPerWeek
             // 
             this.lblPerWeek.AutoSize = true;
-            this.lblPerWeek.Location = new System.Drawing.Point(47, 197);
+            this.lblPerWeek.Location = new System.Drawing.Point(47, 189);
             this.lblPerWeek.Name = "lblPerWeek";
             this.lblPerWeek.Size = new System.Drawing.Size(26, 13);
             this.lblPerWeek.TabIndex = 14;
             this.lblPerWeek.Text = "p/w";
+            // 
+            // lblClub
+            // 
+            this.lblClub.AutoSize = true;
+            this.lblClub.Location = new System.Drawing.Point(9, 215);
+            this.lblClub.Name = "lblClub";
+            this.lblClub.Size = new System.Drawing.Size(56, 13);
+            this.lblClub.TabIndex = 15;
+            this.lblClub.Text = "Aston Villa";
+            // 
+            // lblReputation
+            // 
+            this.lblReputation.AutoSize = true;
+            this.lblReputation.Location = new System.Drawing.Point(8, 238);
+            this.lblReputation.Name = "lblReputation";
+            this.lblReputation.Size = new System.Drawing.Size(27, 13);
+            this.lblReputation.TabIndex = 16;
+            this.lblReputation.Text = "Rep";
+            // 
+            // lblRepVal
+            // 
+            this.lblRepVal.AutoSize = true;
+            this.lblRepVal.Location = new System.Drawing.Point(57, 237);
+            this.lblRepVal.Name = "lblRepVal";
+            this.lblRepVal.Size = new System.Drawing.Size(83, 13);
+            this.lblRepVal.TabIndex = 17;
+            this.lblRepVal.Text = "1000/1500/500";
             // 
             // UCPersonalDetails
             // 
@@ -240,5 +273,8 @@
         private System.Windows.Forms.Label lblExpiry;
         private System.Windows.Forms.Label lblWage;
         private System.Windows.Forms.Label lblPerWeek;
+        private System.Windows.Forms.Label lblClub;
+        private System.Windows.Forms.Label lblReputation;
+        private System.Windows.Forms.Label lblRepVal;
     }
 }
