@@ -53,6 +53,27 @@ namespace CMScouter.UI
             }
         }
 
+        public List<Player> OrderByDataPoint(DP dataPoint)
+        {
+            switch (dataPoint)
+            {
+                case DP.Tackling:
+                    return _savegame.Players.OrderByDescending(x => x._player.Tackling).ToList();
+
+                case DP.Passing:
+                    return _savegame.Players.OrderByDescending(x => x._player.Passing).ToList();
+
+                case DP.OffTheBall:
+                    return _savegame.Players.OrderByDescending(x => x._player.OffTheBall).ToList();
+
+                case DP.Finishing:
+                    return _savegame.Players.OrderByDescending(x => x._player.Finishing).ToList();
+
+                default:
+                    return new List<Player>();
+            }
+        }
+
         public void CreateClubFilter(ScoutingRequest request, List<Func<Player, bool>> filters)
         {
             int? clubId = null;
@@ -97,12 +118,12 @@ namespace CMScouter.UI
 
         public void CreateContractStatusFilter(ScoutingRequest request, List<Func<Player, bool>> filters)
         {
-            if (request.ContractStatus < 0)
+            if (request.ContractStatus == null || request.ContractStatus.Value < 0)
             {
                 return;
             }
 
-            Func<Player, bool> filter = x => x._staff.ContractExpiryDate <= _savegame.GameDate.AddDays(30 * request.ContractStatus);
+            Func<Player, bool> filter = x => x._staff.ContractExpiryDate <= _savegame.GameDate.AddDays(30 * request.ContractStatus.Value);
             filters.Add(filter);
         }
 

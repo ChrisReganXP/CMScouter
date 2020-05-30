@@ -30,7 +30,7 @@
         {
             this.lblAggression = new System.Windows.Forms.Label();
             this.lblBravery = new System.Windows.Forms.Label();
-            this.Consistency = new System.Windows.Forms.Label();
+            this.lblConsistency = new System.Windows.Forms.Label();
             this.lblImpMat = new System.Windows.Forms.Label();
             this.lblInfluence = new System.Windows.Forms.Label();
             this.lblInfVal = new System.Windows.Forms.Label();
@@ -43,12 +43,12 @@
             this.lblVersVal = new System.Windows.Forms.Label();
             this.lblTeamVal = new System.Windows.Forms.Label();
             this.gbxMental = new System.Windows.Forms.GroupBox();
-            this.lblWorkVal = new System.Windows.Forms.Label();
-            this.lblWorkRate = new System.Windows.Forms.Label();
-            this.lblDirtyness = new System.Windows.Forms.Label();
-            this.lblDirtVal = new System.Windows.Forms.Label();
             this.lblFlair = new System.Windows.Forms.Label();
             this.lblFlaVal = new System.Windows.Forms.Label();
+            this.lblDirtyness = new System.Windows.Forms.Label();
+            this.lblDirtVal = new System.Windows.Forms.Label();
+            this.lblWorkVal = new System.Windows.Forms.Label();
+            this.lblWorkRate = new System.Windows.Forms.Label();
             this.gbxMental.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,14 +70,14 @@
             this.lblBravery.TabIndex = 1;
             this.lblBravery.Text = "Bravery";
             // 
-            // Consistency
+            // lblConsistency
             // 
-            this.Consistency.AutoSize = true;
-            this.Consistency.Location = new System.Drawing.Point(15, 72);
-            this.Consistency.Name = "Consistency";
-            this.Consistency.Size = new System.Drawing.Size(64, 13);
-            this.Consistency.TabIndex = 2;
-            this.Consistency.Text = "Consistency";
+            this.lblConsistency.AutoSize = true;
+            this.lblConsistency.Location = new System.Drawing.Point(15, 72);
+            this.lblConsistency.Name = "lblConsistency";
+            this.lblConsistency.Size = new System.Drawing.Size(64, 13);
+            this.lblConsistency.TabIndex = 2;
+            this.lblConsistency.Text = "Consistency";
             // 
             // lblImpMat
             // 
@@ -190,7 +190,7 @@
             this.gbxMental.Controls.Add(this.lblVersVal);
             this.gbxMental.Controls.Add(this.lblAggression);
             this.gbxMental.Controls.Add(this.lblTeamVal);
-            this.gbxMental.Controls.Add(this.Consistency);
+            this.gbxMental.Controls.Add(this.lblConsistency);
             this.gbxMental.Controls.Add(this.lblVersitility);
             this.gbxMental.Controls.Add(this.lblImpMat);
             this.gbxMental.Controls.Add(this.lblTeamwork);
@@ -206,42 +206,6 @@
             this.gbxMental.TabIndex = 26;
             this.gbxMental.TabStop = false;
             this.gbxMental.Text = "Mental";
-            // 
-            // lblWorkVal
-            // 
-            this.lblWorkVal.AutoSize = true;
-            this.lblWorkVal.Location = new System.Drawing.Point(80, 234);
-            this.lblWorkVal.Name = "lblWorkVal";
-            this.lblWorkVal.Size = new System.Drawing.Size(41, 13);
-            this.lblWorkVal.TabIndex = 27;
-            this.lblWorkVal.Text = "label31";
-            // 
-            // lblWorkRate
-            // 
-            this.lblWorkRate.AutoSize = true;
-            this.lblWorkRate.Location = new System.Drawing.Point(15, 234);
-            this.lblWorkRate.Name = "lblWorkRate";
-            this.lblWorkRate.Size = new System.Drawing.Size(59, 13);
-            this.lblWorkRate.TabIndex = 26;
-            this.lblWorkRate.Text = "Work Rate";
-            // 
-            // lblDirtyness
-            // 
-            this.lblDirtyness.AutoSize = true;
-            this.lblDirtyness.Location = new System.Drawing.Point(16, 95);
-            this.lblDirtyness.Name = "lblDirtyness";
-            this.lblDirtyness.Size = new System.Drawing.Size(50, 13);
-            this.lblDirtyness.TabIndex = 28;
-            this.lblDirtyness.Text = "Dirtyness";
-            // 
-            // lblDirtVal
-            // 
-            this.lblDirtVal.AutoSize = true;
-            this.lblDirtVal.Location = new System.Drawing.Point(83, 95);
-            this.lblDirtVal.Name = "lblDirtVal";
-            this.lblDirtVal.Size = new System.Drawing.Size(41, 13);
-            this.lblDirtVal.TabIndex = 29;
-            this.lblDirtVal.Text = "label14";
             // 
             // lblFlair
             // 
@@ -261,6 +225,42 @@
             this.lblFlaVal.TabIndex = 31;
             this.lblFlaVal.Text = "label14";
             // 
+            // lblDirtyness
+            // 
+            this.lblDirtyness.AutoSize = true;
+            this.lblDirtyness.Location = new System.Drawing.Point(16, 95);
+            this.lblDirtyness.Name = "lblDirtyness";
+            this.lblDirtyness.Size = new System.Drawing.Size(50, 13);
+            this.lblDirtyness.TabIndex = 28;
+            this.lblDirtyness.Text = "Dirtyness";
+            // 
+            // lblDirtVal
+            // 
+            this.lblDirtVal.AutoSize = true;
+            this.lblDirtVal.Location = new System.Drawing.Point(83, 95);
+            this.lblDirtVal.Name = "lblDirtVal";
+            this.lblDirtVal.Size = new System.Drawing.Size(41, 13);
+            this.lblDirtVal.TabIndex = 29;
+            this.lblDirtVal.Text = "label14";
+            // 
+            // lblWorkVal
+            // 
+            this.lblWorkVal.AutoSize = true;
+            this.lblWorkVal.Location = new System.Drawing.Point(80, 234);
+            this.lblWorkVal.Name = "lblWorkVal";
+            this.lblWorkVal.Size = new System.Drawing.Size(41, 13);
+            this.lblWorkVal.TabIndex = 27;
+            this.lblWorkVal.Text = "label31";
+            // 
+            // lblWorkRate
+            // 
+            this.lblWorkRate.AutoSize = true;
+            this.lblWorkRate.Location = new System.Drawing.Point(15, 234);
+            this.lblWorkRate.Name = "lblWorkRate";
+            this.lblWorkRate.Size = new System.Drawing.Size(59, 13);
+            this.lblWorkRate.TabIndex = 26;
+            this.lblWorkRate.Text = "Work Rate";
+            // 
             // UCMental
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -278,7 +278,7 @@
 
         private System.Windows.Forms.Label lblAggression;
         private System.Windows.Forms.Label lblBravery;
-        private System.Windows.Forms.Label Consistency;
+        private System.Windows.Forms.Label lblConsistency;
         private System.Windows.Forms.Label lblImpMat;
         private System.Windows.Forms.Label lblInfluence;
         private System.Windows.Forms.Label lblInfVal;

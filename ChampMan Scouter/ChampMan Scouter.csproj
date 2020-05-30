@@ -46,6 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\BaseAttributeControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\UCGoalkeeping.cs">
       <SubType>UserControl</SubType>
     </Compile>

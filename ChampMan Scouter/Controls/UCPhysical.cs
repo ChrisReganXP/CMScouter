@@ -12,38 +12,24 @@ using CMScouter.UI;
 
 namespace ChampMan_Scouter.Controls
 {
-    [Designer("System.Windows.Forms.Design.ParentControlDesigner, System.Design", typeof(IDesigner))]
-    public partial class UCPhysical : UserControl
+    public partial class UCPhysical : BaseAttributeControl
     {
-        private PlayerView player;
-
         public UCPhysical()
         {
             InitializeComponent();
         }
 
-        public void SetPlayer(PlayerView Player)
+        protected override void SetLabels()
         {
-            player = Player;
-            SetLabels();
-        }
-
-        private void SetLabels()
-        {
-            SetAttributeLabelValue(lblAccVal, player.Attributes.Acceleration);
-            SetAttributeLabelValue(lblAgiVal, player.Attributes.Agility);
-            SetAttributeLabelValue(lblBalVal, player.Attributes.Balance);
-            SetAttributeLabelValue(lblInjVal, player.Attributes.InjuryProneness);
-            SetAttributeLabelValue(lblJumpVal, player.Attributes.Jumping);
-            SetAttributeLabelValue(lblNaFiVal, player.Attributes.NaturalFitness);
-            SetAttributeLabelValue(lblPaceVal, player.Attributes.Pace);
-            SetAttributeLabelValue(lblStaVal, player.Attributes.Stamina);
-            SetAttributeLabelValue(lblStreVal, player.Attributes.Strength);
-        }
-
-        private void SetAttributeLabelValue(Label label, byte val)
-        {
-            label.Text = val.ToString();
+            SetAttributeLabels(lblAcceleration, lblAccVal, player.Attributes.Acceleration);
+            SetAttributeLabels(lblAgility, lblAgiVal, player.Attributes.Agility);
+            SetAttributeLabels(lblBalance, lblBalVal, player.Attributes.Balance);
+            SetAttributeLabels(lblInjuryProneness, lblInjVal, player.Attributes.InjuryProneness, false, true);
+            SetAttributeLabels(lblJumping, lblJumpVal, player.Attributes.Jumping);
+            SetAttributeLabels(lblNaturalFitness, lblNaFiVal, player.Attributes.NaturalFitness);
+            SetAttributeLabels(lblPace, lblPaceVal, player.Attributes.Pace);
+            SetAttributeLabels(lblStamina, lblStaVal, player.Attributes.Stamina);
+            SetAttributeLabels(lblStrength, lblStreVal, player.Attributes.Strength);
         }
     }
 }

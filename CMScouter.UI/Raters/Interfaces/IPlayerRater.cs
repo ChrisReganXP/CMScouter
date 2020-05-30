@@ -6,9 +6,12 @@ using System.Text;
 
 namespace CMScouter.UI
 {
-    internal interface IPlayerRater
+    public interface IPlayerRater
     {
         RatingResults GetRatings(Player item);
+
         bool PlaysPosition(PlayerType type, PlayerData player);
+
+        byte GetIntrinsicMask(byte intrinsicValue);
     }
 }

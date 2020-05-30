@@ -21,7 +21,7 @@ namespace CMScouter.UI
 
         public int? MaxValue { get; set; }
 
-        public short ContractStatus { get; set; }
+        public short? ContractStatus { get; set; }
 
         public PlayerType? PlayerType { get; set; }
 

@@ -8,7 +8,7 @@ using System.Text;
 
 namespace CMScouter.UI
 {
-    internal class DefaultRater : IPlayerRater
+    public class DefaultRater : IPlayerRater
     {
         /*
             GK: Anticipation, Decisions, Handling, Heading, Positioning, Reflexes, Tackling, One on Ones
@@ -402,6 +402,11 @@ namespace CMScouter.UI
                 return val;
             }
 
+            return GetIntrinsicMask(val);
+        }
+
+        public byte GetIntrinsicMask(byte val)
+        {
             // based on GK attribs
             /*
             if (val < 32) return 1;

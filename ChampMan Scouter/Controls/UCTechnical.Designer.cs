@@ -126,7 +126,7 @@
             // lblLongShots
             // 
             this.lblLongShots.AutoSize = true;
-            this.lblLongShots.Location = new System.Drawing.Point(137, 29);
+            this.lblLongShots.Location = new System.Drawing.Point(134, 29);
             this.lblLongShots.Name = "lblLongShots";
             this.lblLongShots.Size = new System.Drawing.Size(61, 13);
             this.lblLongShots.TabIndex = 7;
@@ -135,11 +135,12 @@
             // lblLonVal
             // 
             this.lblLonVal.AutoSize = true;
-            this.lblLonVal.Location = new System.Drawing.Point(204, 29);
+            this.lblLonVal.Location = new System.Drawing.Point(201, 29);
             this.lblLonVal.Name = "lblLonVal";
             this.lblLonVal.Size = new System.Drawing.Size(35, 13);
             this.lblLonVal.TabIndex = 15;
             this.lblLonVal.Text = "label9";
+            this.lblLonVal.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // lblHeaVal
             // 
@@ -149,6 +150,7 @@
             this.lblHeaVal.Size = new System.Drawing.Size(41, 13);
             this.lblHeaVal.TabIndex = 14;
             this.lblHeaVal.Text = "label10";
+            this.lblHeaVal.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // lblFinVal
             // 
@@ -158,6 +160,7 @@
             this.lblFinVal.Size = new System.Drawing.Size(41, 13);
             this.lblFinVal.TabIndex = 13;
             this.lblFinVal.Text = "label11";
+            this.lblFinVal.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // lblDribVal
             // 
@@ -167,6 +170,7 @@
             this.lblDribVal.Size = new System.Drawing.Size(41, 13);
             this.lblDribVal.TabIndex = 12;
             this.lblDribVal.Text = "label12";
+            this.lblDribVal.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // lblDecVal
             // 
@@ -176,6 +180,7 @@
             this.lblDecVal.Size = new System.Drawing.Size(41, 13);
             this.lblDecVal.TabIndex = 11;
             this.lblDecVal.Text = "label13";
+            this.lblDecVal.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // lblCrossingVal
             // 
@@ -185,6 +190,7 @@
             this.lblCrossingVal.Size = new System.Drawing.Size(41, 13);
             this.lblCrossingVal.TabIndex = 10;
             this.lblCrossingVal.Text = "label14";
+            this.lblCrossingVal.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // lblCreVal
             // 
@@ -194,20 +200,22 @@
             this.lblCreVal.Size = new System.Drawing.Size(41, 13);
             this.lblCreVal.TabIndex = 9;
             this.lblCreVal.Text = "label15";
+            this.lblCreVal.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // lblAntVal
             // 
             this.lblAntVal.AutoSize = true;
             this.lblAntVal.Location = new System.Drawing.Point(73, 29);
             this.lblAntVal.Name = "lblAntVal";
-            this.lblAntVal.Size = new System.Drawing.Size(19, 13);
+            this.lblAntVal.Size = new System.Drawing.Size(46, 13);
             this.lblAntVal.TabIndex = 8;
-            this.lblAntVal.Text = "20";
+            this.lblAntVal.Text = "20 (156)";
+            this.lblAntVal.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // lblTackling
             // 
             this.lblTackling.AutoSize = true;
-            this.lblTackling.Location = new System.Drawing.Point(137, 144);
+            this.lblTackling.Location = new System.Drawing.Point(134, 144);
             this.lblTackling.Name = "lblTackling";
             this.lblTackling.Size = new System.Drawing.Size(48, 13);
             this.lblTackling.TabIndex = 20;
@@ -216,7 +224,7 @@
             // lblPositioning
             // 
             this.lblPositioning.AutoSize = true;
-            this.lblPositioning.Location = new System.Drawing.Point(137, 121);
+            this.lblPositioning.Location = new System.Drawing.Point(134, 121);
             this.lblPositioning.Name = "lblPositioning";
             this.lblPositioning.Size = new System.Drawing.Size(58, 13);
             this.lblPositioning.TabIndex = 19;
@@ -225,7 +233,7 @@
             // lblPassing
             // 
             this.lblPassing.AutoSize = true;
-            this.lblPassing.Location = new System.Drawing.Point(137, 97);
+            this.lblPassing.Location = new System.Drawing.Point(134, 97);
             this.lblPassing.Name = "lblPassing";
             this.lblPassing.Size = new System.Drawing.Size(44, 13);
             this.lblPassing.TabIndex = 18;
@@ -234,7 +242,7 @@
             // lblOffTheBall
             // 
             this.lblOffTheBall.AutoSize = true;
-            this.lblOffTheBall.Location = new System.Drawing.Point(137, 75);
+            this.lblOffTheBall.Location = new System.Drawing.Point(134, 75);
             this.lblOffTheBall.Name = "lblOffTheBall";
             this.lblOffTheBall.Size = new System.Drawing.Size(63, 13);
             this.lblOffTheBall.TabIndex = 17;
@@ -243,7 +251,7 @@
             // lblMarking
             // 
             this.lblMarking.AutoSize = true;
-            this.lblMarking.Location = new System.Drawing.Point(137, 52);
+            this.lblMarking.Location = new System.Drawing.Point(134, 52);
             this.lblMarking.Name = "lblMarking";
             this.lblMarking.Size = new System.Drawing.Size(45, 13);
             this.lblMarking.TabIndex = 16;
@@ -252,47 +260,52 @@
             // lblTackVal
             // 
             this.lblTackVal.AutoSize = true;
-            this.lblTackVal.Location = new System.Drawing.Point(202, 144);
+            this.lblTackVal.Location = new System.Drawing.Point(199, 144);
             this.lblTackVal.Name = "lblTackVal";
             this.lblTackVal.Size = new System.Drawing.Size(41, 13);
             this.lblTackVal.TabIndex = 28;
             this.lblTackVal.Text = "label28";
+            this.lblTackVal.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // lblPosVal
             // 
             this.lblPosVal.AutoSize = true;
-            this.lblPosVal.Location = new System.Drawing.Point(202, 121);
+            this.lblPosVal.Location = new System.Drawing.Point(199, 121);
             this.lblPosVal.Name = "lblPosVal";
             this.lblPosVal.Size = new System.Drawing.Size(41, 13);
             this.lblPosVal.TabIndex = 27;
             this.lblPosVal.Text = "label29";
+            this.lblPosVal.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // lblPasVal
             // 
             this.lblPasVal.AutoSize = true;
-            this.lblPasVal.Location = new System.Drawing.Point(202, 97);
+            this.lblPasVal.Location = new System.Drawing.Point(199, 97);
             this.lblPasVal.Name = "lblPasVal";
             this.lblPasVal.Size = new System.Drawing.Size(41, 13);
             this.lblPasVal.TabIndex = 26;
             this.lblPasVal.Text = "label30";
+            this.lblPasVal.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // lblOffVal
             // 
             this.lblOffVal.AutoSize = true;
-            this.lblOffVal.Location = new System.Drawing.Point(202, 75);
+            this.lblOffVal.Location = new System.Drawing.Point(199, 75);
             this.lblOffVal.Name = "lblOffVal";
             this.lblOffVal.Size = new System.Drawing.Size(41, 13);
             this.lblOffVal.TabIndex = 25;
             this.lblOffVal.Text = "label31";
+            this.lblOffVal.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // lblMarVal
             // 
             this.lblMarVal.AutoSize = true;
-            this.lblMarVal.Location = new System.Drawing.Point(202, 52);
+            this.lblMarVal.Location = new System.Drawing.Point(199, 52);
             this.lblMarVal.Name = "lblMarVal";
             this.lblMarVal.Size = new System.Drawing.Size(41, 13);
             this.lblMarVal.TabIndex = 24;
             this.lblMarVal.Text = "label32";
+            this.lblMarVal.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // gbxTechnical
             // 
@@ -334,16 +347,17 @@
             // lblTecVal
             // 
             this.lblTecVal.AutoSize = true;
-            this.lblTecVal.Location = new System.Drawing.Point(201, 166);
+            this.lblTecVal.Location = new System.Drawing.Point(198, 166);
             this.lblTecVal.Name = "lblTecVal";
             this.lblTecVal.Size = new System.Drawing.Size(41, 13);
             this.lblTecVal.TabIndex = 30;
             this.lblTecVal.Text = "label28";
+            this.lblTecVal.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // lblTechnique
             // 
             this.lblTechnique.AutoSize = true;
-            this.lblTechnique.Location = new System.Drawing.Point(137, 166);
+            this.lblTechnique.Location = new System.Drawing.Point(134, 166);
             this.lblTechnique.Name = "lblTechnique";
             this.lblTechnique.Size = new System.Drawing.Size(58, 13);
             this.lblTechnique.TabIndex = 29;

@@ -1,59 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.ComponentModel.Design;
-using CMScouter.UI;
-
-namespace ChampMan_Scouter.Controls
+﻿namespace ChampMan_Scouter.Controls
 {
-    [Designer("System.Windows.Forms.Design.ParentControlDesigner, System.Design", typeof(IDesigner))]
-    public partial class UCTechnical : UserControl
+    public partial class UCTechnical : BaseAttributeControl
     {
-        private PlayerView player;
-
         public UCTechnical()
         {
             InitializeComponent();
         }
 
-        public void SetPlayer(PlayerView Player)
+        protected override void SetLabels()
         {
-            player = Player;
-            SetLabels();
-        }
-
-        private void SetLabels()
-        {
-            SetAttributeLabelValue(lblAntVal, player.Attributes.Anticipation);
-            SetAttributeLabelValue(lblCreVal, player.Attributes.Creativity);
-            SetAttributeLabelValue(lblCrossingVal, player.Attributes.Crossing);
-            SetAttributeLabelValue(lblDecVal, player.Attributes.Decisions);
-            SetAttributeLabelValue(lblDribVal, player.Attributes.Dribbling);
-            SetAttributeLabelValue(lblFinVal, player.Attributes.Finishing);
-            SetAttributeLabelValue(lblHeaVal, player.Attributes.Heading);
-            SetAttributeLabelValue(lblLonVal, player.Attributes.LongShots);
-            SetAttributeLabelValue(lblMarVal, player.Attributes.Marking);
-            SetAttributeLabelValue(lblOffVal, player.Attributes.OffTheBall);
-            SetAttributeLabelValue(lblPasVal, player.Attributes.Passing);
-            SetAttributeLabelValue(lblPosVal, player.Attributes.Positioning);
-            SetAttributeLabelValue(lblTackVal, player.Attributes.Tackling);
-            SetAttributeLabelValue(lblTecVal, $"({player.Attributes.Technique})");
-        }
-
-        private void SetAttributeLabelValue(Label label, byte val)
-        {
-            label.Text = val.ToString();
-        }
-
-        private void SetAttributeLabelValue(Label label, string val)
-        {
-            label.Text = val;
+            SetAttributeLabels(lblAnticipation, lblAntVal, player.Attributes.Anticipation, true);
+            SetAttributeLabels(lblCreativity, lblCreVal, player.Attributes.Creativity, true);
+            SetAttributeLabels(lblCrossing, lblCrossingVal, player.Attributes.Crossing, true);
+            SetAttributeLabels(lblDecisions, lblDecVal, player.Attributes.Decisions, true);
+            SetAttributeLabels(lblDribbling, lblDribVal, player.Attributes.Dribbling, true);
+            SetAttributeLabels(lblFinishing, lblFinVal, player.Attributes.Finishing, true);
+            SetAttributeLabels(lblHeading, lblHeaVal, player.Attributes.Heading, true);
+            SetAttributeLabels(lblLongShots, lblLonVal, player.Attributes.LongShots, true);
+            SetAttributeLabels(lblMarking, lblMarVal, player.Attributes.Marking, true);
+            SetAttributeLabels(lblOffTheBall, lblOffVal, player.Attributes.OffTheBall, true);
+            SetAttributeLabels(lblPassing, lblPasVal, player.Attributes.Passing, true);
+            SetAttributeLabels(lblPositioning, lblPosVal, player.Attributes.Positioning, true);
+            SetAttributeLabels(lblTackling, lblTackVal, player.Attributes.Tackling, true);
+            SetAttributeLabels(lblTechnique, lblTecVal, player.Attributes.Technique);
         }
     }
 }

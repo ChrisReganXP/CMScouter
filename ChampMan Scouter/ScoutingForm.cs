@@ -510,7 +510,7 @@ namespace ChampMan_Scouter
                 int PlayerId = (int)((DataRowView)senderGrid.Rows[e.RowIndex].DataBoundItem).Row[0];
 
                 PlayerView player = cmsUI.GetPlayerByPlayerId(new List<int>() { PlayerId }).First();
-                PlayerViewForm details = new PlayerViewForm(player);
+                PlayerViewForm details = new PlayerViewForm(player, cmsUI.PlayerRater);
                 DialogResult result = details.ShowDialog();
             }
         }

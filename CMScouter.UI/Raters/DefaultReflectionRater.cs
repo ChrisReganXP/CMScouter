@@ -50,7 +50,6 @@ namespace CMScouter.UI
             AddOffField();
         }
 
-
         public bool PlaysPosition(PlayerType type, PlayerData player)
         {
             switch (type)
@@ -996,6 +995,11 @@ namespace CMScouter.UI
                 return val;
             }
 
+            return GetIntrinsicMask(val);
+        }
+
+        public byte GetIntrinsicMask(byte val)
+        {
             // based on GK attribs
             /*
             if (val < 32) return 1;

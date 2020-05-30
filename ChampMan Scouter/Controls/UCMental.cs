@@ -1,50 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.ComponentModel;
 using System.ComponentModel.Design;
-using CMScouter.UI;
 
 namespace ChampMan_Scouter.Controls
 {
-    [Designer("System.Windows.Forms.Design.ParentControlDesigner, System.Design", typeof(IDesigner))]
-    public partial class UCMental : UserControl
+    public partial class UCMental : BaseAttributeControl
     {
-        private PlayerView player;
-
         public UCMental()
         {
             InitializeComponent();
         }
 
-        public void SetPlayer(PlayerView Player)
+        protected override void SetLabels()
         {
-            player = Player;
-            SetLabels();
-        }
-
-        private void SetLabels()
-        {
-            SetAttributeLabelValue(lblAggVal, player.Attributes.Aggression);
-            SetAttributeLabelValue(lblBraVal, player.Attributes.Bravery);
-            SetAttributeLabelValue(lblConsVal, player.Attributes.Consistency);
-            SetAttributeLabelValue(lblDirtVal, player.Attributes.Dirtiness);
-            SetAttributeLabelValue(lblFlaVal, player.Attributes.Flair);
-            SetAttributeLabelValue(lblImpVal, player.Attributes.ImportantMatches);
-            SetAttributeLabelValue(lblInfVal, player.Attributes.Influence);
-            SetAttributeLabelValue(lblTeamVal, player.Attributes.Teamwork);
-            SetAttributeLabelValue(lblVersVal, player.Attributes.Versitility);
-            SetAttributeLabelValue(lblWorkVal, player.Attributes.WorkRate);
-        }
-
-        private void SetAttributeLabelValue(Label label, byte val)
-        {
-            label.Text = val.ToString();
+            SetAttributeLabels(lblAggression, lblAggVal, player.Attributes.Aggression);
+            SetAttributeLabels(lblBravery, lblBraVal, player.Attributes.Bravery);
+            SetAttributeLabels(lblConsistency, lblConsVal, player.Attributes.Consistency);
+            SetAttributeLabels(lblDirtyness, lblDirtVal, player.Attributes.Dirtiness, false, true);
+            SetAttributeLabels(lblFlair, lblFlaVal, player.Attributes.Flair);
+            SetAttributeLabels(lblImpMat, lblImpVal, player.Attributes.ImportantMatches);
+            SetAttributeLabels(lblInfluence, lblInfVal, player.Attributes.Influence);
+            SetAttributeLabels(lblTeamwork, lblTeamVal, player.Attributes.Teamwork);
+            SetAttributeLabels(lblVersitility, lblVersVal, player.Attributes.Versitility);
+            SetAttributeLabels(lblWorkRate, lblWorkVal, player.Attributes.WorkRate);
         }
     }
 }

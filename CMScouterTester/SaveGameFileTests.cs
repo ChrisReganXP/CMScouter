@@ -91,7 +91,6 @@ namespace CMScouterTester
         }
         
         [TestMethod]
-        [DataRow()]
         public void TestSearchForHighestGKs()
         {
             ScoutingRequest request = new ScoutingRequest() { PlayerType = PlayerType.GoalKeeper, NumberOfResults = 20 };
@@ -104,7 +103,24 @@ namespace CMScouterTester
         }
 
         [TestMethod]
-        [DataRow()]
+        public void TestHighestTacklers()
+        {
+            List<PlayerView> players = cmsUI.GetHighestIntrinsic(DP.Tackling, 30);
+            Assert.IsNotNull(players);
+            Assert.IsTrue(players.Count == 30);
+            Assert.IsTrue(players.All(x => x.Attributes.Tackling > 128));
+        }
+
+        [TestMethod]
+        public void TestHighestPassing()
+        {
+            List<PlayerView> players = cmsUI.GetHighestIntrinsic(DP.Passing, 30);
+            Assert.IsNotNull(players);
+            Assert.IsTrue(players.Count == 30);
+            Assert.IsTrue(players.All(x => x.Attributes.Passing > 128));
+        }
+
+        [TestMethod]
         public void TestSearchForBestFreeTransfers()
         {
             ScoutingRequest request = new ScoutingRequest() { MaxValue = 0, NumberOfResults = 100 };
@@ -115,7 +131,6 @@ namespace CMScouterTester
         }
 
         [TestMethod]
-        [DataRow()]
         public void TestSearchForCentreBacks()
         {
             ScoutingRequest request = new ScoutingRequest() { PlayerType = PlayerType.CentreHalf, MaxValue = 2000000, NumberOfResults = 50, EUNationalityOnly = true };
@@ -127,7 +142,6 @@ namespace CMScouterTester
         }
 
         [TestMethod]
-        [DataRow()]
         public void TestSearchForAttackingMidfielders()
         {
             ScoutingRequest request = new ScoutingRequest() { PlayerType = PlayerType.AttackingMidfielder, MaxValue = 2000000, NumberOfResults = 50, EUNationalityOnly = true };

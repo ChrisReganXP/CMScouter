@@ -433,7 +433,7 @@ namespace ChampMan_Scouter
                 e.RowIndex >= 0)
             {
                 PlayerView player = senderGrid.Rows[e.RowIndex].DataBoundItem as PlayerView;
-                PlayerViewForm details = new PlayerViewForm(player);
+                PlayerViewForm details = new PlayerViewForm(player, cmsUI.PlayerRater);
                 DialogResult result = details.ShowDialog();
             }
         }
