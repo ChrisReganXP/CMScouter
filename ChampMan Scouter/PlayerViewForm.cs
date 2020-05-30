@@ -15,12 +15,12 @@ namespace ChampMan_Scouter
     {
         public PlayerView Player { get; set; }
 
-        public IPlayerRater Rater { get; set; }
+        public IIntrinsicMasker Masker { get; set; }
 
-        public PlayerViewForm(PlayerView player, IPlayerRater rater)
+        public PlayerViewForm(PlayerView player, IIntrinsicMasker masker)
         {
             Player = player;
-            Rater = rater;
+            Masker = masker;
             InitializeComponent();
             InitialiseControls();
         }
@@ -29,11 +29,11 @@ namespace ChampMan_Scouter
         {
             ucPersonalDetails.SetPlayer(this.Player);
             ucScouting.SetPlayer(this.Player);
-            ucTechnical.SetPlayer(this.Player, Rater);
-            ucMental.SetPlayer(this.Player, Rater);
-            ucPhysical.SetPlayer(this.Player, Rater);
-            ucSetPieces.SetPlayer(this.Player, Rater);
-            ucGoalkeeping.SetPlayer(this.Player, Rater);
+            ucTechnical.SetPlayer(this.Player, Masker);
+            ucMental.SetPlayer(this.Player, Masker);
+            ucPhysical.SetPlayer(this.Player, Masker);
+            ucSetPieces.SetPlayer(this.Player, Masker);
+            ucGoalkeeping.SetPlayer(this.Player, Masker);
         }
     }
 }

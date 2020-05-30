@@ -15,14 +15,14 @@ namespace ChampMan_Scouter.Controls
     public class BaseAttributeControl : UserControl
     {
         protected PlayerView player;
-        protected IPlayerRater rater = new DefaultRater();
+        protected IIntrinsicMasker masker;
 
         protected virtual void SetLabels() { }
 
-        public void SetPlayer(PlayerView Player, IPlayerRater Rater)
+        public void SetPlayer(PlayerView Player, IIntrinsicMasker Masker)
         {
             player = Player;
-            rater = Rater;
+            masker = Masker;
             SetLabels();
         }
 
@@ -32,7 +32,7 @@ namespace ChampMan_Scouter.Controls
             if (IsIntrinsic)
             {
                 maskedValue = value;
-                value = rater.GetIntrinsicMask(value);
+                value = masker.GetIntrinsicMask(value);
             }
 
             Color color = GetAttributeColor(IsInverted ? (byte)(21 - value) : value);

@@ -1,4 +1,5 @@
 ﻿using CMScouter.UI.Converters;
+using CMScouter.UI.Raters;
 using CMScouterFunctions;
 using CMScouterFunctions.DataClasses;
 using System;
@@ -12,6 +13,7 @@ namespace CMScouter.UI
     {
         private SaveGameData _savegame;
         private PlayerDisplayHelper _displayHelper;
+        private IPlayerRater _rater;
 
         public CMScouterUI(string fileName)
         {
@@ -20,10 +22,12 @@ namespace CMScouter.UI
             _savegame = file;
 
             ConstructLookups();
-            PlayerRater = new DefaultRater();
+
+            IntrinsicMasker = new DefaultIntrinsicMasker();
+            _rater = new DefaultRater(IntrinsicMasker);
         }
 
-        public IPlayerRater PlayerRater { get; internal set; }
+        public IIntrinsicMasker IntrinsicMasker { get; internal set; }
 
         public List<Club> GetClubs()
         {
@@ -50,16 +54,16 @@ namespace CMScouter.UI
 
         public List<PlayerView> GetHighestIntrinsic(DP dataPoint, short numberOfRecords)
         {
-            SearchFilterHelper filterHelper = new SearchFilterHelper(_savegame, PlayerRater);
+            SearchFilterHelper filterHelper = new SearchFilterHelper(_savegame, _rater);
             var playersToConstruct = filterHelper.OrderByDataPoint(dataPoint).Take(numberOfRecords).ToList();
-            var list = _displayHelper.ConstructPlayers(playersToConstruct, PlayerRater).ToList();
+            var list = _displayHelper.ConstructPlayers(playersToConstruct, _rater).ToList();
             return list.OrderByDescending(x => x.Attributes.Tackling).ToList();
         }
 
         public List<PlayerView> GetScoutResults(ScoutingRequest request)
         {
             List<Func<Player, bool>> filters = new List<Func<Player, bool>>();
-            SearchFilterHelper filterHelper = new SearchFilterHelper(_savegame, PlayerRater);
+            SearchFilterHelper filterHelper = new SearchFilterHelper(_savegame, _rater);
 
             filterHelper.CreateClubFilter(request, filters);
             filterHelper.CreatePositionFilter(request, filters);
@@ -81,7 +85,7 @@ namespace CMScouter.UI
 
         private List<PlayerView> ConstructPlayerByFilter(Func<Player, bool> filter)
         {
-            return _displayHelper.ConstructPlayers(ApplyFilterToPlayerList(filter), PlayerRater).ToList();
+            return _displayHelper.ConstructPlayers(ApplyFilterToPlayerList(filter), _rater).ToList();
         }
 
         private IEnumerable<Player> ApplyFilterToPlayerList(Func<Player, bool> filter, List<Player> specificPlayerList = null)
@@ -102,7 +106,7 @@ namespace CMScouter.UI
             }
 
             var playersToConstruct = preFilteredPlayers ?? _savegame.Players;
-            var list = _displayHelper.ConstructPlayers(playersToConstruct, PlayerRater).ToList();
+            var list = _displayHelper.ConstructPlayers(playersToConstruct, _rater).ToList();
             return ScoutingOrdering(list, type).Take(numberOfResults).ToList();
         }
 
