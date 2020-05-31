@@ -101,25 +101,40 @@ namespace CMScouterFunctions.DataClasses
         [DataFileInfo(59)]
         public byte RightFoot { get; set; }
 
+
         [DataFileInfo(27, IsIntrinsic = false)]
         [AttributeGroup(AttributeGroup.Physical)]
         public byte Acceleration { get; set; }
-
-        [DataFileInfo(28, IsIntrinsic = false)]
-        [AttributeGroup(AttributeGroup.Mental)]
-        public byte Aggression { get; set; }
 
         [DataFileInfo(29, IsIntrinsic = false)]
         [AttributeGroup(AttributeGroup.Physical)]
         public byte Agility { get; set; }
 
-        [DataFileInfo(30, IsIntrinsic = true)]
-        [AttributeGroup(AttributeGroup.Technical)]
-        public byte Anticipation { get; set; }
-
         [DataFileInfo(31, IsIntrinsic = false)]
         [AttributeGroup(AttributeGroup.Physical)]
         public byte Balance { get; set; }
+
+        [DataFileInfo(46, IsIntrinsic = false)]
+        [AttributeGroup(AttributeGroup.Physical)]
+        public byte Jumping { get; set; }
+
+        [DataFileInfo(54, IsIntrinsic = false)]
+        [AttributeGroup(AttributeGroup.Physical)]
+        public byte Pace { get; set; }
+
+        [DataFileInfo(60, IsIntrinsic = false)]
+        [AttributeGroup(AttributeGroup.Physical)]
+        public byte Stamina { get; set; }
+
+        [DataFileInfo(61, IsIntrinsic = false)]
+        [AttributeGroup(AttributeGroup.Physical)]
+        public byte Strength { get; set; }
+
+
+
+        [DataFileInfo(28, IsIntrinsic = false)]
+        [AttributeGroup(AttributeGroup.Mental)]
+        public byte Aggression { get; set; }
 
         [DataFileInfo(32, IsIntrinsic = false)]
         [AttributeGroup(AttributeGroup.Mental)]
@@ -129,8 +144,31 @@ namespace CMScouterFunctions.DataClasses
         [AttributeGroup(AttributeGroup.Mental)]
         public byte Consistency { get; set; }
 
-        [DataFileInfo(34, IsIntrinsic = false)]
-        public byte Corners { get; set; }
+        [DataFileInfo(40, IsIntrinsic = false)]
+        [AttributeGroup(AttributeGroup.Mental)]
+        public byte Flair { get; set; }
+
+        [DataFileInfo(44, IsIntrinsic = false)]
+        [AttributeGroup(AttributeGroup.Mental)]
+        public byte ImportantMatches { get; set; }
+
+        [DataFileInfo(47, IsIntrinsic = false)]
+        [AttributeGroup(AttributeGroup.Mental)]
+        public byte Influence { get; set; }
+
+        [DataFileInfo(63, IsIntrinsic = false)]
+        [AttributeGroup(AttributeGroup.Mental)]
+        public byte Teamwork { get; set; }
+
+        [DataFileInfo(68, IsIntrinsic = false)]
+        [AttributeGroup(AttributeGroup.Mental)]
+        public byte WorkRate { get; set; }
+
+
+
+        [DataFileInfo(30, IsIntrinsic = true)]
+        [AttributeGroup(AttributeGroup.Technical)]
+        public byte Anticipation { get; set; }
 
         [DataFileInfo(67, IsIntrinsic = true)]
         [AttributeGroup(AttributeGroup.Technical)]
@@ -144,9 +182,6 @@ namespace CMScouterFunctions.DataClasses
         [AttributeGroup(AttributeGroup.Technical)]
         public byte Decisions { get; set; }
 
-        [DataFileInfo(37, IsIntrinsic = false)]
-        public byte Dirtiness { get; set; }
-
         [DataFileInfo(38, IsIntrinsic = true)]
         [AttributeGroup(AttributeGroup.Technical)]
         public byte Dribbling { get; set; }
@@ -154,12 +189,6 @@ namespace CMScouterFunctions.DataClasses
         [DataFileInfo(39, IsIntrinsic = true)]
         [AttributeGroup(AttributeGroup.Technical)]
         public byte Finishing { get; set; }
-
-        [DataFileInfo(40, IsIntrinsic = false)]
-        public byte Flair { get; set; }
-
-        [DataFileInfo(41, IsIntrinsic = false)]
-        public byte FreeKicks { get; set; }
 
         [DataFileInfo(42, IsIntrinsic = true)]
         [AttributeGroup(AttributeGroup.Technical)]
@@ -169,21 +198,6 @@ namespace CMScouterFunctions.DataClasses
         [AttributeGroup(AttributeGroup.Technical)]
         public byte Heading { get; set; }
 
-        [DataFileInfo(44, IsIntrinsic = false)]
-        [AttributeGroup(AttributeGroup.Mental)]
-        public byte ImportantMatches { get; set; }
-
-        [DataFileInfo(47, IsIntrinsic = false)]
-        [AttributeGroup(AttributeGroup.Mental)]
-        public byte Influence { get; set; }
-
-        [DataFileInfo(45, IsIntrinsic = false)]
-        public byte InjuryProneness { get; set; }
-
-        [DataFileInfo(46, IsIntrinsic = false)]
-        [AttributeGroup(AttributeGroup.Physical)]
-        public byte Jumping { get; set; }
-
         [DataFileInfo(49, IsIntrinsic = true)]
         [AttributeGroup(AttributeGroup.Technical)]
         public byte LongShots { get; set; }
@@ -191,9 +205,6 @@ namespace CMScouterFunctions.DataClasses
         [DataFileInfo(50, IsIntrinsic = true)]
         [AttributeGroup(AttributeGroup.Technical)]
         public byte Marking { get; set; }
-
-        [DataFileInfo(52, IsIntrinsic = false)]
-        public byte NaturalFitness { get; set; }
 
         [DataFileInfo(51, IsIntrinsic = true)]
         [AttributeGroup(AttributeGroup.Technical)]
@@ -203,16 +214,9 @@ namespace CMScouterFunctions.DataClasses
         [AttributeGroup(AttributeGroup.Technical)]
         public byte OneOnOnes { get; set; }
 
-        [DataFileInfo(54, IsIntrinsic = false)]
-        [AttributeGroup(AttributeGroup.Physical)]
-        public byte Pace { get; set; }
-
         [DataFileInfo(55, IsIntrinsic = true)]
         [AttributeGroup(AttributeGroup.Technical)]
         public byte Passing { get; set; }
-
-        [DataFileInfo(56, IsIntrinsic = true)]
-        public byte Penalties { get; set; }
 
         [DataFileInfo(57, IsIntrinsic = true)]
         [AttributeGroup(AttributeGroup.Technical)]
@@ -222,33 +226,37 @@ namespace CMScouterFunctions.DataClasses
         [AttributeGroup(AttributeGroup.Technical)]
         public byte Reflexes { get; set; }
 
-        [DataFileInfo(60, IsIntrinsic = false)]
-        [AttributeGroup(AttributeGroup.Physical)]
-        public byte Stamina { get; set; }
-
-        [DataFileInfo(61, IsIntrinsic = false)]
-        [AttributeGroup(AttributeGroup.Physical)]
-        public byte Strength { get; set; }
-
         [DataFileInfo(62, IsIntrinsic = true)]
         [AttributeGroup(AttributeGroup.Technical)]
         public byte Tackling { get; set; }
 
-        [DataFileInfo(63, IsIntrinsic = false)]
-        [AttributeGroup(AttributeGroup.Mental)]
-        public byte Teamwork { get; set; }
-
         [DataFileInfo(64, IsIntrinsic = false)]
+        [AttributeGroup(AttributeGroup.Technical)]
         public byte Technique { get; set; }
+
+
+        [DataFileInfo(34, IsIntrinsic = false)]
+        public byte Corners { get; set; }
+
+        [DataFileInfo(37, IsIntrinsic = false)]
+        public byte Dirtiness { get; set; }
+
+        [DataFileInfo(41, IsIntrinsic = false)]
+        public byte FreeKicks { get; set; }
+
+        [DataFileInfo(45, IsIntrinsic = false)]
+        public byte InjuryProneness { get; set; }
+
+        [DataFileInfo(52, IsIntrinsic = false)]
+        public byte NaturalFitness { get; set; }
+
+        [DataFileInfo(56, IsIntrinsic = true)]
+        public byte Penalties { get; set; }
 
         [DataFileInfo(65, IsIntrinsic = true)]
         public byte ThrowIns { get; set; }
 
         [DataFileInfo(66, IsIntrinsic = false)]
         public byte Versatility { get; set; }
-
-        [DataFileInfo(68, IsIntrinsic = false)]
-        [AttributeGroup(AttributeGroup.Mental)]
-        public byte WorkRate { get; set; }
     }
 }

@@ -240,6 +240,11 @@ namespace CMScouter.UI
             decimal mentalScore = Weight(mental, mentalWeight);
             decimal physicalScore = Weight(physical, physicalWeight);
             decimal technicalScore = Weight(technical, technicalWeight);
+
+            byte positionInflate = weights.GW(DP.TechnicalInflation);
+            decimal inflatedValue = technicalScore * ((decimal)positionInflate / 100);
+            technicalScore = Math.Min(100, Math.Max(0, (int)Math.Round(inflatedValue)));
+
             decimal adjust = (decimal)(mentalWeight + physicalWeight + technicalWeight) / 100;
 
             debug = new RatingRoleDebug()
@@ -414,109 +419,122 @@ namespace CMScouter.UI
             return weightings[(int)role];
         }
 
-        private void AddGK()
+        private void AddBaselineMentality(byte[] role)
         {
-            byte[] role = new byte[Enum.GetNames(typeof(DP)).Length];
-            role.AW(DP.Acceleration, 0);
-            role.AW(DP.Aggression, 0);
-            role.AW(DP.Agility, 1);
-            role.AW(DP.Anticipation, 1);
-            role.AW(DP.Balance, 0);
-            role.AW(DP.Bravery, 0);
-            role.AW(DP.Consistency, 1);
-            role.AW(DP.Corners, 0);
-            role.AW(DP.Creativity, 0);
-            role.AW(DP.Crossing, 0);
-            role.AW(DP.Decisions, 1);
-            role.AW(DP.Dirtiness, 0);
-            role.AW(DP.Dribbling, 0);
-            role.AW(DP.Finishing, 0);
-            role.AW(DP.FreeKicks, 0);
-            role.AW(DP.Flair, 0);
-            role.AW(DP.Handling, 10);
-            role.AW(DP.Heading, 0);
-            role.AW(DP.ImportantMatches, 1);
-            role.AW(DP.Influence, 0);
-            role.AW(DP.InjuryProneness, 0);
-            role.AW(DP.Jumping, 3);
-            role.AW(DP.LongShots, 0);
-            role.AW(DP.Marking, 0);
-            role.AW(DP.OffTheBall, 0);
-            role.AW(DP.OneOnOnes, 1);
-            role.AW(DP.Pace, 0);
-            role.AW(DP.Passing, 0);
-            role.AW(DP.Penalties, 0);
-            role.AW(DP.Positioning, 2);
-            role.AW(DP.Reflexes, 3);
-            role.AW(DP.Stamina, 0);
-            role.AW(DP.Strength, 1);
-            role.AW(DP.Tackling, 0);
-            role.AW(DP.Teamwork, 0);
-            role.AW(DP.Technique, 0);
-            role.AW(DP.ThrowIns, 0);
-            role.AW(DP.Versatility, 0);
-            role.AW(DP.WorkRate, 0);
-            role.AW(DP.LeftFoot, 0);
-            role.AW(DP.RightFoot, 0);
-            role.AW(DP.MentalityWeight, 20);
-            role.AW(DP.PhysicalityWeight, 10);
-            role.AW(DP.TechnicalWeight, 100);
-            weightings[(int)Roles.GK] = role;
-        }
-
-        private byte[] GetBaselineMentality()
-        {
-            var role = new byte[Enum.GetNames(typeof(DP)).Length];
-
             role.AW(DP.Aggression, 1);
-            role.AW(DP.Anticipation, 3);
+            role.AW(DP.Anticipation, 1);
             role.AW(DP.Bravery, 1);
             role.AW(DP.Consistency, 4);
-            role.AW(DP.Decisions, 5);
+            role.AW(DP.Decisions, 4);
             role.AW(DP.Dirtiness, 0);
             role.AW(DP.ImportantMatches, 1);
             role.AW(DP.Influence, 0);
             role.AW(DP.Teamwork, 1);
             role.AW(DP.WorkRate, 1);
+        }
 
-            return role;
+        private void AddGK()
+        {
+            byte[] role = new byte[Enum.GetNames(typeof(DP)).Length];
+
+            role.AW(DP.Aggression, 0);
+            role.AW(DP.Anticipation, 3);
+            role.AW(DP.Bravery, 1);
+            role.AW(DP.Consistency, 3);
+            role.AW(DP.Dirtiness, 0);
+            role.AW(DP.Flair, 0);
+            role.AW(DP.ImportantMatches, 2);
+            role.AW(DP.Influence, 0);
+            role.AW(DP.Teamwork, 0);
+            role.AW(DP.WorkRate, 0);
+
+            role.AW(DP.Acceleration, 0);
+            role.AW(DP.Agility, 3);
+            role.AW(DP.Balance, 0);
+            role.AW(DP.Jumping, 3);
+            role.AW(DP.Pace, 0);
+            role.AW(DP.Stamina, 0);
+            role.AW(DP.Strength, 1);
+
+            role.AW(DP.Creativity, 0);
+            role.AW(DP.Crossing, 0);
+            role.AW(DP.Decisions, 3);
+            role.AW(DP.Dribbling, 0);
+            role.AW(DP.Finishing, 0);
+            role.AW(DP.Heading, 0);
+            role.AW(DP.InjuryProneness, 0);
+            role.AW(DP.LongShots, 0);
+            role.AW(DP.Marking, 0);
+            role.AW(DP.OffTheBall, 0);
+            role.AW(DP.Passing, 0);
+            role.AW(DP.Positioning, 3);
+            role.AW(DP.Tackling, 1);
+            role.AW(DP.Technique, 0);
+            role.AW(DP.Versatility, 0);
+
+            role.AW(DP.Handling, 6);
+            role.AW(DP.OneOnOnes, 3);
+            role.AW(DP.Reflexes, 3);
+
+            role.AW(DP.Corners, 0);
+            role.AW(DP.FreeKicks, 0);
+            role.AW(DP.Penalties, 0);
+            role.AW(DP.ThrowIns, 0);
+
+            role.AW(DP.LeftFoot, 0);
+            role.AW(DP.RightFoot, 0);
+
+            role.AW(DP.MentalityWeight, 60);
+            role.AW(DP.PhysicalityWeight, 40);
+            role.AW(DP.TechnicalWeight, 100);
+
+            role.AW(DP.TechnicalInflation, 90);
+
+            weightings[(int)Roles.GK] = role;
         }
 
         private void AddDFB()
         {
-            byte[] role = GetBaselineMentality();
-            role.AW(DP.Acceleration, 3);
+            byte[] role = new byte[Enum.GetNames(typeof(DP)).Length];
+            AddBaselineMentality(role);
+
             role.AW(DP.Aggression, 3);
-            role.AW(DP.Agility, 1);
+            role.AW(DP.Anticipation, 3);
+            role.AW(DP.Bravery, 2);
+            role.AW(DP.Teamwork, 2);
+
+            role.AW(DP.Acceleration, 5);
+            role.AW(DP.Agility, 2);
             role.AW(DP.Balance, 1);
-            role.AW(DP.Bravery, 4);
-            role.AW(DP.Corners, 0);
-            role.AW(DP.Creativity, 0);
-            role.AW(DP.Crossing, 2);
-            role.AW(DP.Dirtiness, 0);
-            role.AW(DP.Dribbling, 1);
-            role.AW(DP.Finishing, 0);
-            role.AW(DP.FreeKicks, 0);
-            role.AW(DP.Flair, 0);
-            role.AW(DP.Handling, 0);
-            role.AW(DP.Heading, 3);
-            role.AW(DP.InjuryProneness, 0);
             role.AW(DP.Jumping, 4);
-            role.AW(DP.LongShots, 0);
-            role.AW(DP.Marking, 8);
-            role.AW(DP.OffTheBall, 1);
-            role.AW(DP.OneOnOnes, 0);
             role.AW(DP.Pace, 3);
-            role.AW(DP.Passing, 2);
-            role.AW(DP.Penalties, 0);
-            role.AW(DP.Positioning, 8);
-            role.AW(DP.Reflexes, 0);
             role.AW(DP.Stamina, 1);
             role.AW(DP.Strength, 3);
-            role.AW(DP.Tackling, 8);
+
+            role.AW(DP.Creativity, 0);
+            role.AW(DP.Crossing, 2);
+            role.AW(DP.Decisions, 3);
+            role.AW(DP.Dribbling, 1);
+            role.AW(DP.Finishing, 0);
+            role.AW(DP.Heading, 3);
+            role.AW(DP.InjuryProneness, 0);
+            role.AW(DP.LongShots, 0);
+            role.AW(DP.Marking, 6);
+            role.AW(DP.OffTheBall, 1);
+            role.AW(DP.Passing, 2);
+            role.AW(DP.Positioning, 7);
+            role.AW(DP.Tackling, 7);
             role.AW(DP.Technique, 1);
-            role.AW(DP.ThrowIns, 0);
             role.AW(DP.Versatility, 0);
+
+            role.AW(DP.Handling, 0);
+            role.AW(DP.OneOnOnes, 0);
+            role.AW(DP.Reflexes, 0);
+
+            role.AW(DP.Corners, 0);
+            role.AW(DP.FreeKicks, 0);
+            role.AW(DP.Penalties, 0);
+            role.AW(DP.ThrowIns, 0);
 
             role.AW(DP.LeftFoot, 0);
             role.AW(DP.RightFoot, 0);
@@ -524,99 +542,130 @@ namespace CMScouter.UI
             role.AW(DP.MentalityWeight, 80);
             role.AW(DP.PhysicalityWeight, 90);
             role.AW(DP.TechnicalWeight, 100);
+
+            role.AW(DP.TechnicalInflation, 110);
+
             weightings[(int)Roles.DFB] = role;
         }
 
         private void AddAFB()
         {
-            byte[] role = GetBaselineMentality();
-            role.AW(DP.Acceleration, 5);
-            role.AW(DP.Agility, 0);
-            role.AW(DP.Balance, 0);
+            byte[] role = new byte[Enum.GetNames(typeof(DP)).Length];
+            AddBaselineMentality(role);
+
+            role.AW(DP.Aggression, 3);
+            role.AW(DP.Anticipation, 3);
             role.AW(DP.Bravery, 2);
-            role.AW(DP.Corners, 0);
-            role.AW(DP.Creativity, 1);
-            role.AW(DP.Crossing, 5);
-            role.AW(DP.Dirtiness, 0);
-            role.AW(DP.Dribbling, 2);
-            role.AW(DP.Finishing, 1);
-            role.AW(DP.FreeKicks, 0);
-            role.AW(DP.Flair, 0);
-            role.AW(DP.Handling, 0);
-            role.AW(DP.Heading, 1);
-            role.AW(DP.InjuryProneness, 0);
-            role.AW(DP.Jumping, 2);
-            role.AW(DP.LongShots, 1);
-            role.AW(DP.Marking, 4);
-            role.AW(DP.OffTheBall, 2);
-            role.AW(DP.OneOnOnes, 0);
-            role.AW(DP.Pace, 5);
-            role.AW(DP.Passing, 4);
-            role.AW(DP.Penalties, 0);
-            role.AW(DP.Positioning, 7);
-            role.AW(DP.Reflexes, 0);
-            role.AW(DP.Stamina, 0);
+            role.AW(DP.Teamwork, 2);
+
+            role.AW(DP.Acceleration, 5);
+            role.AW(DP.Agility, 2);
+            role.AW(DP.Balance, 1);
+            role.AW(DP.Jumping, 3);
+            role.AW(DP.Pace, 4);
+            role.AW(DP.Stamina, 1);
             role.AW(DP.Strength, 2);
-            role.AW(DP.Tackling, 4);
-            role.AW(DP.Technique, 3);
-            role.AW(DP.ThrowIns, 0);
+
+            role.AW(DP.Creativity, 0);
+            role.AW(DP.Crossing, 4);
+            role.AW(DP.Decisions, 3);
+            role.AW(DP.Dribbling, 2);
+            role.AW(DP.Finishing, 0);
+            role.AW(DP.Heading, 2);
+            role.AW(DP.InjuryProneness, 0);
+            role.AW(DP.LongShots, 0);
+            role.AW(DP.Marking, 4);
+            role.AW(DP.OffTheBall, 3);
+            role.AW(DP.Passing, 3);
+            role.AW(DP.Positioning, 5);
+            role.AW(DP.Tackling, 6);
+            role.AW(DP.Technique, 2);
             role.AW(DP.Versatility, 0);
-            role.AW(DP.WorkRate, 2);
+
+            role.AW(DP.Handling, 0);
+            role.AW(DP.OneOnOnes, 0);
+            role.AW(DP.Reflexes, 0);
+
+            role.AW(DP.Corners, 0);
+            role.AW(DP.FreeKicks, 0);
+            role.AW(DP.Penalties, 0);
+            role.AW(DP.ThrowIns, 0);
+
             role.AW(DP.LeftFoot, 0);
             role.AW(DP.RightFoot, 0);
+
             role.AW(DP.MentalityWeight, 80);
-            role.AW(DP.PhysicalityWeight, 80);
-            role.AW(DP.TechnicalWeight, 100);
+            role.AW(DP.PhysicalityWeight, 100);
+            role.AW(DP.TechnicalWeight, 90);
+
+            role.AW(DP.TechnicalInflation, 110);
+
             weightings[(int)Roles.AFB] = role;
         }
 
         private void AddCB()
         {
-            byte[] role = GetBaselineMentality();
-            role.AW(DP.Acceleration, 1);
-            role.AW(DP.Aggression, 4);
-            role.AW(DP.Agility, 0);
-            role.AW(DP.Balance, 0);
-            role.AW(DP.Bravery, 2);
+            byte[] role = new byte[Enum.GetNames(typeof(DP)).Length];
+            AddBaselineMentality(role);
+
+            role.AW(DP.Aggression, 5);
+            role.AW(DP.Anticipation, 3);
+            role.AW(DP.Bravery, 5);
+
+
+            role.AW(DP.Acceleration, 2);
+            role.AW(DP.Agility, 1);
+            role.AW(DP.Balance, 1);
+            role.AW(DP.InjuryProneness, 0);
+            role.AW(DP.Jumping, 6);
+            role.AW(DP.Pace, 2);
+            role.AW(DP.Stamina, 1);
+            role.AW(DP.Strength, 4);
+
+
             role.AW(DP.Corners, 0);
+            role.AW(DP.FreeKicks, 0);
+            role.AW(DP.Penalties, 0);
+            role.AW(DP.ThrowIns, 0);
+
+
             role.AW(DP.Creativity, 0);
             role.AW(DP.Crossing, 0);
             role.AW(DP.Dribbling, 0);
             role.AW(DP.Finishing, 0);
-            role.AW(DP.FreeKicks, 0);
-            role.AW(DP.Flair, 0);
-            role.AW(DP.Handling, 0);
-            role.AW(DP.Heading, 2);
-            role.AW(DP.InjuryProneness, 0);
-            role.AW(DP.Jumping, 8);
+            role.AW(DP.Heading, 3);
             role.AW(DP.LongShots, 0);
             role.AW(DP.Marking, 6);
             role.AW(DP.OffTheBall, 0);
+            role.AW(DP.Passing, 2);
+            role.AW(DP.Positioning, 8);
+            role.AW(DP.Tackling, 7);
+            role.AW(DP.Technique, 1);
+
+
+            role.AW(DP.Handling, 0);
             role.AW(DP.OneOnOnes, 0);
-            role.AW(DP.Pace, 2);
-            role.AW(DP.Passing, 0);
-            role.AW(DP.Penalties, 0);
-            role.AW(DP.Positioning, 9);
             role.AW(DP.Reflexes, 0);
-            role.AW(DP.Stamina, 0);
-            role.AW(DP.Strength, 4);
-            role.AW(DP.Tackling, 8);
-            role.AW(DP.Technique, 0);
-            role.AW(DP.ThrowIns, 0);
+
             role.AW(DP.Versatility, 0);
+
 
             role.AW(DP.LeftFoot, 0);
             role.AW(DP.RightFoot, 0);
 
-            role.AW(DP.MentalityWeight, 90);
-            role.AW(DP.PhysicalityWeight, 80);
-            role.AW(DP.TechnicalWeight, 90);
+            role.AW(DP.MentalityWeight, 85);
+            role.AW(DP.PhysicalityWeight, 100);
+            role.AW(DP.TechnicalWeight, 100);
+
+            role.AW(DP.TechnicalInflation, 100);
+
             weightings[(int)Roles.CB] = role;
         }
 
         private void AddWB()
         {
-            byte[] role = GetBaselineMentality();
+            byte[] role = new byte[Enum.GetNames(typeof(DP)).Length];
+            AddBaselineMentality(role);
             role.AW(DP.Acceleration, 5);
             role.AW(DP.Agility, 1);
             role.AW(DP.Balance, 1);
@@ -654,45 +703,118 @@ namespace CMScouter.UI
             role.AW(DP.MentalityWeight, 80);
             role.AW(DP.PhysicalityWeight, 80);
             role.AW(DP.TechnicalWeight, 100);
+
+            role.AW(DP.TechnicalInflation, 100);
+
             weightings[(int)Roles.WB] = role;
         }
 
         private void AddDM()
         {
-            byte[] role = GetBaselineMentality();
-            role.AW(DP.Acceleration, 1);
+            byte[] role = new byte[Enum.GetNames(typeof(DP)).Length];
+            AddBaselineMentality(role);
+
             role.AW(DP.Aggression, 4);
-            role.AW(DP.Agility, 0);
-            role.AW(DP.Balance, 0);
+            role.AW(DP.Anticipation, 2);
             role.AW(DP.Bravery, 3);
-            role.AW(DP.Corners, 0);
-            role.AW(DP.Creativity, 0);
+            role.AW(DP.WorkRate, 4);
+            role.AW(DP.Teamwork, 3);
+
+            role.AW(DP.Acceleration, 2);
+            role.AW(DP.Agility, 1);
+            role.AW(DP.Balance, 1);
+            role.AW(DP.InjuryProneness, 0);
+            role.AW(DP.Jumping, 3);
+            role.AW(DP.Pace, 1);
+            role.AW(DP.Stamina, 2);
+            role.AW(DP.Strength, 4);
+
+
+            role.AW(DP.Creativity, 2);
             role.AW(DP.Crossing, 0);
             role.AW(DP.Dribbling, 0);
             role.AW(DP.Finishing, 0);
-            role.AW(DP.FreeKicks, 0);
-            role.AW(DP.Flair, 0);
+            role.AW(DP.Heading, 2);
+            role.AW(DP.LongShots, 1);
+            role.AW(DP.Marking, 6);
+            role.AW(DP.OffTheBall, 2);
+            role.AW(DP.Passing, 5);
+            role.AW(DP.Positioning, 6);
+            role.AW(DP.Tackling, 5);
+            role.AW(DP.Technique, 2);
+
+
             role.AW(DP.Handling, 0);
-            role.AW(DP.Heading, 1);
+            role.AW(DP.OneOnOnes, 0);
+            role.AW(DP.Reflexes, 0);
+
+            role.AW(DP.Versatility, 0);
+
+            role.AW(DP.Corners, 0);
+            role.AW(DP.Penalties, 0);
+            role.AW(DP.FreeKicks, 0);
+            role.AW(DP.ThrowIns, 0);
+
+
+            role.AW(DP.LeftFoot, 0);
+            role.AW(DP.RightFoot, 0);
+
+            role.AW(DP.MentalityWeight, 80);
+            role.AW(DP.PhysicalityWeight, 90);
+            role.AW(DP.TechnicalWeight, 100);
+
+            role.AW(DP.TechnicalInflation, 90);
+
+            weightings[(int)Roles.HM] = role;
+        }
+
+        private void AddCM()
+        {
+            byte[] role = new byte[Enum.GetNames(typeof(DP)).Length];
+            AddBaselineMentality(role);
+
+            role.AW(DP.Aggression, 2);
+            role.AW(DP.Bravery, 2);
+            role.AW(DP.Teamwork, 2);
+            role.AW(DP.WorkRate, 4);
+
+            role.AW(DP.Acceleration, 4);
+            role.AW(DP.Agility, 3);
+            role.AW(DP.Balance, 3);
             role.AW(DP.InjuryProneness, 0);
             role.AW(DP.Jumping, 2);
-            role.AW(DP.LongShots, 0);
-            role.AW(DP.Marking, 6);
-            role.AW(DP.OffTheBall, 0);
-            role.AW(DP.OneOnOnes, 0);
-            role.AW(DP.Pace, 1);
-            role.AW(DP.Passing, 4);
-            role.AW(DP.Penalties, 0);
-            role.AW(DP.Positioning, 6);
-            role.AW(DP.Reflexes, 0);
-            role.AW(DP.Stamina, 2);
+            role.AW(DP.Pace, 3);
+            role.AW(DP.Stamina, 4);
             role.AW(DP.Strength, 4);
-            role.AW(DP.Tackling, 5);
-            role.AW(DP.Teamwork, 3);
-            role.AW(DP.Technique, 2);
-            role.AW(DP.ThrowIns, 0);
+
+
+            role.AW(DP.Creativity, 4);
+            role.AW(DP.Crossing, 1);
+            role.AW(DP.Dribbling, 1);
+            role.AW(DP.Finishing, 2);
+            role.AW(DP.Heading, 1);
+            role.AW(DP.LongShots, 3);
+            role.AW(DP.Marking, 3);
+            role.AW(DP.OffTheBall, 2);
+            role.AW(DP.Passing, 4);
+            role.AW(DP.Positioning, 3);
+            role.AW(DP.Tackling, 4);
+            role.AW(DP.Technique, 3);
+
+
             role.AW(DP.Versatility, 0);
-            role.AW(DP.WorkRate, 4);
+
+
+            role.AW(DP.Handling, 0);
+            role.AW(DP.OneOnOnes, 0);
+            role.AW(DP.Reflexes, 0);
+
+
+            role.AW(DP.Corners, 0);
+            role.AW(DP.FreeKicks, 0);
+            role.AW(DP.ThrowIns, 0);
+            role.AW(DP.Penalties, 0);
+
 
             role.AW(DP.LeftFoot, 0);
             role.AW(DP.RightFoot, 0);
@@ -700,133 +822,114 @@ namespace CMScouter.UI
             role.AW(DP.MentalityWeight, 80);
             role.AW(DP.PhysicalityWeight, 80);
             role.AW(DP.TechnicalWeight, 100);
-            weightings[(int)Roles.HM] = role;
-        }
 
-        private void AddCM()
-        {
-            byte[] role = GetBaselineMentality();
-            role.AW(DP.Acceleration, 1);
-            role.AW(DP.Aggression, 2);
-            role.AW(DP.Agility, 0);
-            role.AW(DP.Balance, 0);
-            role.AW(DP.Bravery, 2);
-            role.AW(DP.Corners, 0);
-            role.AW(DP.Creativity, 0);
-            role.AW(DP.Crossing, 0);
-            role.AW(DP.Dribbling, 0);
-            role.AW(DP.Finishing, 0);
-            role.AW(DP.FreeKicks, 0);
-            role.AW(DP.Flair, 0);
-            role.AW(DP.Handling, 0);
-            role.AW(DP.Heading, 1);
-            role.AW(DP.InjuryProneness, 0);
-            role.AW(DP.Jumping, 2);
-            role.AW(DP.LongShots, 3);
-            role.AW(DP.Marking, 3);
-            role.AW(DP.OffTheBall, 1);
-            role.AW(DP.OneOnOnes, 0);
-            role.AW(DP.Pace, 1);
-            role.AW(DP.Passing, 6);
-            role.AW(DP.Penalties, 0);
-            role.AW(DP.Positioning, 4);
-            role.AW(DP.Reflexes, 0);
-            role.AW(DP.Stamina, 2);
-            role.AW(DP.Strength, 2);
-            role.AW(DP.Tackling, 5);
-            role.AW(DP.Teamwork, 2);
-            role.AW(DP.Technique, 3);
-            role.AW(DP.ThrowIns, 0);
-            role.AW(DP.Versatility, 0);
-            role.AW(DP.WorkRate, 4);
+            role.AW(DP.TechnicalInflation, 116);
 
-            role.AW(DP.LeftFoot, 0);
-            role.AW(DP.RightFoot, 0);
-
-            role.AW(DP.MentalityWeight, 50);
-            role.AW(DP.PhysicalityWeight, 60);
-            role.AW(DP.TechnicalWeight, 100);
             weightings[(int)Roles.CM] = role;
         }
 
         private void AddWM()
         {
             byte[] role = new byte[Enum.GetNames(typeof(DP)).Length];
-            role.AW(DP.Acceleration, 3);
-            role.AW(DP.Agility, 1);
-            role.AW(DP.Balance, 2);
-            role.AW(DP.Corners, 0);
-            role.AW(DP.Creativity, 2);
-            role.AW(DP.Crossing, 4);
-            role.AW(DP.Dribbling, 3);
-            role.AW(DP.Finishing, 1);
-            role.AW(DP.FreeKicks, 0);
-            role.AW(DP.Flair, 0);
-            role.AW(DP.Handling, 0);
-            role.AW(DP.Heading, 0);
-            role.AW(DP.InjuryProneness, 0);
-            role.AW(DP.Jumping, 0);
-            role.AW(DP.LongShots, 0);
-            role.AW(DP.Marking, 1);
-            role.AW(DP.OffTheBall, 4);
-            role.AW(DP.OneOnOnes, 0);
-            role.AW(DP.Pace, 4);
-            role.AW(DP.Passing, 5);
-            role.AW(DP.Penalties, 0);
-            role.AW(DP.Positioning, 1);
-            role.AW(DP.Reflexes, 0);
-            role.AW(DP.Stamina, 3);
-            role.AW(DP.Strength, 0);
-            role.AW(DP.Tackling, 1);
+            AddBaselineMentality(role);
+
+            role.AW(DP.Flair, 2);
             role.AW(DP.Teamwork, 2);
-            role.AW(DP.Technique, 3);
-            role.AW(DP.ThrowIns, 0);
-            role.AW(DP.Versatility, 0);
             role.AW(DP.WorkRate, 2);
+
+            role.AW(DP.Acceleration, 4);
+            role.AW(DP.Agility, 3);
+            role.AW(DP.Balance, 3);
+            role.AW(DP.InjuryProneness, 0);
+            role.AW(DP.Jumping, 1);
+            role.AW(DP.Pace, 3);
+            role.AW(DP.Stamina, 2);
+            role.AW(DP.Strength, 1);
+
+
+            role.AW(DP.Creativity, 3);
+            role.AW(DP.Crossing, 5);
+            role.AW(DP.Dribbling, 5);
+            role.AW(DP.Finishing, 2);
+            role.AW(DP.Heading, 1);
+            role.AW(DP.LongShots, 3);
+            role.AW(DP.Marking, 2);
+            role.AW(DP.OffTheBall, 5);
+            role.AW(DP.Passing, 4);
+            role.AW(DP.Positioning, 2);
+            role.AW(DP.Tackling, 1);
+            role.AW(DP.Technique, 4);
+
+
+            role.AW(DP.Versatility, 0);
+
+
+            role.AW(DP.Handling, 0);
+            role.AW(DP.OneOnOnes, 0);
+            role.AW(DP.Reflexes, 0);
+
+
+            role.AW(DP.Corners, 0);
+            role.AW(DP.FreeKicks, 0);
+            role.AW(DP.ThrowIns, 0);
+            role.AW(DP.Penalties, 0);
+
 
             role.AW(DP.LeftFoot, 0);
             role.AW(DP.RightFoot, 0);
 
-            role.AW(DP.MentalityWeight, 70);
-            role.AW(DP.PhysicalityWeight, 100);
+            role.AW(DP.MentalityWeight, 85);
+            role.AW(DP.PhysicalityWeight, 90);
             role.AW(DP.TechnicalWeight, 100);
+
+            role.AW(DP.TechnicalInflation, 100);
+
             weightings[(int)Roles.WM] = role;
         }
 
         private void AddAM()
         {
-            byte[] role = GetBaselineMentality();
-            role.AW(DP.Acceleration, 2);
-            role.AW(DP.Agility, 2);
-            role.AW(DP.Anticipation, 4);
-            role.AW(DP.Balance, 2);
-            role.AW(DP.Consistency, 2);
-            role.AW(DP.Corners, 0);
-            role.AW(DP.Creativity, 7);
-            role.AW(DP.Crossing, 0);
+            byte[] role = new byte[Enum.GetNames(typeof(DP)).Length];
+            AddBaselineMentality(role);
+
+            role.AW(DP.Flair, 4);
+
+            role.AW(DP.Acceleration, 3);
+            role.AW(DP.Agility, 4);
+            role.AW(DP.Balance, 3);
+            role.AW(DP.InjuryProneness, 0);
+            role.AW(DP.Jumping, 1);
+            role.AW(DP.Pace, 3);
+            role.AW(DP.Stamina, 2);
+            role.AW(DP.Strength, 1);
+
+
+            role.AW(DP.Creativity, 5);
+            role.AW(DP.Crossing, 3);
             role.AW(DP.Dribbling, 4);
             role.AW(DP.Finishing, 5);
-            role.AW(DP.FreeKicks, 0);
-            role.AW(DP.Flair, 2);
-            role.AW(DP.Handling, 0);
-            role.AW(DP.Heading, 0);
-            role.AW(DP.InjuryProneness, 0);
-            role.AW(DP.Jumping, 0);
-            role.AW(DP.LongShots, 1);
-            role.AW(DP.Marking, 0);
-            role.AW(DP.OffTheBall, 4);
-            role.AW(DP.OneOnOnes, 0);
-            role.AW(DP.Pace, 2);
-            role.AW(DP.Passing, 3);
-            role.AW(DP.Penalties, 0);
-            role.AW(DP.Positioning, 0);
-            role.AW(DP.Reflexes, 0);
-            role.AW(DP.Stamina, 0);
-            role.AW(DP.Strength, 0);
-            role.AW(DP.Tackling, 0);
-            role.AW(DP.Technique, 4);
-            role.AW(DP.ThrowIns, 0);
+            role.AW(DP.Heading, 1);
+            role.AW(DP.LongShots, 4);
+            role.AW(DP.Marking, 1);
+            role.AW(DP.OffTheBall, 5);
+            role.AW(DP.Passing, 5);
+            role.AW(DP.Positioning, 2);
+            role.AW(DP.Tackling, 2);
+            role.AW(DP.Technique, 5);
+
+
             role.AW(DP.Versatility, 0);
+
+
+            role.AW(DP.Handling, 0);
+            role.AW(DP.OneOnOnes, 0);
+            role.AW(DP.Reflexes, 0);
+
+
+            role.AW(DP.Corners, 0);
+            role.AW(DP.FreeKicks, 0);
+            role.AW(DP.ThrowIns, 0);
+            role.AW(DP.Penalties, 0);
 
             role.AW(DP.LeftFoot, 0);
             role.AW(DP.RightFoot, 0);
@@ -834,84 +937,55 @@ namespace CMScouter.UI
             role.AW(DP.MentalityWeight, 90);
             role.AW(DP.PhysicalityWeight, 50);
             role.AW(DP.TechnicalWeight, 100);
+
+            role.AW(DP.TechnicalInflation, 115);
+
             weightings[(int)Roles.AM] = role;
         }
 
         private void AddWG()
         {
-            byte[] role = GetBaselineMentality();
+            byte[] role = new byte[Enum.GetNames(typeof(DP)).Length];
+            AddBaselineMentality(role);
+
+            role.AW(DP.Flair, 3);
+
             role.AW(DP.Acceleration, 4);
-            role.AW(DP.Agility, 1);
-            role.AW(DP.Balance, 1);
-            role.AW(DP.Corners, 0);
-            role.AW(DP.Creativity, 2);
-            role.AW(DP.Crossing, 12);
-            role.AW(DP.Dribbling, 9);
-            role.AW(DP.Finishing, 2);
-            role.AW(DP.FreeKicks, 0);
-            role.AW(DP.Flair, 1);
-            role.AW(DP.Handling, 0);
-            role.AW(DP.Heading, 0);
-            role.AW(DP.InjuryProneness, 0);
-            role.AW(DP.Jumping, 0);
-            role.AW(DP.LongShots, 2);
-            role.AW(DP.Marking, 0);
-            role.AW(DP.OffTheBall, 8);
-            role.AW(DP.OneOnOnes, 0);
-            role.AW(DP.Pace, 5);
-            role.AW(DP.Passing, 6);
-            role.AW(DP.Penalties, 0);
-            role.AW(DP.Positioning, 0);
-            role.AW(DP.Reflexes, 0);
-            role.AW(DP.Stamina, 2);
-            role.AW(DP.Strength, 0);
-            role.AW(DP.Tackling, 0);
-            role.AW(DP.Technique, 5);
-            role.AW(DP.ThrowIns, 0);
-            role.AW(DP.Versatility, 0);
-
-            role.AW(DP.LeftFoot, 0);
-            role.AW(DP.RightFoot, 0);
-
-            role.AW(DP.MentalityWeight, 70);
-            role.AW(DP.PhysicalityWeight, 70);
-            role.AW(DP.TechnicalWeight, 100);
-            weightings[(int)Roles.WG] = role;
-        }
-
-        private void AddST()
-        {
-            byte[] role = GetBaselineMentality();
-            role.AW(DP.Acceleration, 6);
-            role.AW(DP.Agility, 0);
-            role.AW(DP.Anticipation, 6);
-            role.AW(DP.Balance, 0);
-            role.AW(DP.Corners, 0);
-            role.AW(DP.Creativity, 0);
-            role.AW(DP.Crossing, 0);
-            role.AW(DP.Dribbling, 2);
-            role.AW(DP.Finishing, 8);
-            role.AW(DP.FreeKicks, 0);
-            role.AW(DP.Flair, 0);
-            role.AW(DP.Handling, 3);
-            role.AW(DP.Heading, 0);
+            role.AW(DP.Agility, 3);
+            role.AW(DP.Balance, 3);
             role.AW(DP.InjuryProneness, 0);
             role.AW(DP.Jumping, 1);
-            role.AW(DP.LongShots, 1);
-            role.AW(DP.Marking, 0);
-            role.AW(DP.OffTheBall, 8);
-            role.AW(DP.OneOnOnes, 0);
-            role.AW(DP.Pace, 4);
-            role.AW(DP.Passing, 2);
-            role.AW(DP.Penalties, 0);
-            role.AW(DP.Positioning, 0);
-            role.AW(DP.Reflexes, 0);
-            role.AW(DP.Stamina, 0);
-            role.AW(DP.Strength, 2);
-            role.AW(DP.Tackling, 0);
-            role.AW(DP.Technique, 0);
-            role.AW(DP.ThrowIns, 0);
+            role.AW(DP.Pace, 3);
+            role.AW(DP.Stamina, 2);
+            role.AW(DP.Strength, 1);
+
+
+            role.AW(DP.Creativity, 4);
+            role.AW(DP.Crossing, 5);
+            role.AW(DP.Dribbling, 5);
+            role.AW(DP.Finishing, 3);
+            role.AW(DP.Heading, 1);
+            role.AW(DP.LongShots, 3);
+            role.AW(DP.Marking, 1);
+            role.AW(DP.OffTheBall, 5);
+            role.AW(DP.Passing, 4);
+            role.AW(DP.Positioning, 2);
+            role.AW(DP.Tackling, 1);
+            role.AW(DP.Technique, 4);
+
+
             role.AW(DP.Versatility, 0);
+
+
+            role.AW(DP.Handling, 0);
+            role.AW(DP.OneOnOnes, 0);
+            role.AW(DP.Reflexes, 0);
+
+
+            role.AW(DP.Corners, 0);
+            role.AW(DP.FreeKicks, 0);
+            role.AW(DP.ThrowIns, 0);
+            role.AW(DP.Penalties, 0);
 
             role.AW(DP.LeftFoot, 0);
             role.AW(DP.RightFoot, 0);
@@ -919,57 +993,125 @@ namespace CMScouter.UI
             role.AW(DP.MentalityWeight, 70);
             role.AW(DP.PhysicalityWeight, 80);
             role.AW(DP.TechnicalWeight, 100);
+
+            role.AW(DP.TechnicalInflation, 100);
+
+            weightings[(int)Roles.WG] = role;
+        }
+
+        private void AddST()
+        {
+            byte[] role = new byte[Enum.GetNames(typeof(DP)).Length];
+            AddBaselineMentality(role);
+
+            role.AW(DP.Flair, 2);
+
+            role.AW(DP.Acceleration, 5);
+            role.AW(DP.Agility, 3);
+            role.AW(DP.Balance, 3);
+            role.AW(DP.InjuryProneness, 0);
+            role.AW(DP.Jumping, 2);
+            role.AW(DP.Pace, 4);
+            role.AW(DP.Stamina, 2);
+            role.AW(DP.Strength, 3);
+
+
+            role.AW(DP.Creativity, 1);
+            role.AW(DP.Crossing, 2);
+            role.AW(DP.Dribbling, 5);
+            role.AW(DP.Finishing, 5);
+            role.AW(DP.Heading, 2);
+            role.AW(DP.LongShots, 1);
+            role.AW(DP.Marking, 0);
+            role.AW(DP.OffTheBall, 4);
+            role.AW(DP.Passing, 2);
+            role.AW(DP.Positioning, 0);
+            role.AW(DP.Tackling, 0);
+            role.AW(DP.Technique, 6);
+
+
+            role.AW(DP.Versatility, 0);
+
+
+            role.AW(DP.Handling, 0);
+            role.AW(DP.OneOnOnes, 0);
+            role.AW(DP.Reflexes, 0);
+
+
+            role.AW(DP.Corners, 0);
+            role.AW(DP.FreeKicks, 0);
+            role.AW(DP.ThrowIns, 0);
+            role.AW(DP.Penalties, 0);
+
+            role.AW(DP.LeftFoot, 0);
+            role.AW(DP.RightFoot, 0);
+
+            role.AW(DP.MentalityWeight, 60);
+            role.AW(DP.PhysicalityWeight, 100);
+            role.AW(DP.TechnicalWeight, 90);
+
+            role.AW(DP.TechnicalInflation, 120);
+
             weightings[(int)Roles.ST] = role;
         }
 
         private void AddTM()
         {
-            byte[] role = GetBaselineMentality();
-            role.AW(DP.Acceleration, 2);
-            role.AW(DP.Aggression, 3);
-            role.AW(DP.Agility, 0);
-            role.AW(DP.Anticipation, 5);
-            role.AW(DP.Balance, 0);
-            role.AW(DP.Bravery, 2);
-            role.AW(DP.Corners, 0);
-            role.AW(DP.Creativity, 0);
-            role.AW(DP.Crossing, 0);
-            role.AW(DP.Dribbling, 2);
-            role.AW(DP.Finishing, 8);
-            role.AW(DP.FreeKicks, 0);
-            role.AW(DP.Flair, 0);
-            role.AW(DP.Handling, 3);
-            role.AW(DP.Heading, 0);
+            byte[] role = new byte[Enum.GetNames(typeof(DP)).Length];
+            AddBaselineMentality(role);
+
+            role.AW(DP.Acceleration, 3);
+            role.AW(DP.Agility, 2);
+            role.AW(DP.Balance, 3);
             role.AW(DP.InjuryProneness, 0);
             role.AW(DP.Jumping, 5);
+            role.AW(DP.Pace, 2);
+            role.AW(DP.Stamina, 2);
+            role.AW(DP.Strength, 5);
+
+
+            role.AW(DP.Creativity, 1);
+            role.AW(DP.Crossing, 1);
+            role.AW(DP.Dribbling, 2);
+            role.AW(DP.Finishing, 3);
+            role.AW(DP.Heading, 4);
             role.AW(DP.LongShots, 1);
             role.AW(DP.Marking, 0);
-            role.AW(DP.OffTheBall, 8);
-            role.AW(DP.OneOnOnes, 0);
-            role.AW(DP.Pace, 1);
-            role.AW(DP.Passing, 2);
-            role.AW(DP.Penalties, 0);
-            role.AW(DP.Positioning, 0);
-            role.AW(DP.Reflexes, 0);
-            role.AW(DP.Stamina, 0);
-            role.AW(DP.Strength, 5);
+            role.AW(DP.OffTheBall, 4);
+            role.AW(DP.Passing, 3);
+            role.AW(DP.Positioning, 1);
             role.AW(DP.Tackling, 0);
-            role.AW(DP.Technique, 0);
-            role.AW(DP.ThrowIns, 0);
+            role.AW(DP.Technique, 3);
+
+
             role.AW(DP.Versatility, 0);
+
+
+            role.AW(DP.Handling, 0);
+            role.AW(DP.OneOnOnes, 0);
+            role.AW(DP.Reflexes, 0);
+
+
+            role.AW(DP.Corners, 0);
+            role.AW(DP.FreeKicks, 0);
+            role.AW(DP.ThrowIns, 0);
+            role.AW(DP.Penalties, 0);
 
             role.AW(DP.LeftFoot, 0);
             role.AW(DP.RightFoot, 0);
 
             role.AW(DP.MentalityWeight, 70);
             role.AW(DP.PhysicalityWeight, 100);
-            role.AW(DP.TechnicalWeight, 60);
+            role.AW(DP.TechnicalWeight, 80);
+
+            role.AW(DP.TechnicalInflation, 100);
+
             weightings[(int)Roles.TM] = role;
         }
 
         private void AddOffField()
         {
-            byte[] person = new byte[52];
+            byte[] person = new byte[Enum.GetNames(typeof(DP)).Length];
             person.AW(DP.Adaptability, 0);
             person.AW(DP.Ambition, 0);
             person.AW(DP.Determination, 3);

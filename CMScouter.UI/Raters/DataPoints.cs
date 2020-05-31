@@ -50,6 +50,7 @@ namespace CMScouter.UI
         MentalityWeight,
         PhysicalityWeight,
         TechnicalWeight,
+        TechnicalInflation,
 
         Adaptability,
         Ambition,
