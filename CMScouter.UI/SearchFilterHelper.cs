@@ -113,7 +113,7 @@ namespace CMScouter.UI
 
         public void CreateValueFilter(ScoutingRequest request, List<Func<Player, bool>> filters)
         {
-            filters.Add(x => (request.MinValue == null || x._staff.IsOverValue(request.MinValue.Value, _savegame.ValueMultiplier)) && (request.MaxValue == null || x._staff.IsUnderValue(request.MaxValue.Value, _savegame.ValueMultiplier)));
+            filters.Add(x => (request.MinValue == null || x._staff.IsOverValue(request.MinValue.Value)) && (request.MaxValue == null || x._staff.IsUnderValue(request.MaxValue.Value)));
         }
 
         public void CreateContractStatusFilter(ScoutingRequest request, List<Func<Player, bool>> filters)

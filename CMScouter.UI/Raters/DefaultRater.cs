@@ -238,12 +238,8 @@ namespace CMScouter.UI
             var technical = GetGroupingScore(TechnicalAttributes, values, weights, true, out technicalDebugString);
 
             decimal mentalScore = Weight(mental, mentalWeight);
-            decimal physicalScore = Weight(physical, physicalWeight);
-            decimal technicalScore = Weight(technical, technicalWeight);
-
-            byte positionInflate = weights.GW(DP.TechnicalInflation);
-            decimal inflatedValue = technicalScore * ((decimal)positionInflate / 100);
-            technicalScore = Math.Min(100, Math.Max(0, (int)Math.Round(inflatedValue)));
+            decimal physicalScore = Weight(physical, physicalWeight, weights.GW(DP.PhysicalInflation));
+            decimal technicalScore = Weight(technical, technicalWeight, weights.GW(DP.TechnicalInflation));
 
             decimal adjust = (decimal)(mentalWeight + physicalWeight + technicalWeight) / 100;
 
@@ -314,7 +310,7 @@ namespace CMScouter.UI
             int maxScore = 20 * combinedWeights;
 
             var result = (byte)((rating / maxScore) * 100);
-            return result;
+            return Math.Min((byte)99, result);
         }
 
         private byte PositionalFamiliarity(PlayerType type, Player player)
@@ -398,10 +394,19 @@ namespace CMScouter.UI
             return (byte)100;
         }
 
-        private decimal Weight(byte score, short importance)
+        private decimal Weight(byte score, short importance, short inflationPercentage = 100)
         {
-            score = Math.Min(score, (byte)100);
-            return (decimal)score / 100 * importance;
+            if (inflationPercentage == 0)
+            {
+                inflationPercentage = 100;
+            }
+
+            score = Math.Min(score, (byte)99);
+
+            decimal inflatedValue = score * ((decimal)inflationPercentage / 100);
+            var inflatedScore = Math.Min(99, Math.Max(1, (int)Math.Round(inflatedValue)));
+
+            return (decimal)inflatedScore / 100 * importance;
         }
 
         private decimal Adj(byte val, bool isIntrinsic)
@@ -466,15 +471,15 @@ namespace CMScouter.UI
             role.AW(DP.LongShots, 0);
             role.AW(DP.Marking, 0);
             role.AW(DP.OffTheBall, 0);
-            role.AW(DP.Passing, 0);
+            role.AW(DP.Passing, 1);
             role.AW(DP.Positioning, 3);
             role.AW(DP.Tackling, 1);
             role.AW(DP.Technique, 0);
             role.AW(DP.Versatility, 0);
 
             role.AW(DP.Handling, 6);
-            role.AW(DP.OneOnOnes, 3);
-            role.AW(DP.Reflexes, 3);
+            role.AW(DP.OneOnOnes, 4);
+            role.AW(DP.Reflexes, 4);
 
             role.AW(DP.Corners, 0);
             role.AW(DP.FreeKicks, 0);
@@ -485,7 +490,7 @@ namespace CMScouter.UI
             role.AW(DP.RightFoot, 0);
 
             role.AW(DP.MentalityWeight, 60);
-            role.AW(DP.PhysicalityWeight, 40);
+            role.AW(DP.PhysicalityWeight, 60);
             role.AW(DP.TechnicalWeight, 100);
 
             role.AW(DP.TechnicalInflation, 90);
@@ -506,7 +511,7 @@ namespace CMScouter.UI
             role.AW(DP.Acceleration, 5);
             role.AW(DP.Agility, 2);
             role.AW(DP.Balance, 1);
-            role.AW(DP.Jumping, 4);
+            role.AW(DP.Jumping, 3);
             role.AW(DP.Pace, 3);
             role.AW(DP.Stamina, 1);
             role.AW(DP.Strength, 3);
@@ -540,9 +545,11 @@ namespace CMScouter.UI
             role.AW(DP.RightFoot, 0);
 
             role.AW(DP.MentalityWeight, 80);
+            
             role.AW(DP.PhysicalityWeight, 90);
-            role.AW(DP.TechnicalWeight, 100);
+            role.AW(DP.PhysicalInflation, 115);
 
+            role.AW(DP.TechnicalWeight, 100);
             role.AW(DP.TechnicalInflation, 110);
 
             weightings[(int)Roles.DFB] = role;
@@ -561,7 +568,7 @@ namespace CMScouter.UI
             role.AW(DP.Acceleration, 5);
             role.AW(DP.Agility, 2);
             role.AW(DP.Balance, 1);
-            role.AW(DP.Jumping, 3);
+            role.AW(DP.Jumping, 2);
             role.AW(DP.Pace, 4);
             role.AW(DP.Stamina, 1);
             role.AW(DP.Strength, 2);
@@ -595,9 +602,11 @@ namespace CMScouter.UI
             role.AW(DP.RightFoot, 0);
 
             role.AW(DP.MentalityWeight, 80);
-            role.AW(DP.PhysicalityWeight, 100);
-            role.AW(DP.TechnicalWeight, 90);
+            
+            role.AW(DP.PhysicalityWeight, 90);
+            role.AW(DP.PhysicalInflation, 115);
 
+            role.AW(DP.TechnicalWeight, 100);
             role.AW(DP.TechnicalInflation, 110);
 
             weightings[(int)Roles.AFB] = role;
@@ -720,12 +729,12 @@ namespace CMScouter.UI
             role.AW(DP.WorkRate, 4);
             role.AW(DP.Teamwork, 3);
 
-            role.AW(DP.Acceleration, 2);
-            role.AW(DP.Agility, 1);
-            role.AW(DP.Balance, 1);
+            role.AW(DP.Acceleration, 4);
+            role.AW(DP.Agility, 3);
+            role.AW(DP.Balance, 3);
             role.AW(DP.InjuryProneness, 0);
-            role.AW(DP.Jumping, 3);
-            role.AW(DP.Pace, 1);
+            role.AW(DP.Jumping, 5);
+            role.AW(DP.Pace, 2);
             role.AW(DP.Stamina, 2);
             role.AW(DP.Strength, 4);
 
@@ -734,7 +743,7 @@ namespace CMScouter.UI
             role.AW(DP.Crossing, 0);
             role.AW(DP.Dribbling, 0);
             role.AW(DP.Finishing, 0);
-            role.AW(DP.Heading, 2);
+            role.AW(DP.Heading, 3);
             role.AW(DP.LongShots, 1);
             role.AW(DP.Marking, 6);
             role.AW(DP.OffTheBall, 2);
@@ -759,11 +768,13 @@ namespace CMScouter.UI
             role.AW(DP.LeftFoot, 0);
             role.AW(DP.RightFoot, 0);
 
-            role.AW(DP.MentalityWeight, 80);
-            role.AW(DP.PhysicalityWeight, 90);
-            role.AW(DP.TechnicalWeight, 100);
+            role.AW(DP.MentalityWeight, 70);
 
-            role.AW(DP.TechnicalInflation, 90);
+            role.AW(DP.PhysicalityWeight, 70);
+            role.AW(DP.PhysicalInflation, 110);
+
+            role.AW(DP.TechnicalWeight, 100);
+            role.AW(DP.TechnicalInflation, 110);
 
             weightings[(int)Roles.HM] = role;
         }
@@ -778,28 +789,28 @@ namespace CMScouter.UI
             role.AW(DP.Teamwork, 2);
             role.AW(DP.WorkRate, 4);
 
-            role.AW(DP.Acceleration, 4);
+            role.AW(DP.Acceleration, 3);
             role.AW(DP.Agility, 3);
             role.AW(DP.Balance, 3);
             role.AW(DP.InjuryProneness, 0);
             role.AW(DP.Jumping, 2);
             role.AW(DP.Pace, 3);
-            role.AW(DP.Stamina, 4);
-            role.AW(DP.Strength, 4);
+            role.AW(DP.Stamina, 5);
+            role.AW(DP.Strength, 6);
 
 
-            role.AW(DP.Creativity, 4);
+            role.AW(DP.Creativity, 8);
             role.AW(DP.Crossing, 1);
             role.AW(DP.Dribbling, 1);
             role.AW(DP.Finishing, 2);
             role.AW(DP.Heading, 1);
-            role.AW(DP.LongShots, 3);
-            role.AW(DP.Marking, 3);
-            role.AW(DP.OffTheBall, 2);
-            role.AW(DP.Passing, 4);
-            role.AW(DP.Positioning, 3);
+            role.AW(DP.LongShots, 5);
+            role.AW(DP.Marking, 4);
+            role.AW(DP.OffTheBall, 4);
+            role.AW(DP.Passing, 8);
+            role.AW(DP.Positioning, 5);
             role.AW(DP.Tackling, 4);
-            role.AW(DP.Technique, 3);
+            role.AW(DP.Technique, 5);
 
 
             role.AW(DP.Versatility, 0);
@@ -819,11 +830,13 @@ namespace CMScouter.UI
             role.AW(DP.LeftFoot, 0);
             role.AW(DP.RightFoot, 0);
 
-            role.AW(DP.MentalityWeight, 80);
-            role.AW(DP.PhysicalityWeight, 80);
-            role.AW(DP.TechnicalWeight, 100);
+            role.AW(DP.MentalityWeight, 70);
 
-            role.AW(DP.TechnicalInflation, 116);
+            role.AW(DP.PhysicalityWeight, 70);
+            role.AW(DP.PhysicalInflation, 115);
+
+            role.AW(DP.TechnicalWeight, 100);
+            role.AW(DP.TechnicalInflation, 110);
 
             weightings[(int)Roles.CM] = role;
         }
@@ -878,8 +891,10 @@ namespace CMScouter.UI
             role.AW(DP.LeftFoot, 0);
             role.AW(DP.RightFoot, 0);
 
-            role.AW(DP.MentalityWeight, 85);
+            role.AW(DP.MentalityWeight, 80);
             role.AW(DP.PhysicalityWeight, 90);
+            role.AW(DP.PhysicalInflation, 110);
+
             role.AW(DP.TechnicalWeight, 100);
 
             role.AW(DP.TechnicalInflation, 100);
@@ -898,23 +913,23 @@ namespace CMScouter.UI
             role.AW(DP.Agility, 4);
             role.AW(DP.Balance, 3);
             role.AW(DP.InjuryProneness, 0);
-            role.AW(DP.Jumping, 1);
+            role.AW(DP.Jumping, 0);
             role.AW(DP.Pace, 3);
-            role.AW(DP.Stamina, 2);
-            role.AW(DP.Strength, 1);
+            role.AW(DP.Stamina, 1);
+            role.AW(DP.Strength, 0);
 
 
             role.AW(DP.Creativity, 5);
             role.AW(DP.Crossing, 3);
             role.AW(DP.Dribbling, 4);
-            role.AW(DP.Finishing, 5);
-            role.AW(DP.Heading, 1);
+            role.AW(DP.Finishing, 4);
+            role.AW(DP.Heading, 0);
             role.AW(DP.LongShots, 4);
-            role.AW(DP.Marking, 1);
+            role.AW(DP.Marking, 0);
             role.AW(DP.OffTheBall, 5);
             role.AW(DP.Passing, 5);
-            role.AW(DP.Positioning, 2);
-            role.AW(DP.Tackling, 2);
+            role.AW(DP.Positioning, 1);
+            role.AW(DP.Tackling, 1);
             role.AW(DP.Technique, 5);
 
 
@@ -991,10 +1006,11 @@ namespace CMScouter.UI
             role.AW(DP.RightFoot, 0);
 
             role.AW(DP.MentalityWeight, 70);
-            role.AW(DP.PhysicalityWeight, 80);
-            role.AW(DP.TechnicalWeight, 100);
+            role.AW(DP.PhysicalityWeight, 90);
+            role.AW(DP.PhysicalInflation, 110);
 
-            role.AW(DP.TechnicalInflation, 100);
+            role.AW(DP.TechnicalWeight, 100);
+            role.AW(DP.TechnicalInflation, 110);
 
             weightings[(int)Roles.WG] = role;
         }
@@ -1017,17 +1033,17 @@ namespace CMScouter.UI
 
 
             role.AW(DP.Creativity, 1);
-            role.AW(DP.Crossing, 2);
-            role.AW(DP.Dribbling, 5);
-            role.AW(DP.Finishing, 5);
-            role.AW(DP.Heading, 2);
+            role.AW(DP.Crossing, 3);
+            role.AW(DP.Dribbling, 6);
+            role.AW(DP.Finishing, 10);
+            role.AW(DP.Heading, 4);
             role.AW(DP.LongShots, 1);
             role.AW(DP.Marking, 0);
-            role.AW(DP.OffTheBall, 4);
-            role.AW(DP.Passing, 2);
+            role.AW(DP.OffTheBall, 8);
+            role.AW(DP.Passing, 4);
             role.AW(DP.Positioning, 0);
             role.AW(DP.Tackling, 0);
-            role.AW(DP.Technique, 6);
+            role.AW(DP.Technique, 8);
 
 
             role.AW(DP.Versatility, 0);
@@ -1046,11 +1062,12 @@ namespace CMScouter.UI
             role.AW(DP.LeftFoot, 0);
             role.AW(DP.RightFoot, 0);
 
-            role.AW(DP.MentalityWeight, 60);
+            role.AW(DP.MentalityWeight, 40);
             role.AW(DP.PhysicalityWeight, 100);
-            role.AW(DP.TechnicalWeight, 90);
+            role.AW(DP.TechnicalWeight, 80);
 
-            role.AW(DP.TechnicalInflation, 120);
+            role.AW(DP.PhysicalInflation, 110);
+            role.AW(DP.TechnicalInflation, 110);
 
             weightings[(int)Roles.ST] = role;
         }
@@ -1060,21 +1077,21 @@ namespace CMScouter.UI
             byte[] role = new byte[Enum.GetNames(typeof(DP)).Length];
             AddBaselineMentality(role);
 
-            role.AW(DP.Acceleration, 3);
+            role.AW(DP.Acceleration, 4);
             role.AW(DP.Agility, 2);
             role.AW(DP.Balance, 3);
             role.AW(DP.InjuryProneness, 0);
-            role.AW(DP.Jumping, 5);
-            role.AW(DP.Pace, 2);
+            role.AW(DP.Jumping, 6);
+            role.AW(DP.Pace, 3);
             role.AW(DP.Stamina, 2);
-            role.AW(DP.Strength, 5);
+            role.AW(DP.Strength, 6);
 
 
             role.AW(DP.Creativity, 1);
             role.AW(DP.Crossing, 1);
             role.AW(DP.Dribbling, 2);
-            role.AW(DP.Finishing, 3);
-            role.AW(DP.Heading, 4);
+            role.AW(DP.Finishing, 4);
+            role.AW(DP.Heading, 6);
             role.AW(DP.LongShots, 1);
             role.AW(DP.Marking, 0);
             role.AW(DP.OffTheBall, 4);
@@ -1100,11 +1117,13 @@ namespace CMScouter.UI
             role.AW(DP.LeftFoot, 0);
             role.AW(DP.RightFoot, 0);
 
-            role.AW(DP.MentalityWeight, 70);
-            role.AW(DP.PhysicalityWeight, 100);
-            role.AW(DP.TechnicalWeight, 80);
+            role.AW(DP.MentalityWeight, 30);
 
-            role.AW(DP.TechnicalInflation, 100);
+            role.AW(DP.PhysicalityWeight, 100);
+            role.AW(DP.PhysicalInflation, 110);
+
+            role.AW(DP.TechnicalWeight, 70);
+            role.AW(DP.TechnicalInflation, 110);
 
             weightings[(int)Roles.TM] = role;
         }

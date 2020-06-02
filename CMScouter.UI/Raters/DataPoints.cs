@@ -49,6 +49,7 @@ namespace CMScouter.UI
         RightFoot,
         MentalityWeight,
         PhysicalityWeight,
+        PhysicalInflation,
         TechnicalWeight,
         TechnicalInflation,
 

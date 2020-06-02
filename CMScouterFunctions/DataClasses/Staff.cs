@@ -78,14 +78,14 @@ namespace CMScouterFunctions.DataClasses
             return NationId == nationId || SecondaryNationId == nationId;
         }
 
-        public bool IsOverValue(int value, byte multiplier)
+        public bool IsOverValue(int value)
         {
-            return value <= (Value * multiplier);
+            return value <= Value;
         }
 
-        public bool IsUnderValue(int value, byte multiplier)
+        public bool IsUnderValue(int value)
         {
-            return value >= (Value * multiplier);
+            return value >= Value;
         }
     }
 

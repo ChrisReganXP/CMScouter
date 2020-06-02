@@ -39,10 +39,10 @@ namespace CMScouterFunctions.DataClasses
         [LinkedRoles(Roles.AFB)]
         LeftWingBack,
 
-        [LinkedRoles(Roles.HM, Roles.CM, Roles.AM)]
+        [LinkedRoles(Roles.HM, Roles.CM)]
         CentralMidfielder,
 
-        [LinkedRoles(Roles.CM, Roles.AM)]
+        [LinkedRoles(Roles.AM)]
         AttackingMidfielder,
 
         [LinkedRoles(Roles.WM, Roles.WG)]

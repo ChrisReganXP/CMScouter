@@ -48,6 +48,11 @@ namespace ChampMan_Scouter.Controls
 
         private static Color GetAttributeColor(byte value)
         {
+            if (value >= 21)
+            {
+                return Color.DarkGoldenrod;
+            }
+
             if (value >= 18)
             {
                 return Color.Teal;
