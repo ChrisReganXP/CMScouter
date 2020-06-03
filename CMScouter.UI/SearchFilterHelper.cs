@@ -22,14 +22,14 @@ namespace CMScouter.UI
             List<int> countryClubs = null;
             Func<Player, bool> filter = null;
 
-            if (!string.IsNullOrWhiteSpace(request.PlaysInRegion))
+            if (request.PlaysInDivision.HasValue)
             {
-                List<int> regionCountryIds = SaveGameHandler.GetCountriesInRegion(_savegame.Nations, request.PlaysInRegion);
-                if (regionCountryIds?.Count > 0)
+                Club_Comp comp = _savegame.ClubComps.Values.FirstOrDefault(x => x.Id == request.PlaysInDivision.Value);
+                    if (comp != null)
                 {
-                    countryClubs = _savegame.Clubs.Where(x => regionCountryIds.Contains(x.Value.NationId)).Select(x => x.Key).ToList();
+                    var compClubs = _savegame.Clubs.Where(x => x.Value.DivisionId == comp.Id).Select(x => x.Value).ToList();
 
-                    filter = x => countryClubs.Contains(x._staff.ClubId) || (x._staff.ClubId == -1 && regionCountryIds.Contains(x._staff.NationId));
+                    filter = x => compClubs.Select(y => y.ClubId).Contains(x._staff.ClubId);
                     filters.Add(filter);
                     return;
                 }
@@ -49,6 +49,19 @@ namespace CMScouter.UI
                         filters.Add(filter);
                         return;
                     }
+                }
+            }
+
+            if (!string.IsNullOrWhiteSpace(request.PlaysInRegion))
+            {
+                List<int> regionCountryIds = SaveGameHandler.GetCountriesInRegion(_savegame.Nations, request.PlaysInRegion);
+                if (regionCountryIds?.Count > 0)
+                {
+                    countryClubs = _savegame.Clubs.Where(x => regionCountryIds.Contains(x.Value.NationId)).Select(x => x.Key).ToList();
+
+                    filter = x => countryClubs.Contains(x._staff.ClubId) || (x._staff.ClubId == -1 && regionCountryIds.Contains(x._staff.NationId));
+                    filters.Add(filter);
+                    return;
                 }
             }
         }

@@ -35,6 +35,7 @@
             this.ucTechnical = new ChampMan_Scouter.Controls.UCTechnical();
             this.ucScouting = new ChampMan_Scouter.Controls.UCScouting();
             this.ucPersonalDetails = new ChampMan_Scouter.Controls.UCPersonalDetails();
+            this.ucPersonality = new ChampMan_Scouter.Controls.UCPersonality();
             this.SuspendLayout();
             // 
             // ucSetPieces
@@ -74,9 +75,9 @@
             // 
             // ucScouting
             // 
-            this.ucScouting.Location = new System.Drawing.Point(12, 279);
+            this.ucScouting.Location = new System.Drawing.Point(12, 355);
             this.ucScouting.Name = "ucScouting";
-            this.ucScouting.Size = new System.Drawing.Size(776, 444);
+            this.ucScouting.Size = new System.Drawing.Size(776, 383);
             this.ucScouting.TabIndex = 1;
             // 
             // ucPersonalDetails
@@ -86,11 +87,19 @@
             this.ucPersonalDetails.Size = new System.Drawing.Size(158, 269);
             this.ucPersonalDetails.TabIndex = 0;
             // 
+            // ucPersonality
+            // 
+            this.ucPersonality.Location = new System.Drawing.Point(13, 284);
+            this.ucPersonality.Name = "ucPersonality";
+            this.ucPersonality.Size = new System.Drawing.Size(856, 65);
+            this.ucPersonality.TabIndex = 6;
+            // 
             // PlayerViewForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(897, 750);
+            this.Controls.Add(this.ucPersonality);
             this.Controls.Add(this.ucSetPieces);
             this.Controls.Add(this.ucGoalkeeping);
             this.Controls.Add(this.ucPhysical);
@@ -113,5 +122,6 @@
         private Controls.UCPhysical ucPhysical;
         private Controls.UCSetPieces ucSetPieces;
         private Controls.UCGoalkeeping ucGoalkeeping;
+        private Controls.UCPersonality ucPersonality;
     }
 }

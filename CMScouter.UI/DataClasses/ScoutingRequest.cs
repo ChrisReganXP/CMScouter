@@ -29,6 +29,8 @@ namespace CMScouter.UI
 
         public string PlaysInRegion { get; set; }
 
+        public int? PlaysInDivision { get; set; }
+
         public short NumberOfResults { get; set; }
     }
 }

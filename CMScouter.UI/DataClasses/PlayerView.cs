@@ -54,6 +54,7 @@ namespace CMScouter.UI
         public PlayerPositionView Positions { get; set; }
 
         public PlayerAttributeView Attributes { get; set; }
+
         public RatingResults ScoutRatings { get; set; }
 
         public string GetFootedness()

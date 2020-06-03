@@ -42,11 +42,6 @@ namespace ChampMan_Scouter
                 ddlPlayerType.Items.Add(type);
             }
 
-            ddlPlaysInRegion.Items.Add("<All>");
-            ddlPlaysInRegion.SelectedIndex = 0;
-            ddlPlaysInRegion.Items.Add("UK & Ireland");
-            ddlPlaysInRegion.Items.Add("Scandinavia");
-
             ddlContractStatus.ValueMember = "Value";
             ddlContractStatus.DisplayMember = "Text";
             var contractStatusList = new[] { new { Value = -1, Text = "<All>" }, new { Value = 6, Text = "Expires 6 Months" }, new { Value = 12, Text = "Expires 12 Months" } };
@@ -109,6 +104,27 @@ namespace ChampMan_Scouter
             //pnlPlayerSearch.Show();
 
             AddNationsToSelect();
+
+            ddlPlaysIn.ValueMember = "Value";
+            ddlPlaysIn.DisplayMember = "Text";
+            var playsInLocationList = new List<object>
+            {
+                new { Value = "-1", Text = "<All>" },
+                new { Value = "UKI", Text = "UK & Ireland" },
+                new { Value = "SCA", Text = "Scandinavia" }
+            };
+
+            var nations = cmsUI.GetAllNations();
+            var clubComps = cmsUI.GetAllClubCompetitions();
+
+            foreach (var comp in clubComps)
+            {
+                var x = new { Value = comp.Id.ToString(), Text = comp.LongName };
+                playsInLocationList.Add(x);
+            }
+
+            ddlPlaysIn.DataSource = playsInLocationList;
+            ddlPlaysIn.SelectedIndex = 0;
         }
 
         private void AddNationsToSelect()
@@ -198,6 +214,25 @@ namespace ChampMan_Scouter
 
             int? nationId = (int)ddlNationality.SelectedValue == -1 ? (int?)null : (int)ddlNationality.SelectedValue;
 
+            string selectedPlaysInValue = (string)ddlPlaysIn.SelectedValue;
+            string playsInRegion = null;
+            int? playsInDivision = null;
+            if (!string.IsNullOrWhiteSpace(selectedPlaysInValue) && selectedPlaysInValue.Length == 3 && selectedPlaysInValue.ToList().All(Char.IsLetter))
+            {
+                playsInRegion = (string)ddlPlaysIn.Text;
+            }
+            else
+            {
+                if (selectedPlaysInValue.ToList().All(Char.IsDigit))
+                {
+                    int parsedID = 0;
+                    if (int.TryParse(selectedPlaysInValue, out parsedID))
+                    {
+                        playsInDivision = parsedID;
+                    }
+                }
+            }
+
             ScoutingRequest request = new ScoutingRequest()
             {
                 PlayerType = type,
@@ -205,7 +240,8 @@ namespace ChampMan_Scouter
                 EUNationalityOnly = cbxEUNational.Checked,
                 MaxAge = maxAge,
                 NumberOfResults = 200,
-                PlaysInRegion = ddlPlaysInRegion.Text,
+                PlaysInRegion = playsInRegion,
+                PlaysInDivision = playsInDivision,
                 Nationality = nationId,
                 ContractStatus = (short)(int)ddlContractStatus.SelectedValue,
             };

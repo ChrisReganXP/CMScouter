@@ -12,12 +12,13 @@ namespace CMScouterTester
     {
         protected const string LiverpoolSave = @"C:\Install\Games\CM 0102\A Large Oldham EndOfSeason.sav";
         protected const string OldhamSave = @"C:\Install\Games\CM 0102\Oldham Cheating.sav";
+        protected const string BurySave = @"C:\Install\Games\CM0102\Bury End Season 1 3.9.68.sav";
         static CMScouterUI cmsUI;
 
         [ClassInitialize]
         public static void TestSetup(TestContext context)
         {
-            cmsUI = new CMScouterUI(LiverpoolSave);
+            cmsUI = new CMScouterUI(BurySave);
         }
 
         [TestMethod]
@@ -210,6 +211,21 @@ namespace CMScouterTester
 
             Assert.IsNotNull(player);
             Assert.IsTrue(player.ScoutRatings.CentreForward.BestRole().Rating > 70);
+        }
+
+        [TestMethod]
+        public void TestDiv3Strikers()
+        {
+            List<Club_Comp> allComps = cmsUI.GetAllClubCompetitions();
+            var Div3 = allComps.FirstOrDefault(x => x.LongName.Equals("English Third Division", StringComparison.InvariantCultureIgnoreCase));
+            Assert.IsNotNull(Div3);
+
+            ScoutingRequest request = new ScoutingRequest() { NumberOfResults = 30, PlayerType = PlayerType.CentreForward, PlaysInDivision = Div3.Id };
+            var players = cmsUI.GetScoutResults(request);
+
+            Assert.IsNotNull(players);
+            Assert.IsTrue(players.Count > 0);
+            Assert.IsTrue(players[0].CFRating > 50);
         }
     }
 }

@@ -129,6 +129,15 @@ namespace CMScouter.UI
 
                     LeftFoot = item._player.LeftFoot,
                     RightFoot = item._player.RightFoot,
+
+                    Adaptability = item._staff.Adaptability,
+                    Ambition = item._staff.Ambition,
+                    Determination = item._staff.Determination,
+                    Loyalty = item._staff.Loyalty,
+                    Pressure = item._staff.Pressure,
+                    Professionalism = item._staff.Professionalism,
+                    Sportsmanship = item._staff.Sportsmanship,
+                    Temperament = item._staff.Temperament,
                 },
 
                 ScoutRatings = _rater.GetRatings(item),

@@ -301,7 +301,15 @@ namespace CMScouter.UI
 
                 decimal value = Adj(realValue, isIntrinsic);
 
-                decimal weightedValue = value * weight;
+                decimal cappedValue = Math.Min(20, value);
+                if (value > 20)
+                {
+                    decimal remainder = (value - 20) / 2;
+                    cappedValue += remainder;
+                }
+
+                decimal weightedValue = cappedValue * weight;
+
                 rating += weightedValue;
 
                 debugString += $"{attribute} : {value}-{weight}({realValue}) ";
@@ -311,6 +319,9 @@ namespace CMScouter.UI
 
             var result = (byte)((rating / maxScore) * 100);
             return Math.Min((byte)99, result);
+
+
+
         }
 
         private byte PositionalFamiliarity(PlayerType type, Player player)

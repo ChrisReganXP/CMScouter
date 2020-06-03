@@ -39,6 +39,11 @@ namespace CMScouter.UI
             return _savegame.Nations.Values.ToList();
         }
 
+        public List<Club_Comp> GetAllClubCompetitions()
+        {
+            return _savegame.ClubComps.Values.ToList();
+        }
+
         public List<PlayerView> GetPlayerByPlayerId(List<int> playerIds)
         {
             Func<Player, bool> filter = new Func<Player, bool>(x => playerIds.Contains(x._player.PlayerId));

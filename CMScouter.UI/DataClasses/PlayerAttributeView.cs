@@ -118,5 +118,25 @@ namespace CMScouter.UI
         public byte LeftFoot { get; set; }
 
         public byte RightFoot { get; set; }
+
+        #region Personality
+
+        public byte Adaptability { get; set; }
+
+        public byte Ambition { get; set; }
+
+        public byte Determination { get; set; }
+
+        public byte Loyalty { get; set; }
+
+        public byte Pressure { get; set; }
+
+        public byte Professionalism { get; set; }
+
+        public byte Sportsmanship { get; set; }
+
+        public byte Temperament { get; set; }
+
+        #endregion
     }
 }
