@@ -57,7 +57,7 @@ namespace CMScouterFunctions.DataClasses
         [LinkedRoles(Roles.WG)]
         LeftWinger,
 
-        [LinkedRoles(Roles.TM, Roles.ST)]
+        [LinkedRoles(Roles.TM, Roles.ST, Roles.PO, Roles.CF)]
         CentreForward,
     }
 
@@ -76,5 +76,7 @@ namespace CMScouterFunctions.DataClasses
         AM,
         TM,
         ST,
+        PO,
+        CF,
     }
 }

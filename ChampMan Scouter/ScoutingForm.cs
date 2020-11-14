@@ -104,18 +104,25 @@ namespace ChampMan_Scouter
             //pnlPlayerSearch.Show();
 
             AddNationsToSelect();
+            AddPlaysInOptions();
+        }
 
+        private void AddPlaysInOptions()
+        {
             ddlPlaysIn.ValueMember = "Value";
             ddlPlaysIn.DisplayMember = "Text";
             var playsInLocationList = new List<object>
             {
                 new { Value = "-1", Text = "<All>" },
+                new { Value = "-2", Text = "---- Regions ----" },
                 new { Value = "UKI", Text = "UK & Ireland" },
-                new { Value = "SCA", Text = "Scandinavia" }
+                new { Value = "SCA", Text = "Scandinavia" },
+                new { Value = "OCE", Text = "Oceania" },
+                new { Value = "-3", Text = "---- Competitions ----" },
             };
 
             var nations = cmsUI.GetAllNations();
-            var clubComps = cmsUI.GetAllClubCompetitions();
+            var clubComps = cmsUI.GetAllClubCompetitions().OrderBy(x => x.LongName);
 
             foreach (var comp in clubComps)
             {

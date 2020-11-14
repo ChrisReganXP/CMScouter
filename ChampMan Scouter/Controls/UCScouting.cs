@@ -107,7 +107,7 @@ namespace ChampMan_Scouter.Controls
 
         private string GetRoleDebugLine(RatingRoleDebug debug, PlayerType type, byte rating)
         {
-            return $"{type.ToString().PadRight(20)} {debug.Role} {rating} - Mental:{debug.Mental} Physical:{debug.Physical} Technical:{debug.Technical} Familiarity:{debug.Position}" + Environment.NewLine;
+            return $"{type,-20} {debug.Role} {rating} - Mental:{debug.Mental} Physical:{debug.Physical} Technical:{debug.Technical} Familiarity:{debug.Position} OffField:{debug.OffField}" + Environment.NewLine;
         }
     }
 }

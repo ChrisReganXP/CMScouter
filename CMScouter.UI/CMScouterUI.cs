@@ -24,7 +24,8 @@ namespace CMScouter.UI
             ConstructLookups();
 
             IntrinsicMasker = new DefaultIntrinsicMasker();
-            _rater = new DefaultRater(IntrinsicMasker);
+            //_rater = new DefaultRater(IntrinsicMasker);
+            _rater = new InvestigationRater(IntrinsicMasker);
         }
 
         public IIntrinsicMasker IntrinsicMasker { get; internal set; }

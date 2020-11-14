@@ -86,6 +86,8 @@ namespace CMScouter.UI.Raters
 
     public class RatingRoleDebug
     {
+        public string OffField { get; set; }
+
         public string Position { get; set; }
 
         public Roles Role { get; set; }

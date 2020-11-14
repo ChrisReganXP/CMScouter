@@ -47,6 +47,10 @@ namespace CMScouterFunctions
                 case "SCANDINAVIA":
                     countryIds = GetScandiCountries(nations);
                     break;
+
+                case "OCEANIA":
+                    countryIds = GetOceaniaCountries(nations);
+                    break;
             }
 
             return countryIds;
@@ -101,6 +105,12 @@ namespace CMScouterFunctions
         private static List<int> GetScandiCountries(Dictionary<int, Nation> nations)
         {
             List<string> countryNames = new List<string>() { "ICELAND", "FINLAND", "NORWAY", "SWEDEN", "DENMARK" };
+            return PopulateNationIds(countryNames, nations);
+        }
+
+        private static List<int> GetOceaniaCountries(Dictionary<int, Nation> nations)
+        {
+            List<string> countryNames = new List<string>() { "AUSTRALIA", "FIJI", "SAMOA", "SOLOMON ISLANDS", "VANATU" };
             return PopulateNationIds(countryNames, nations);
         }
 
