@@ -296,13 +296,16 @@ namespace ChampMan_Scouter
             dgvPlayers.Columns.Add(CreateGridViewColumn(30, "BestRating", "Rat"));
             dgvPlayers.Columns.Add(CreateGridViewColumn(30, "BestPosition", "Pos"));
             dgvPlayers.Columns.Add(CreateGridViewColumn(30, "BestRole", "Role"));
-            dgvPlayers.Columns.Add(CreateGridViewColumn(100, "ClubName", "Club"));
             dgvPlayers.Columns.Add(CreateGridViewColumn(70, "DescribedPosition", "Position"));
             dgvPlayers.Columns.Add(CreateGridViewColumn(70, "Value", "Value", format: "c0"));
+            dgvPlayers.Columns.Add(CreateGridViewColumn(70, "SquadStatus", "Squad"));
+            dgvPlayers.Columns.Add(CreateGridViewColumn(70, "TransferStatus", "Transfer"));
+            dgvPlayers.Columns.Add(CreateGridViewColumn(70, "ContractExpiryDate", "Contract"));
+            dgvPlayers.Columns.Add(CreateGridViewColumn(70, "ReleaseValue", "Release", format: "c0"));
+            dgvPlayers.Columns.Add(CreateGridViewColumn(100, "ClubName", "Club"));
             dgvPlayers.Columns.Add(CreateGridViewColumn(50, "Wage", "Wage", format: "c0"));
             dgvPlayers.Columns.Add(CreateGridViewColumn(30, "Age", "Age"));
             dgvPlayers.Columns.Add(CreateGridViewColumn(70, "Nationality", "Nation"));
-            dgvPlayers.Columns.Add(CreateGridViewColumn(70, "ContractExpiryDate", "Contract"));
 
             DataTable dtPlayers = CreateDataTable(playerList, request);
             dgvPlayers.DataSource = dtPlayers;
@@ -332,6 +335,9 @@ namespace ChampMan_Scouter
             dt.Columns.Add(new DataColumn() { ColumnName = "Age", DataType = typeof(short), DefaultValue = null });
             dt.Columns.Add(new DataColumn() { ColumnName = "Nationality", DataType = typeof(string), DefaultValue = null });
             dt.Columns.Add(new DataColumn() { ColumnName = "ContractExpiryDate", DataType = typeof(string), DefaultValue = null });
+            dt.Columns.Add(new DataColumn() { ColumnName = "SquadStatus", DataType = typeof(string), DefaultValue = null });
+            dt.Columns.Add(new DataColumn() { ColumnName = "TransferStatus", DataType = typeof(string), DefaultValue = null });
+            dt.Columns.Add(new DataColumn() { ColumnName = "ReleaseValue", DataType = typeof(int), DefaultValue = null });
 
             foreach (var player in playerList)
             {
@@ -356,6 +362,9 @@ namespace ChampMan_Scouter
                 dr["Age"] = player.Age;
                 dr["Nationality"] = player.Nationality;
                 dr["ContractExpiryDate"] = player.ContractExpiryDate == null ? string.Empty : player.ContractExpiryDate.Value.ToShortDateString();
+                dr["SquadStatus"] = player.Contract.SquadStatus;
+                dr["TransferStatus"] = player.Contract.TransferStatus?.ToString();
+                dr["ReleaseValue"] = player.Contract.ReleaseValue;
 
                 dt.Rows.Add(dr);
             }

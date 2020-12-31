@@ -1,4 +1,5 @@
-﻿using CMScouterFunctions.DataClasses;
+﻿using CMScouter.UI.Converters;
+using CMScouterFunctions.DataClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,6 +61,17 @@ namespace CMScouter.UI
                 Reputation = item._player.Reputation,
                 DomesticReputation = item._player.DomesticReputation,
                 WorldReputation = item._player.WorldReputation,
+
+                Contract = item._contract == null ? new ContractView() : new ContractView()
+                {
+                    ReleaseValue = item._contract.ReleaseClauseValue,
+                    ReleaseClause = item._contract.MinimumFeeReleaseClause ? ReleaseClauseType.MinimumFee :
+                                        item._contract.ManagerReleaseClause ? ReleaseClauseType.ManagerJob :
+                                        item._contract.NonPromotionReleaseClause ? ReleaseClauseType.NonPromotion :
+                                        item._contract.RelegationReleaseClause ? ReleaseClauseType.Relegation : ReleaseClauseType.NotPlaying,
+                    SquadStatus = SquadStatusConverter.ConvertSquadStatus(item._contract.SquadStatus),
+                    TransferStatus = ((TransferStatus)item._contract.TransferStatus).ToName(),
+                },
 
                 Positions = new PlayerPositionView()
                 {
